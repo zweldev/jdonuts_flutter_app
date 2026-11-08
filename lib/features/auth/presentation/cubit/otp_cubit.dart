@@ -114,8 +114,9 @@ class OtpCubit extends Cubit<OtpState> {
     }
   }
 
-  void codeChanged(String code) =>
-      emit(state.copyWith(code: code, failure: null));
+  void codeChanged(String code) => emit(
+    state.copyWith(code: code, failure: code.isEmpty ? state.failure : null),
+  );
 
   void leaveStep() => _timer?.cancel();
 
