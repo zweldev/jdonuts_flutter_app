@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../auth_failure_message.dart';
 import '../cubit/session_cubit.dart';
+import '../cubit/session_state.dart';
 import '../cubit/registration_cubit.dart';
 import '../screens/home_screen.dart';
 import '../screens/dob_screen.dart';
