@@ -103,6 +103,61 @@
   "languageLabel": "မြန်မာဘာသာ အသုံးပြုရန်",
   "englishLanguage": "အင်္ဂလိပ်",
   "burmeseLanguage": "မြန်မာ",
+  "offlineBanner": "အင်တာနက် ချိတ်ဆက်မထားပါ။ သိမ်းဆည်းထားသော အချက်အလက်များကို ပြသနေပါသည်။",
+  "productUnavailable": "ဤပစ္စည်း၏ အချက်အလက်များကို မရရှိနိုင်ပါ။",
+  "productLoadError": "ဤပစ္စည်းကို ဖွင့်၍မရပါ။ ထပ်ကြိုးစားပါ။",
+  "cartAdded": "{productName} ကို ဈေးခြင်းထဲသို့ ထည့်ပြီးပါပြီ။",
+  "@cartAdded": {
+    "placeholders": {
+      "productName": {}
+    }
+  },
+  "cartAddFailed": "ဤပစ္စည်းကို ဈေးခြင်းထဲသို့ ထည့်၍မရပါ။",
+  "notifications": "အသိပေးချက်များ",
+  "noNotifications": "အသိပေးချက်အသစ် မရှိပါ။",
+  "noProductSections": "ပစ္စည်းအမျိုးအစားများ မရှိသေးပါ။",
+  "noProducts": "ဤနေရာတွင် ပစ္စည်းမရှိသေးပါ။",
+  "noNearbyShops": "အနီးအနားတွင် ဆိုင်မရှိပါ။",
+  "sectionLoadError": "ဤအမျိုးအစားကို ဖွင့်၍မရပါ။",
+  "newBadge": "အသစ်",
+  "discountPercentOff": "{discount}% လျှော့ဈေး",
+  "@discountPercentOff": {
+    "placeholders": {
+      "discount": {
+        "type": "int"
+      }
+    }
+  },
+  "decreaseQuantity": "အရေအတွက် လျှော့ရန်",
+  "increaseQuantity": "အရေအတွက် တိုးရန်",
+  "memberFallback": "J’Donuts အသင်းဝင်",
+  "homeMemberTier": "{tier} အသင်းဝင်",
+  "@homeMemberTier": {
+    "placeholders": {
+      "tier": {}
+    }
+  },
+  "popularSectionTitle": "လူကြိုက်များသော မုန့်များ 🔥",
+  "nearbyShopsCount": "သင့်အနီးအနားတွင် J’Donut ဆိုင် {count} ဆိုင်ရှိပါသည်။ 😊",
+  "@nearbyShopsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "exploreNow": "ယခုပင် ကြည့်ရှုရန်",
+  "orderOnline": "အွန်လိုင်းမှ မှာယူရန်",
+  "whatsThis": "ဒါဘာ\nလဲ?",
+  "addToCart": "ဈေးခြင်းထဲ ထည့်ရန်",
+  "discountPercent": "{discount}%",
+  "@discountPercent": {
+    "placeholders": {
+      "discount": {
+        "type": "int"
+      }
+    }
+  },
   "homeTitle": "ပင်မစာမျက်နှာ",
   "progressReady": "အဆင်သင့်",
   "progressGettingStarted": "စတင်အသုံးပြုနေပါသည်",
