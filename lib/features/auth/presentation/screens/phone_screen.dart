@@ -117,6 +117,12 @@ class _PhoneScreenState extends State<PhoneScreen> {
                             authInputDecoration(hint: l10n.phoneNumberHint)
                                 .copyWith(
                                   filled: false,
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(
+                                      AppRadius.md,
+                                    ),
+                                    borderSide: BorderSide.none,
+                                  ),
                                   contentPadding: const EdgeInsets.symmetric(
                                     vertical: 18,
                                   ),
