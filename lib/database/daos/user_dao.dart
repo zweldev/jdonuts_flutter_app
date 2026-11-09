@@ -71,7 +71,7 @@ class UserDao extends DatabaseAccessor<AppDatabase>
             user.lastName.trim(),
           ].where((part) => part.isNotEmpty).join(' '),
           tierId: 'bronze',
-          totalPoints: 0,
+          totalPoints: initialDemoMemberPoints,
         ),
       );
       return userId;
