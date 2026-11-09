@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_design_system.dart';
+import '../../../../core/widgets/app_entrance.dart';
 
 class AuthStepScaffold extends StatelessWidget {
   const AuthStepScaffold({
@@ -74,22 +75,30 @@ class AuthStepScaffold extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: AppSpacing.xxl),
-                Text(
-                  title,
-                  style: AppTextStyles.headlineLarge.copyWith(
-                    color: AppColors.textPrimary,
-                    fontSize: 27,
-                    height: 1.14,
-                    fontWeight: FontWeight.w700,
+                AppEntrance(
+                  child: Text(
+                    title,
+                    style: AppTextStyles.headlineLarge.copyWith(
+                      color: AppColors.textPrimary,
+                      fontSize: 27,
+                      height: 1.14,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ),
                 const SizedBox(height: AppSpacing.md),
-                child,
+                AppEntrance(
+                  delay: const Duration(milliseconds: 90),
+                  child: child,
+                ),
                 const SizedBox(height: AppSpacing.xxl),
-                AuthPrimaryButton(
-                  label: continueLabel,
-                  onPressed: isContinueEnabled ? onContinue : null,
-                  isLoading: isLoading,
+                AppEntrance(
+                  delay: const Duration(milliseconds: 180),
+                  child: AuthPrimaryButton(
+                    label: continueLabel,
+                    onPressed: isContinueEnabled ? onContinue : null,
+                    isLoading: isLoading,
+                  ),
                 ),
               ],
             ),
@@ -100,7 +109,7 @@ class AuthStepScaffold extends StatelessWidget {
   }
 }
 
-class AuthPrimaryButton extends StatelessWidget {
+class AuthPrimaryButton extends StatefulWidget {
   const AuthPrimaryButton({
     required this.label,
     required this.onPressed,
@@ -113,33 +122,52 @@ class AuthPrimaryButton extends StatelessWidget {
   final bool isLoading;
 
   @override
+  State<AuthPrimaryButton> createState() => _AuthPrimaryButtonState();
+}
+
+class _AuthPrimaryButtonState extends State<AuthPrimaryButton> {
+  bool _pressed = false;
+
+  @override
   Widget build(BuildContext context) {
+    final reduceMotion = MediaQuery.disableAnimationsOf(context);
     return SizedBox(
       height: AppDimensions.buttonHeight,
       width: double.infinity,
-      child: ElevatedButton(
-        onPressed: isLoading ? null : onPressed,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.primary,
-          foregroundColor: AppColors.textInverse,
-          disabledBackgroundColor: AppColors.disabledSurface,
-          disabledForegroundColor: AppColors.textInverse,
-          shape: const StadiumBorder(),
-          elevation: 0,
+      child: GestureDetector(
+        onTapDown: (_) => setState(() => _pressed = true),
+        onTapUp: (_) => setState(() => _pressed = false),
+        onTapCancel: () => setState(() => _pressed = false),
+        child: AnimatedScale(
+          scale: _pressed && !reduceMotion ? AppMotion.pressedScale : 1,
+          duration: reduceMotion ? Duration.zero : AppMotion.buttonPress,
+          child: ElevatedButton(
+            onPressed: widget.isLoading ? null : widget.onPressed,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.primary,
+              foregroundColor: AppColors.textInverse,
+              disabledBackgroundColor: AppColors.disabledSurface,
+              disabledForegroundColor: AppColors.textInverse,
+              shape: const StadiumBorder(),
+              elevation: 0,
+            ),
+            child: widget.isLoading
+                ? const SizedBox(
+                    width: AppDimensions.loaderSize,
+                    height: AppDimensions.loaderSize,
+                    child: CircularProgressIndicator(
+                      strokeWidth: AppDimensions.loaderStrokeWidth,
+                      color: AppColors.textInverse,
+                    ),
+                  )
+                : Text(
+                    widget.label,
+                    style: AppTextStyles.labelLarge.copyWith(
+                      letterSpacing: 0.6,
+                    ),
+                  ),
+          ),
         ),
-        child: isLoading
-            ? const SizedBox(
-                width: AppDimensions.loaderSize,
-                height: AppDimensions.loaderSize,
-                child: CircularProgressIndicator(
-                  strokeWidth: AppDimensions.loaderStrokeWidth,
-                  color: AppColors.textInverse,
-                ),
-              )
-            : Text(
-                label,
-                style: AppTextStyles.labelLarge.copyWith(letterSpacing: 0.6),
-              ),
       ),
     );
   }
@@ -163,11 +191,18 @@ class AuthProgressBadge extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          CircularProgressIndicator(
-            value: progress,
-            strokeWidth: AppDimensions.progressStrokeWidth,
-            backgroundColor: AppColors.primary.withValues(alpha: 0.35),
-            valueColor: const AlwaysStoppedAnimation(AppColors.secondary),
+          TweenAnimationBuilder<double>(
+            tween: Tween(begin: 0, end: progress),
+            duration: MediaQuery.disableAnimationsOf(context)
+                ? Duration.zero
+                : AppMotion.progressRing,
+            curve: AppMotion.rewardsCurve,
+            builder: (context, value, _) => CircularProgressIndicator(
+              value: value,
+              strokeWidth: AppDimensions.progressStrokeWidth,
+              backgroundColor: AppColors.primary.withValues(alpha: 0.35),
+              valueColor: const AlwaysStoppedAnimation(AppColors.secondary),
+            ),
           ),
           if (isComplete || progress >= 1)
             const Icon(
