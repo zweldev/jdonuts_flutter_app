@@ -4,6 +4,7 @@ import '../database/app_database.dart';
 import '../database/daos/cart_dao.dart';
 import '../database/daos/home_dao.dart';
 import '../database/daos/meta_dao.dart';
+import '../database/daos/rewards_dao.dart';
 import '../database/seed/seed_loader.dart';
 import '../database/seed/seed_source.dart';
 import '../features/auth/data/stores/secure_session_store.dart';
@@ -27,6 +28,11 @@ void configureDependencies() {
   }
   if (!getIt.isRegistered<CartDao>()) {
     getIt.registerLazySingleton<CartDao>(() => CartDao(getIt<AppDatabase>()));
+  }
+  if (!getIt.isRegistered<RewardsDao>()) {
+    getIt.registerLazySingleton<RewardsDao>(
+      () => RewardsDao(getIt<AppDatabase>()),
+    );
   }
   if (!getIt.isRegistered<SeedSource>()) {
     getIt.registerLazySingleton<SeedSource>(() => const AssetSeedSource());
