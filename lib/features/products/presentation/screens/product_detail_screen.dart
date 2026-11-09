@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/network/connectivity_monitor.dart';
 import '../../../../core/theme/app_design_system.dart';
+import '../../../../core/widgets/app_image.dart';
+import '../../../../core/widgets/connectivity_banner.dart';
 import '../../../../database/app_database.dart';
 import '../../../../database/daos/cart_dao.dart';
+import '../../../../l10n/app_localizations.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   const ProductDetailScreen({
     super.key,
     required this.product,
     required this.cartDao,
+    this.connectivityMonitor,
+    this.heroTag,
   });
 
   final Product product;
   final CartDao cartDao;
+  final ConnectivityMonitor? connectivityMonitor;
+  final String? heroTag;
 
   @override
   State<ProductDetailScreen> createState() => _ProductDetailScreenState();
@@ -32,7 +40,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('${widget.product.name} added to cart.'),
+          content: Text(
+            AppLocalizations.of(context).cartAdded(widget.product.name),
+          ),
           behavior: SnackBarBehavior.floating,
         ),
       );
@@ -46,8 +56,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       );
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Could not add this product to your cart.'),
+        SnackBar(
+          content: Text(AppLocalizations.of(context).cartAddFailed),
           behavior: SnackBarBehavior.floating,
         ),
       );
@@ -59,68 +69,78 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) => Scaffold(
     backgroundColor: AppColors.homeBackground,
-    body: SafeArea(
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(
-              AppSpacing.md,
-              AppSpacing.xs,
-              AppSpacing.md,
-              AppSpacing.xs,
-            ),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: IconButton(
-                onPressed: () => Navigator.maybePop(context),
-                icon: const Icon(Icons.arrow_back_rounded),
-                color: AppColors.iconPrimary,
-                iconSize: AppDimensions.iconLarge,
-                tooltip: MaterialLocalizations.of(context).backButtonTooltip,
-              ),
-            ),
-          ),
-          Expanded(
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                final panelHeight =
-                    (constraints.maxHeight * 0.62).clamp(360.0, 520.0) * 1.2;
-                return SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppSpacing.lg,
+    body: Column(
+      children: [
+        ConnectivityBanner(monitor: widget.connectivityMonitor),
+        Expanded(
+          child: SafeArea(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(
+                    AppSpacing.md,
+                    AppSpacing.xs,
+                    AppSpacing.md,
+                    AppSpacing.xs,
                   ),
-                  child: Column(
-                    children: [
-                      _ProductPanel(
-                        product: widget.product,
-                        quantity: _quantity,
-                        height: panelHeight,
-                        onDecrement: () {
-                          if (_quantity > 1) {
-                            setState(() => _quantity--);
-                          }
-                        },
-                        onIncrement: () => setState(() => _quantity++),
-                      ),
-                      const SizedBox(height: AppSpacing.xl),
-                      _ProductDescription(
-                        description: widget.product.description,
-                      ),
-                      const SizedBox(height: AppSpacing.xl),
-                    ],
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: IconButton(
+                      onPressed: () => Navigator.maybePop(context),
+                      icon: const Icon(Icons.arrow_back_rounded),
+                      color: AppColors.iconPrimary,
+                      iconSize: AppDimensions.iconLarge,
+                      tooltip: MaterialLocalizations.of(context)
+                          .backButtonTooltip,
+                    ),
                   ),
-                );
-              },
+                ),
+                Expanded(
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      final panelHeight =
+                          (constraints.maxHeight * 0.62).clamp(360.0, 520.0) *
+                          1.2;
+                      return SingleChildScrollView(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppSpacing.lg,
+                        ),
+                        child: Column(
+                          children: [
+                            _ProductPanel(
+                              product: widget.product,
+                              quantity: _quantity,
+                              height: panelHeight,
+                              heroTag: widget.heroTag,
+                              onDecrement: () {
+                                if (_quantity > 1) {
+                                  setState(() => _quantity--);
+                                }
+                              },
+                              onIncrement: () => setState(() => _quantity++),
+                            ),
+                            const SizedBox(height: AppSpacing.xl),
+                            _ProductDescription(
+                              description: widget.product.description,
+                            ),
+                            const SizedBox(height: AppSpacing.xl),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                _AddToCartButton(
+                  quantity: _quantity,
+                  priceMmk: widget.product.priceMmk,
+                  isLoading: _isAddingToCart,
+                  onPressed: _addToCart,
+                ),
+              ],
             ),
           ),
-          _AddToCartButton(
-            quantity: _quantity,
-            priceMmk: widget.product.priceMmk,
-            isLoading: _isAddingToCart,
-            onPressed: _addToCart,
-          ),
-        ],
-      ),
+        ),
+      ],
     ),
   );
 }
@@ -130,6 +150,7 @@ class _ProductPanel extends StatelessWidget {
     required this.product,
     required this.quantity,
     required this.height,
+    required this.heroTag,
     required this.onDecrement,
     required this.onIncrement,
   });
@@ -137,6 +158,7 @@ class _ProductPanel extends StatelessWidget {
   final Product product;
   final int quantity;
   final double height;
+  final String? heroTag;
   final VoidCallback onDecrement;
   final VoidCallback onIncrement;
 
@@ -171,9 +193,14 @@ class _ProductPanel extends StatelessWidget {
                       ),
                     ),
                     if (product.isNew)
-                      const _ProductBadge(label: 'New')
+                      _ProductBadge(
+                        label: AppLocalizations.of(context).newBadge,
+                      )
                     else if (product.discountPercent case final discount?)
-                      _ProductBadge(label: '$discount%'),
+                      _ProductBadge(
+                        label: AppLocalizations.of(context)
+                            .discountPercent(discount),
+                      ),
                   ],
                 ),
                 const SizedBox(height: AppSpacing.xs),
@@ -197,7 +224,10 @@ class _ProductPanel extends StatelessWidget {
                   child: Center(
                     child: Padding(
                       padding: const EdgeInsets.all(AppSpacing.md),
-                      child: _ProductImage(path: product.imageUrl),
+                      child: _ProductImage(
+                        path: product.imageUrl,
+                        heroTag: heroTag,
+                      ),
                     ),
                   ),
                 ),
@@ -250,18 +280,20 @@ class _ProductBadge extends StatelessWidget {
 }
 
 class _ProductImage extends StatelessWidget {
-  const _ProductImage({required this.path});
+  const _ProductImage({required this.path, required this.heroTag});
 
   final String path;
+  final String? heroTag;
 
   @override
   Widget build(BuildContext context) {
-    final image = path.startsWith('http')
-        ? Image.network(path, fit: BoxFit.contain)
-        : Image.asset(path, fit: BoxFit.contain);
+    final image = AppImage(path: path, fit: BoxFit.contain);
     return ClipRRect(
       borderRadius: BorderRadius.circular(AppRadius.lg),
-      child: image,
+      child: switch (heroTag) {
+        final tag? => Hero(tag: tag, child: image),
+        null => image,
+      },
     );
   }
 }
@@ -294,20 +326,36 @@ class _QuantityControl extends StatelessWidget {
         _QuantityButton(
           icon: Icons.remove_rounded,
           onPressed: onDecrement,
-          tooltip: 'Decrease quantity',
+          tooltip: AppLocalizations.of(context).decreaseQuantity,
         ),
         SizedBox(
           width: 72,
-          child: Text(
-            '$quantity',
-            textAlign: TextAlign.center,
-            style: AppTextStyles.headlineLarge,
+          child: AnimatedSwitcher(
+            duration: MediaQuery.disableAnimationsOf(context)
+                ? Duration.zero
+                : AppMotion.quantityChange,
+            transitionBuilder: (child, animation) => FadeTransition(
+              opacity: animation,
+              child: SlideTransition(
+                position: Tween<Offset>(
+                  begin: const Offset(0, 0.25),
+                  end: Offset.zero,
+                ).animate(animation),
+                child: child,
+              ),
+            ),
+            child: Text(
+              '$quantity',
+              key: ValueKey(quantity),
+              textAlign: TextAlign.center,
+              style: AppTextStyles.headlineLarge,
+            ),
           ),
         ),
         _QuantityButton(
           icon: Icons.add_rounded,
           onPressed: onIncrement,
-          tooltip: 'Increase quantity',
+          tooltip: AppLocalizations.of(context).increaseQuantity,
         ),
       ],
     ),
@@ -363,7 +411,7 @@ class _ProductDescription extends StatelessWidget {
             ),
             const SizedBox(height: AppSpacing.xs),
             Text(
-              "What's\nthis?",
+              AppLocalizations.of(context).whatsThis,
               style: AppTextStyles.headlineSmall.copyWith(height: 1.15),
             ),
           ],
@@ -432,7 +480,7 @@ class _AddToCartButton extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'ADD TO CART',
+                    AppLocalizations.of(context).addToCart,
                     style: AppTextStyles.labelLarge.copyWith(
                       color: AppColors.textInverse,
                       letterSpacing: 1,
