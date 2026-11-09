@@ -39,6 +39,10 @@ abstract final class AppColors {
   static const homeHero = Color(0xFFFFEEE0);
   static const shopLandscapeFar = Color(0xFF7FAF58);
   static const shopLandscapeNear = Color(0xFFA8C957);
+  static const rewardRingHighlight = Color(0xFFFF83BB);
+  static const rewardSprinkleLight = Color(0xFFFFD6E8);
+  static const rewardSprinkleMid = Color(0xFFFFA9CF);
+  static const rewardSprinkleWhite = Color(0xFFFFF0F6);
 
   static const onboardingGradientStart = Color(0xFFFFEAF2);
   static const onboardingGradientEnd = Color(0xFFFFF9FB);
