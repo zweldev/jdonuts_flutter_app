@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../constants/app_icons.dart';
@@ -645,37 +646,41 @@ class _ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: width,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: imageHeight,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(18),
-              child: Stack(
-                fit: StackFit.expand,
-                children: [
-                  const ColoredBox(color: AppColors.surface),
-                  _CatalogImage(path: product.imageUrl, fit: imageFit),
-                  if (showDiscount)
-                    if (product.discountPercent case final discount?)
-                      Positioned(
-                        right: 8,
-                        bottom: 8,
-                        child: _PillBadge(label: '$discount% off'),
-                      ),
-                ],
+      child: InkWell(
+        onTap: () => context.push('/product', extra: product),
+        borderRadius: BorderRadius.circular(18),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: imageHeight,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(18),
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    const ColoredBox(color: AppColors.surface),
+                    _CatalogImage(path: product.imageUrl, fit: imageFit),
+                    if (showDiscount)
+                      if (product.discountPercent case final discount?)
+                        Positioned(
+                          right: 8,
+                          bottom: 8,
+                          child: _PillBadge(label: '$discount% off'),
+                        ),
+                  ],
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: 10),
-          Text(
-            product.name,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: AppTextStyles.titleLarge,
-          ),
-        ],
+            const SizedBox(height: 10),
+            Text(
+              product.name,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: AppTextStyles.titleLarge,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -1056,9 +1061,7 @@ class _HomeBottomNavigation extends StatelessWidget {
         children: [
           Container(
             height: navigationHeight,
-            decoration: const BoxDecoration(
-              color: AppColors.primary,
-            ),
+            decoration: const BoxDecoration(color: AppColors.primary),
             child: Row(
               children: [
                 for (var index = 0; index < _icons.length; index++)
