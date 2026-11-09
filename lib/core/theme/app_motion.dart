@@ -1,6 +1,13 @@
 import 'package:flutter/animation.dart';
 
 abstract final class AppMotion {
+  static const screenEntrance = Duration(milliseconds: 420);
+  static const homeSectionStagger = Duration(milliseconds: 110);
+  static const bannerAutoPlay = Duration(seconds: 5);
+  static const bannerSlide = Duration(milliseconds: 500);
+  static const quantityChange = Duration(milliseconds: 180);
+  static const shimmerCycle = Duration(milliseconds: 1300);
+  static const progressRing = Duration(milliseconds: 360);
   static const rewardsEntry = Duration(milliseconds: 1250);
   static const challengeAttention = Duration(milliseconds: 900);
   static const buttonPress = Duration(milliseconds: 120);
@@ -20,4 +27,5 @@ abstract final class AppMotion {
   static const challengeEnterDuration = 0.42;
   static const activeEarnScale = 1.035;
   static const pressedScale = 0.96;
+  static const entranceOffset = 18.0;
 }
