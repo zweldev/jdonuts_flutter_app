@@ -202,82 +202,82 @@ class AppLocalizationsMy extends AppLocalizations {
   String get burmeseLanguage => 'မြန်မာ';
 
   @override
-  String get offlineBanner => 'You’re offline. Showing saved data.';
+  String get offlineBanner =>
+      'အင်တာနက် ချိတ်ဆက်မထားပါ။ သိမ်းဆည်းထားသော အချက်အလက်များကို ပြသနေပါသည်။';
 
   @override
-  String get productUnavailable => 'Product details are unavailable.';
+  String get productUnavailable => 'ဤပစ္စည်း၏ အချက်အလက်များကို မရရှိနိုင်ပါ။';
 
   @override
-  String get productLoadError =>
-      'Could not load this product. Please try again.';
+  String get productLoadError => 'ဤပစ္စည်းကို ဖွင့်၍မရပါ။ ထပ်ကြိုးစားပါ။';
 
   @override
   String cartAdded(Object productName) {
-    return '$productName added to cart.';
+    return '$productName ကို ဈေးခြင်းထဲသို့ ထည့်ပြီးပါပြီ။';
   }
 
   @override
-  String get cartAddFailed => 'Could not add this product to your cart.';
+  String get cartAddFailed => 'ဤပစ္စည်းကို ဈေးခြင်းထဲသို့ ထည့်၍မရပါ။';
 
   @override
-  String get notifications => 'Notifications';
+  String get notifications => 'အသိပေးချက်များ';
 
   @override
-  String get noNotifications => 'No new notifications.';
+  String get noNotifications => 'အသိပေးချက်အသစ် မရှိပါ။';
 
   @override
-  String get noProductSections => 'No product sections yet.';
+  String get noProductSections => 'ပစ္စည်းအမျိုးအစားများ မရှိသေးပါ။';
 
   @override
-  String get noProducts => 'Nothing here yet.';
+  String get noProducts => 'ဤနေရာတွင် ပစ္စည်းမရှိသေးပါ။';
 
   @override
-  String get noNearbyShops => 'No nearby shops found.';
+  String get noNearbyShops => 'အနီးအနားတွင် ဆိုင်မရှိပါ။';
 
   @override
-  String get sectionLoadError => 'This section could not be loaded.';
+  String get sectionLoadError => 'ဤအမျိုးအစားကို ဖွင့်၍မရပါ။';
 
   @override
-  String get newBadge => 'New';
+  String get newBadge => 'အသစ်';
 
   @override
   String discountPercentOff(int discount) {
-    return '$discount% off';
+    return '$discount% လျှော့ဈေး';
   }
 
   @override
-  String get decreaseQuantity => 'Decrease quantity';
+  String get decreaseQuantity => 'အရေအတွက် လျှော့ရန်';
 
   @override
-  String get increaseQuantity => 'Increase quantity';
+  String get increaseQuantity => 'အရေအတွက် တိုးရန်';
 
   @override
-  String get memberFallback => 'J’Donuts member';
+  String get memberFallback => 'J’Donuts အသင်းဝင်';
 
   @override
   String homeMemberTier(Object tier) {
-    return '$tier member';
+    return '$tier အသင်းဝင်';
   }
 
   @override
-  String get popularSectionTitle => 'Popular 🔥';
+  String get popularSectionTitle => 'လူကြိုက်များသော မုန့်များ 🔥';
 
   @override
   String nearbyShopsCount(int count) {
-    return 'There are $count J’Donut shops near you. 😊';
+    return 'သင့်အနီးအနားတွင် J’Donut ဆိုင် $count ဆိုင်ရှိပါသည်။ 😊';
   }
 
   @override
-  String get exploreNow => 'EXPLORE NOW';
+  String get exploreNow => 'ယခုပင် ကြည့်ရှုရန်';
 
   @override
-  String get orderOnline => 'Order Online';
+  String get orderOnline => 'အွန်လိုင်းမှ မှာယူရန်';
 
   @override
-  String get whatsThis => 'What’s\nthis?';
+  String get whatsThis => 'ဒါဘာ\nလဲ?';
 
   @override
-  String get addToCart => 'ADD TO CART';
+  String get addToCart => 'ဈေးခြင်းထဲ ထည့်ရန်';
 
   @override
   String discountPercent(int discount) {
