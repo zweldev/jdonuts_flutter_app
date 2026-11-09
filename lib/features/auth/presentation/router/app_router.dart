@@ -11,6 +11,7 @@ import 'package:jdonuts_flutter_app/di/service_locator.dart';
 import '../../../../database/daos/home_dao.dart';
 import '../../../../database/daos/cart_dao.dart';
 import '../../../../database/app_database.dart';
+import '../../../../database/daos/rewards_dao.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../domain/repositories/session_store.dart';
 import '../../domain/repositories/user_store.dart';
@@ -21,6 +22,7 @@ import '../cubit/session_state.dart';
 import '../cubit/registration_cubit.dart';
 import '../screens/member_home_screen.dart';
 import '../../../products/presentation/screens/product_detail_screen.dart';
+import '../../../rewards/presentation/screens/rewards_screen.dart';
 import '../screens/dob_screen.dart';
 import '../screens/name_screen.dart';
 import '../screens/onboarding_screen.dart';
@@ -58,7 +60,9 @@ GoRouter createAppRouter(SessionCubit cubit, AppRouterRefresh refresh) {
       if (!authState.isAuthenticated) {
         if (location == '/splash' ||
             location == '/welcome' ||
-            location == '/home') {
+            location == '/home' ||
+            location == '/product' ||
+            location == '/rewards') {
           return '/onboarding';
         }
         final registration = context.read<RegistrationCubit>().state;
@@ -77,7 +81,11 @@ GoRouter createAppRouter(SessionCubit cubit, AppRouterRefresh refresh) {
       if (authState.justRegistered) {
         return location == '/welcome' ? null : '/welcome';
       }
-      return location == '/home' || location == '/product' ? null : '/home';
+      return location == '/home' ||
+              location == '/product' ||
+              location == '/rewards'
+          ? null
+          : '/home';
     },
     routes: [
       GoRoute(
@@ -136,6 +144,14 @@ GoRouter createAppRouter(SessionCubit cubit, AppRouterRefresh refresh) {
             cartDao: getIt<CartDao>(),
           );
         },
+      ),
+      GoRoute(
+        path: '/rewards',
+        builder: (context, state) => RewardsScreen(
+          memberStore: getIt<MemberStore>(),
+          sessionStore: getIt<SessionStore>(),
+          rewardsDao: getIt<RewardsDao>(),
+        ),
       ),
     ],
   );
