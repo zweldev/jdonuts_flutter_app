@@ -166,8 +166,7 @@ class _ChallengeTabs extends StatelessWidget {
                   Expanded(
                     child: _TabTarget(
                       label: l10n.rewardsGiftTab,
-                      selected: !earnTab,
-                      onTap: () => onSelected('gift'),
+                      selected: false,
                     ),
                   ),
                 ],
@@ -181,35 +180,43 @@ class _ChallengeTabs extends StatelessWidget {
 }
 
 class _TabTarget extends StatelessWidget {
-  const _TabTarget({
-    required this.label,
-    required this.selected,
-    required this.onTap,
-  });
+  const _TabTarget({required this.label, required this.selected, this.onTap});
 
   final String label;
   final bool selected;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   @override
-  Widget build(BuildContext context) => Semantics(
-    button: true,
-    selected: selected,
-    child: InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(AppRadius.pill),
-      child: Center(
-        child: Text(
-          label,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: AppTextStyles.titleLarge.copyWith(
-            color: selected ? AppColors.textInverse : AppColors.textSecondary,
-          ),
+  Widget build(BuildContext context) {
+    final labelWidget = Center(
+      child: Text(
+        label,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: AppTextStyles.titleLarge.copyWith(
+          color: selected ? AppColors.textInverse : AppColors.textSecondary,
         ),
       ),
-    ),
-  );
+    );
+    final onTap = this.onTap;
+    if (onTap == null) {
+      return Semantics(
+        enabled: false,
+        selected: selected,
+        child: IgnorePointer(child: labelWidget),
+      );
+    }
+    return Semantics(
+      button: true,
+      enabled: true,
+      selected: selected,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(AppRadius.pill),
+        child: labelWidget,
+      ),
+    );
+  }
 }
 
 class _StaggeredChallenge extends StatelessWidget {
