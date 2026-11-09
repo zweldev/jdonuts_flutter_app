@@ -1,0 +1,18 @@
+abstract final class AppDimensions {
+  static const buttonHeight = 52.0;
+  static const inputHeight = 56.0;
+  static const backButtonSize = 42.0;
+  static const progressIndicatorSize = 29.0;
+  static const progressStrokeWidth = 6.0;
+  static const loaderSize = 20.0;
+  static const loaderStrokeWidth = 2.0;
+  static const iconSmall = 16.0;
+  static const iconMedium = 20.0;
+  static const iconLarge = 24.0;
+  static const iconExtraLarge = 32.0;
+  static const avatarSmall = 48.0;
+  static const avatarLarge = 84.0;
+  static const cardPadding = 16.0;
+  static const screenHorizontalPadding = 24.0;
+  static const sectionSpacing = 24.0;
+}
