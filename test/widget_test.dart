@@ -398,6 +398,13 @@ void main() {
       find.text('Enter a valid phone number after $phoneCountryPrefix.'),
       findsOneWidget,
     );
+    expect(
+      tester
+          .widget<TextField>(find.byType(TextField).first)
+          .decoration
+          ?.errorText,
+      isNull,
+    );
     await tester.enterText(find.byType(TextField).first, '09254135592');
     await tester.pump();
     expect(
