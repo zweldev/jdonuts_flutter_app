@@ -5,6 +5,7 @@ import 'package:jdonuts_flutter_app/core/theme/app_design_system.dart';
 import 'package:jdonuts_flutter_app/database/app_database.dart';
 import 'package:jdonuts_flutter_app/database/daos/cart_dao.dart';
 import 'package:jdonuts_flutter_app/features/products/presentation/screens/product_detail_screen.dart';
+import 'package:jdonuts_flutter_app/l10n/app_localizations.dart';
 
 void main() {
   late AppDatabase database;
@@ -36,6 +37,8 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         theme: AppTheme.light,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         home: ProductDetailScreen(product: product, cartDao: CartDao(database)),
       ),
     );
