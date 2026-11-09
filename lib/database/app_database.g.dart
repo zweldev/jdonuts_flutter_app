@@ -3442,17 +3442,6 @@ class $MembersTable extends Members with TableInfo<$MembersTable, DbMember> {
     type: DriftSqlType.string,
     requiredDuringInsert: true,
   );
-  static const VerificationMeta _photoUrlMeta = const VerificationMeta(
-    'photoUrl',
-  );
-  @override
-  late final GeneratedColumn<String> photoUrl = GeneratedColumn<String>(
-    'photo_url',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-  );
   static const VerificationMeta _tierIdMeta = const VerificationMeta('tierId');
   @override
   late final GeneratedColumn<String> tierId = GeneratedColumn<String>(
@@ -3476,18 +3465,6 @@ class $MembersTable extends Members with TableInfo<$MembersTable, DbMember> {
     type: DriftSqlType.int,
     requiredDuringInsert: true,
   );
-  static const VerificationMeta _notificationCountMeta = const VerificationMeta(
-    'notificationCount',
-  );
-  @override
-  late final GeneratedColumn<int> notificationCount = GeneratedColumn<int>(
-    'notification_count',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-    defaultValue: const Constant(0),
-  );
   static const VerificationMeta _rewardsBadgeCountMeta = const VerificationMeta(
     'rewardsBadgeCount',
   );
@@ -3505,10 +3482,8 @@ class $MembersTable extends Members with TableInfo<$MembersTable, DbMember> {
     id,
     userId,
     name,
-    photoUrl,
     tierId,
     totalPoints,
-    notificationCount,
     rewardsBadgeCount,
   ];
   @override
@@ -3544,12 +3519,6 @@ class $MembersTable extends Members with TableInfo<$MembersTable, DbMember> {
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
-    if (data.containsKey('photo_url')) {
-      context.handle(
-        _photoUrlMeta,
-        photoUrl.isAcceptableOrUnknown(data['photo_url']!, _photoUrlMeta),
-      );
-    }
     if (data.containsKey('tier_id')) {
       context.handle(
         _tierIdMeta,
@@ -3568,15 +3537,6 @@ class $MembersTable extends Members with TableInfo<$MembersTable, DbMember> {
       );
     } else if (isInserting) {
       context.missing(_totalPointsMeta);
-    }
-    if (data.containsKey('notification_count')) {
-      context.handle(
-        _notificationCountMeta,
-        notificationCount.isAcceptableOrUnknown(
-          data['notification_count']!,
-          _notificationCountMeta,
-        ),
-      );
     }
     if (data.containsKey('rewards_badge_count')) {
       context.handle(
@@ -3608,10 +3568,6 @@ class $MembersTable extends Members with TableInfo<$MembersTable, DbMember> {
         DriftSqlType.string,
         data['${effectivePrefix}name'],
       )!,
-      photoUrl: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}photo_url'],
-      ),
       tierId: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}tier_id'],
@@ -3619,10 +3575,6 @@ class $MembersTable extends Members with TableInfo<$MembersTable, DbMember> {
       totalPoints: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}total_points'],
-      )!,
-      notificationCount: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}notification_count'],
       )!,
       rewardsBadgeCount: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
@@ -3641,19 +3593,15 @@ class DbMember extends DataClass implements Insertable<DbMember> {
   final String id;
   final String userId;
   final String name;
-  final String? photoUrl;
   final String tierId;
   final int totalPoints;
-  final int notificationCount;
   final int rewardsBadgeCount;
   const DbMember({
     required this.id,
     required this.userId,
     required this.name,
-    this.photoUrl,
     required this.tierId,
     required this.totalPoints,
-    required this.notificationCount,
     required this.rewardsBadgeCount,
   });
   @override
@@ -3662,12 +3610,8 @@ class DbMember extends DataClass implements Insertable<DbMember> {
     map['id'] = Variable<String>(id);
     map['user_id'] = Variable<String>(userId);
     map['name'] = Variable<String>(name);
-    if (!nullToAbsent || photoUrl != null) {
-      map['photo_url'] = Variable<String>(photoUrl);
-    }
     map['tier_id'] = Variable<String>(tierId);
     map['total_points'] = Variable<int>(totalPoints);
-    map['notification_count'] = Variable<int>(notificationCount);
     map['rewards_badge_count'] = Variable<int>(rewardsBadgeCount);
     return map;
   }
@@ -3677,12 +3621,8 @@ class DbMember extends DataClass implements Insertable<DbMember> {
       id: Value(id),
       userId: Value(userId),
       name: Value(name),
-      photoUrl: photoUrl == null && nullToAbsent
-          ? const Value.absent()
-          : Value(photoUrl),
       tierId: Value(tierId),
       totalPoints: Value(totalPoints),
-      notificationCount: Value(notificationCount),
       rewardsBadgeCount: Value(rewardsBadgeCount),
     );
   }
@@ -3696,10 +3636,8 @@ class DbMember extends DataClass implements Insertable<DbMember> {
       id: serializer.fromJson<String>(json['id']),
       userId: serializer.fromJson<String>(json['userId']),
       name: serializer.fromJson<String>(json['name']),
-      photoUrl: serializer.fromJson<String?>(json['photoUrl']),
       tierId: serializer.fromJson<String>(json['tierId']),
       totalPoints: serializer.fromJson<int>(json['totalPoints']),
-      notificationCount: serializer.fromJson<int>(json['notificationCount']),
       rewardsBadgeCount: serializer.fromJson<int>(json['rewardsBadgeCount']),
     );
   }
@@ -3710,10 +3648,8 @@ class DbMember extends DataClass implements Insertable<DbMember> {
       'id': serializer.toJson<String>(id),
       'userId': serializer.toJson<String>(userId),
       'name': serializer.toJson<String>(name),
-      'photoUrl': serializer.toJson<String?>(photoUrl),
       'tierId': serializer.toJson<String>(tierId),
       'totalPoints': serializer.toJson<int>(totalPoints),
-      'notificationCount': serializer.toJson<int>(notificationCount),
       'rewardsBadgeCount': serializer.toJson<int>(rewardsBadgeCount),
     };
   }
@@ -3722,19 +3658,15 @@ class DbMember extends DataClass implements Insertable<DbMember> {
     String? id,
     String? userId,
     String? name,
-    Value<String?> photoUrl = const Value.absent(),
     String? tierId,
     int? totalPoints,
-    int? notificationCount,
     int? rewardsBadgeCount,
   }) => DbMember(
     id: id ?? this.id,
     userId: userId ?? this.userId,
     name: name ?? this.name,
-    photoUrl: photoUrl.present ? photoUrl.value : this.photoUrl,
     tierId: tierId ?? this.tierId,
     totalPoints: totalPoints ?? this.totalPoints,
-    notificationCount: notificationCount ?? this.notificationCount,
     rewardsBadgeCount: rewardsBadgeCount ?? this.rewardsBadgeCount,
   );
   DbMember copyWithCompanion(MembersCompanion data) {
@@ -3742,14 +3674,10 @@ class DbMember extends DataClass implements Insertable<DbMember> {
       id: data.id.present ? data.id.value : this.id,
       userId: data.userId.present ? data.userId.value : this.userId,
       name: data.name.present ? data.name.value : this.name,
-      photoUrl: data.photoUrl.present ? data.photoUrl.value : this.photoUrl,
       tierId: data.tierId.present ? data.tierId.value : this.tierId,
       totalPoints: data.totalPoints.present
           ? data.totalPoints.value
           : this.totalPoints,
-      notificationCount: data.notificationCount.present
-          ? data.notificationCount.value
-          : this.notificationCount,
       rewardsBadgeCount: data.rewardsBadgeCount.present
           ? data.rewardsBadgeCount.value
           : this.rewardsBadgeCount,
@@ -3762,26 +3690,16 @@ class DbMember extends DataClass implements Insertable<DbMember> {
           ..write('id: $id, ')
           ..write('userId: $userId, ')
           ..write('name: $name, ')
-          ..write('photoUrl: $photoUrl, ')
           ..write('tierId: $tierId, ')
           ..write('totalPoints: $totalPoints, ')
-          ..write('notificationCount: $notificationCount, ')
           ..write('rewardsBadgeCount: $rewardsBadgeCount')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(
-    id,
-    userId,
-    name,
-    photoUrl,
-    tierId,
-    totalPoints,
-    notificationCount,
-    rewardsBadgeCount,
-  );
+  int get hashCode =>
+      Object.hash(id, userId, name, tierId, totalPoints, rewardsBadgeCount);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -3789,10 +3707,8 @@ class DbMember extends DataClass implements Insertable<DbMember> {
           other.id == this.id &&
           other.userId == this.userId &&
           other.name == this.name &&
-          other.photoUrl == this.photoUrl &&
           other.tierId == this.tierId &&
           other.totalPoints == this.totalPoints &&
-          other.notificationCount == this.notificationCount &&
           other.rewardsBadgeCount == this.rewardsBadgeCount);
 }
 
@@ -3800,20 +3716,16 @@ class MembersCompanion extends UpdateCompanion<DbMember> {
   final Value<String> id;
   final Value<String> userId;
   final Value<String> name;
-  final Value<String?> photoUrl;
   final Value<String> tierId;
   final Value<int> totalPoints;
-  final Value<int> notificationCount;
   final Value<int> rewardsBadgeCount;
   final Value<int> rowid;
   const MembersCompanion({
     this.id = const Value.absent(),
     this.userId = const Value.absent(),
     this.name = const Value.absent(),
-    this.photoUrl = const Value.absent(),
     this.tierId = const Value.absent(),
     this.totalPoints = const Value.absent(),
-    this.notificationCount = const Value.absent(),
     this.rewardsBadgeCount = const Value.absent(),
     this.rowid = const Value.absent(),
   });
@@ -3821,10 +3733,8 @@ class MembersCompanion extends UpdateCompanion<DbMember> {
     required String id,
     required String userId,
     required String name,
-    this.photoUrl = const Value.absent(),
     required String tierId,
     required int totalPoints,
-    this.notificationCount = const Value.absent(),
     this.rewardsBadgeCount = const Value.absent(),
     this.rowid = const Value.absent(),
   }) : id = Value(id),
@@ -3836,10 +3746,8 @@ class MembersCompanion extends UpdateCompanion<DbMember> {
     Expression<String>? id,
     Expression<String>? userId,
     Expression<String>? name,
-    Expression<String>? photoUrl,
     Expression<String>? tierId,
     Expression<int>? totalPoints,
-    Expression<int>? notificationCount,
     Expression<int>? rewardsBadgeCount,
     Expression<int>? rowid,
   }) {
@@ -3847,10 +3755,8 @@ class MembersCompanion extends UpdateCompanion<DbMember> {
       if (id != null) 'id': id,
       if (userId != null) 'user_id': userId,
       if (name != null) 'name': name,
-      if (photoUrl != null) 'photo_url': photoUrl,
       if (tierId != null) 'tier_id': tierId,
       if (totalPoints != null) 'total_points': totalPoints,
-      if (notificationCount != null) 'notification_count': notificationCount,
       if (rewardsBadgeCount != null) 'rewards_badge_count': rewardsBadgeCount,
       if (rowid != null) 'rowid': rowid,
     });
@@ -3860,10 +3766,8 @@ class MembersCompanion extends UpdateCompanion<DbMember> {
     Value<String>? id,
     Value<String>? userId,
     Value<String>? name,
-    Value<String?>? photoUrl,
     Value<String>? tierId,
     Value<int>? totalPoints,
-    Value<int>? notificationCount,
     Value<int>? rewardsBadgeCount,
     Value<int>? rowid,
   }) {
@@ -3871,10 +3775,8 @@ class MembersCompanion extends UpdateCompanion<DbMember> {
       id: id ?? this.id,
       userId: userId ?? this.userId,
       name: name ?? this.name,
-      photoUrl: photoUrl ?? this.photoUrl,
       tierId: tierId ?? this.tierId,
       totalPoints: totalPoints ?? this.totalPoints,
-      notificationCount: notificationCount ?? this.notificationCount,
       rewardsBadgeCount: rewardsBadgeCount ?? this.rewardsBadgeCount,
       rowid: rowid ?? this.rowid,
     );
@@ -3892,17 +3794,11 @@ class MembersCompanion extends UpdateCompanion<DbMember> {
     if (name.present) {
       map['name'] = Variable<String>(name.value);
     }
-    if (photoUrl.present) {
-      map['photo_url'] = Variable<String>(photoUrl.value);
-    }
     if (tierId.present) {
       map['tier_id'] = Variable<String>(tierId.value);
     }
     if (totalPoints.present) {
       map['total_points'] = Variable<int>(totalPoints.value);
-    }
-    if (notificationCount.present) {
-      map['notification_count'] = Variable<int>(notificationCount.value);
     }
     if (rewardsBadgeCount.present) {
       map['rewards_badge_count'] = Variable<int>(rewardsBadgeCount.value);
@@ -3919,10 +3815,8 @@ class MembersCompanion extends UpdateCompanion<DbMember> {
           ..write('id: $id, ')
           ..write('userId: $userId, ')
           ..write('name: $name, ')
-          ..write('photoUrl: $photoUrl, ')
           ..write('tierId: $tierId, ')
           ..write('totalPoints: $totalPoints, ')
-          ..write('notificationCount: $notificationCount, ')
           ..write('rewardsBadgeCount: $rewardsBadgeCount, ')
           ..write('rowid: $rowid')
           ..write(')'))
@@ -7010,10 +6904,8 @@ typedef $$MembersTableCreateCompanionBuilder = MembersCompanion Function({
   required String id,
   required String userId,
   required String name,
-  Value<String?> photoUrl,
   required String tierId,
   required int totalPoints,
-  Value<int> notificationCount,
   Value<int> rewardsBadgeCount,
   Value<int> rowid,
 });
@@ -7021,10 +6913,8 @@ typedef $$MembersTableUpdateCompanionBuilder = MembersCompanion Function({
   Value<String> id,
   Value<String> userId,
   Value<String> name,
-  Value<String?> photoUrl,
   Value<String> tierId,
   Value<int> totalPoints,
-  Value<int> notificationCount,
   Value<int> rewardsBadgeCount,
   Value<int> rowid,
 });
@@ -7087,18 +6977,8 @@ class $$MembersTableFilterComposer
     builder: (column) => ColumnFilters(column),
   );
 
-  ColumnFilters<String> get photoUrl => $composableBuilder(
-    column: $table.photoUrl,
-    builder: (column) => ColumnFilters(column),
-  );
-
   ColumnFilters<int> get totalPoints => $composableBuilder(
     column: $table.totalPoints,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<int> get notificationCount => $composableBuilder(
-    column: $table.notificationCount,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -7173,18 +7053,8 @@ class $$MembersTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
-  ColumnOrderings<String> get photoUrl => $composableBuilder(
-    column: $table.photoUrl,
-    builder: (column) => ColumnOrderings(column),
-  );
-
   ColumnOrderings<int> get totalPoints => $composableBuilder(
     column: $table.totalPoints,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<int> get notificationCount => $composableBuilder(
-    column: $table.notificationCount,
     builder: (column) => ColumnOrderings(column),
   );
 
@@ -7255,16 +7125,8 @@ class $$MembersTableAnnotationComposer
   GeneratedColumn<String> get name =>
       $composableBuilder(column: $table.name, builder: (column) => column);
 
-  GeneratedColumn<String> get photoUrl =>
-      $composableBuilder(column: $table.photoUrl, builder: (column) => column);
-
   GeneratedColumn<int> get totalPoints => $composableBuilder(
     column: $table.totalPoints,
-    builder: (column) => column,
-  );
-
-  GeneratedColumn<int> get notificationCount => $composableBuilder(
-    column: $table.notificationCount,
     builder: (column) => column,
   );
 
@@ -7351,20 +7213,16 @@ class $$MembersTableTableManager
                 Value<String> id = const Value.absent(),
                 Value<String> userId = const Value.absent(),
                 Value<String> name = const Value.absent(),
-                Value<String?> photoUrl = const Value.absent(),
                 Value<String> tierId = const Value.absent(),
                 Value<int> totalPoints = const Value.absent(),
-                Value<int> notificationCount = const Value.absent(),
                 Value<int> rewardsBadgeCount = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
               }) => MembersCompanion(
                 id: id,
                 userId: userId,
                 name: name,
-                photoUrl: photoUrl,
                 tierId: tierId,
                 totalPoints: totalPoints,
-                notificationCount: notificationCount,
                 rewardsBadgeCount: rewardsBadgeCount,
                 rowid: rowid,
               ),
@@ -7373,20 +7231,16 @@ class $$MembersTableTableManager
                 required String id,
                 required String userId,
                 required String name,
-                Value<String?> photoUrl = const Value.absent(),
                 required String tierId,
                 required int totalPoints,
-                Value<int> notificationCount = const Value.absent(),
                 Value<int> rewardsBadgeCount = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
               }) => MembersCompanion.insert(
                 id: id,
                 userId: userId,
                 name: name,
-                photoUrl: photoUrl,
                 tierId: tierId,
                 totalPoints: totalPoints,
-                notificationCount: notificationCount,
                 rewardsBadgeCount: rewardsBadgeCount,
                 rowid: rowid,
               ),
