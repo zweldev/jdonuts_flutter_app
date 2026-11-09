@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/theme/app_design_system.dart';
 import '../../domain/auth_constants.dart';
 import '../../domain/result.dart';
 import '../../domain/validators/auth_validators.dart';
@@ -68,7 +69,7 @@ class _DobScreenState extends State<DobScreen> {
     final l10n = AppLocalizations.of(context);
     final date = await showModalBottomSheet<DateTime>(
       context: context,
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.surface,
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
@@ -86,17 +87,18 @@ class _DobScreenState extends State<DobScreen> {
                     Expanded(
                       child: Text(
                         l10n.selectBirthday,
-                        style: const TextStyle(
-                          color: Color(0xFFEF4F9B),
-                          fontSize: 22,
-                          fontWeight: FontWeight.w500,
+                        style: AppTextStyles.headlineLarge.copyWith(
+                          color: AppColors.secondary,
                         ),
                       ),
                     ),
                     IconButton(
                       tooltip: l10n.close,
                       onPressed: () => Navigator.pop(context),
-                      icon: const Icon(Icons.close, color: Colors.black),
+                      icon: const Icon(
+                        Icons.close,
+                        color: AppColors.iconPrimary,
+                      ),
                     ),
                   ],
                 ),
@@ -120,16 +122,14 @@ class _DobScreenState extends State<DobScreen> {
                     key: const ValueKey('dob_picker_select'),
                     onPressed: () => Navigator.pop(context, selectedDate),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF35C1DD),
-                      foregroundColor: Colors.white,
+                      backgroundColor: AppColors.primary,
+                      foregroundColor: AppColors.textInverse,
                       shape: const StadiumBorder(),
                       elevation: 0,
                     ),
                     child: Text(
                       l10n.select,
-                      style: const TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.w800,
+                      style: AppTextStyles.titleLarge.copyWith(
                         letterSpacing: 1.2,
                       ),
                     ),
@@ -192,9 +192,8 @@ class _DobScreenState extends State<DobScreen> {
                     alignment: Alignment.centerLeft,
                     child: Text(
                       _dobErrorText(l10n, state.dobError!),
-                      style: const TextStyle(
-                        color: Color(0xFFEF4F9B),
-                        fontSize: 13,
+                      style: AppTextStyles.bodySmall.copyWith(
+                        color: AppColors.secondary,
                       ),
                     ),
                   ),
@@ -206,9 +205,8 @@ class _DobScreenState extends State<DobScreen> {
                     alignment: Alignment.centerLeft,
                     child: Text(
                       authFailureMessage(l10n, state.failure!),
-                      style: const TextStyle(
-                        color: Color(0xFFEF4F9B),
-                        fontSize: 13,
+                      style: AppTextStyles.bodySmall.copyWith(
+                        color: AppColors.secondary,
                       ),
                     ),
                   ),
