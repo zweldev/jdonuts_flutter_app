@@ -395,7 +395,7 @@ abstract class AppLocalizations {
   /// No description provided for @welcomeTitle.
   ///
   /// In en, this message translates to:
-  /// **'Welcome to J\'Donuts!'**
+  /// **'Welcome to the\nworld of J’donuts'**
   String get welcomeTitle;
 
   /// No description provided for @welcomeMessage.

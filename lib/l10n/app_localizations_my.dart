@@ -174,7 +174,7 @@ class AppLocalizationsMy extends AppLocalizations {
   String get unknownFailure => 'Something went wrong. Please try again.';
 
   @override
-  String get welcomeTitle => 'Welcome to J\'Donuts!';
+  String get welcomeTitle => 'Welcome to the\nworld of J’donuts';
 
   @override
   String get welcomeMessage => 'Your account is ready. Let\'s explore!';
