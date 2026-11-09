@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart' as material_ui;
 
+import 'core/theme/app_design_system.dart';
 import 'di/service_locator.dart';
 import 'database/seed/seed_loader.dart';
 import 'features/auth/domain/repositories/auth_repository.dart';
@@ -38,6 +39,7 @@ class _StartupErrorApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialApp(
+    theme: AppTheme.light,
     home: Scaffold(
       body: Center(
         child: SelectableText('Unable to load offline data.\n$error'),
@@ -98,15 +100,7 @@ class _MyAppState extends State<MyApp> {
           material_ui.GlobalMaterialLocalizations.delegate,
         ],
         supportedLocales: AppLocalizations.supportedLocales,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color(0xFF55C9E0),
-            surface: const Color(0xFFFFF8FA),
-          ),
-          scaffoldBackgroundColor: const Color(0xFFFFF8FA),
-          fontFamily: 'Roboto',
-          useMaterial3: true,
-        ),
+        theme: AppTheme.light,
         routerConfig: _router,
       ),
     );
