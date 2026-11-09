@@ -62,6 +62,18 @@ class UserDao extends DatabaseAccessor<AppDatabase>
           createdAt: DateTime.now(),
         ),
       );
+      await into(db.members).insert(
+        MembersCompanion.insert(
+          id: _uuid.v4(),
+          userId: userId,
+          name: [
+            user.firstName.trim(),
+            user.lastName.trim(),
+          ].where((part) => part.isNotEmpty).join(' '),
+          tierId: 'bronze',
+          totalPoints: 0,
+        ),
+      );
       return userId;
     });
   }
