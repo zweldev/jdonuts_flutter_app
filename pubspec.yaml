@@ -58,6 +58,7 @@ flutter:
   generate: true
   uses-material-design: true
   assets:
+    - assets/seed/
     - assets/images/challenge_items/
     - assets/images/onboarding/
     - assets/images/products/

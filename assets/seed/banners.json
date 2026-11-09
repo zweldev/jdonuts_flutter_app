@@ -1,0 +1,29 @@
+[
+  {
+    "id":"banner_central_boulevard",
+    "badgeText":"New shop",
+    "title":"We are now at Central Boulevard",
+    "image":"assets/images/shops/shop1.png",
+    "styleKey":"purple",
+    "sortOrder":0,
+    "targetProductId":null
+  },
+  {
+    "id":"banner_hot_deals",
+    "badgeText":"50%",
+    "title":"Hot deals on your favorite treats",
+    "image":"assets/images/shops/shop2.png",
+    "styleKey":"orange",
+    "sortOrder":1,
+    "targetProductId":"p_strawberry_choc"
+  },
+  {
+    "id":"banner_fresh_donuts",
+    "badgeText":"Fresh today",
+    "title":"Make every day a little sweeter",
+    "image":"assets/images/shops/shop3.png",
+    "styleKey":"cyan",
+    "sortOrder":2,
+    "targetProductId":"p_coconut"
+  }
+]

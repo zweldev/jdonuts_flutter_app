@@ -1,0 +1,5 @@
+[
+  {"id":"seasonal","title":"Seasonal specials","sortOrder":0},
+  {"id":"popular","title":"Popular","sortOrder":1},
+  {"id":"order_again","title":"Order again","sortOrder":2}
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "id":"earn_coco_complete",
+    "tab":"earn",
+    "title":"Eat 4 Coco donuts",
+    "progress":4,
+    "target":4,
+    "rewardPoints":100,
+    "artStyle":"donut_quarters",
+    "image":"assets/images/challenge_items/challenge_item_donut.png",
+    "claimed":false,
+    "sortOrder":0
+  },
+  {
+    "id":"earn_coco_in_progress",
+    "tab":"earn",
+    "title":"Eat 4 Coco donuts",
+    "progress":1,
+    "target":4,
+    "rewardPoints":100,
+    "artStyle":"donut_quarters",
+    "image":"assets/images/challenge_items/challenge_item_donut.png",
+    "claimed":false,
+    "sortOrder":1
+  },
+  {
+    "id":"earn_americano",
+    "tab":"earn",
+    "title":"Drink 12 cups americano",
+    "progress":9,
+    "target":12,
+    "rewardPoints":100,
+    "artStyle":"coffee_arc",
+    "image":"assets/images/challenge_items/challenge_item_coffee.png",
+    "claimed":false,
+    "sortOrder":2
+  },
+  {
+    "id":"gift_holiday_box",
+    "tab":"gift",
+    "title":"Share a holiday box with a friend",
+    "progress":0,
+    "target":1,
+    "rewardPoints":200,
+    "artStyle":"gift_box",
+    "image":"assets/images/seasonal_products/season_item_2.png",
+    "claimed":false,
+    "sortOrder":0
+  },
+  {
+    "id":"gift_family_treat",
+    "tab":"gift",
+    "title":"Treat your family to a donut box",
+    "progress":1,
+    "target":3,
+    "rewardPoints":300,
+    "artStyle":"gift_box",
+    "image":"assets/images/seasonal_products/season_item_3.png",
+    "claimed":false,
+    "sortOrder":1
+  }
+]

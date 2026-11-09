@@ -1,0 +1,30 @@
+[
+  {
+    "id":"shop_myaynigone",
+    "name":"Myaynigone J'Donut",
+    "address":"2972 Pyay Road, Sanchaung Township, Yangon.",
+    "image":"assets/images/shops/shop1.png",
+    "sortOrder":0
+  },
+  {
+    "id":"shop_central_boulevard",
+    "name":"Central Boulevard J'Donut",
+    "address":"Central Boulevard, Yankin Township, Yangon.",
+    "image":"assets/images/shops/shop2.png",
+    "sortOrder":1
+  },
+  {
+    "id":"shop_downtown",
+    "name":"Downtown J'Donut",
+    "address":"Bogyoke Aung San Road, Kyauktada Township, Yangon.",
+    "image":"assets/images/shops/shop3.png",
+    "sortOrder":2
+  },
+  {
+    "id":"shop_sanchaung",
+    "name":"Sanchaung J'Donut",
+    "address":"Inya Road, Sanchaung Township, Yangon.",
+    "image":"assets/images/shops/shop1.png",
+    "sortOrder":3
+  }
+]

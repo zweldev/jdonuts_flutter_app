@@ -1,0 +1,17 @@
+[
+  {"sectionId":"seasonal","productId":"p_cookie_set","sortOrder":0},
+  {"sectionId":"seasonal","productId":"p_mistletoe_box","sortOrder":1},
+  {"sectionId":"seasonal","productId":"p_family_box","sortOrder":2},
+  {"sectionId":"seasonal","productId":"p_pistachio_donut","sortOrder":3},
+  {"sectionId":"seasonal","productId":"p_peppermint_cocoa","sortOrder":4},
+  {"sectionId":"popular","productId":"p_coconut","sortOrder":0},
+  {"sectionId":"popular","productId":"p_strawberry_choc","sortOrder":1},
+  {"sectionId":"popular","productId":"p_dalgona_coffee","sortOrder":2},
+  {"sectionId":"popular","productId":"p_chocolate_sprinkle","sortOrder":3},
+  {"sectionId":"popular","productId":"p_classic_glazed","sortOrder":4},
+  {"sectionId":"popular","productId":"p_family_box","sortOrder":5},
+  {"sectionId":"order_again","productId":"p_coconut","sortOrder":0},
+  {"sectionId":"order_again","productId":"p_dalgona_coffee","sortOrder":1},
+  {"sectionId":"order_again","productId":"p_classic_glazed","sortOrder":2},
+  {"sectionId":"order_again","productId":"p_chocolate_sprinkle","sortOrder":3}
+]

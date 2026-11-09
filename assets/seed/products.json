@@ -1,0 +1,102 @@
+[
+  {
+    "id":"p_coconut",
+    "code":"JD022123",
+    "name":"Coconut Donut",
+    "priceMmk":3200,
+    "isNew":true,
+    "discountPercent":null,
+    "imageUrl":"assets/images/products/product_1.png",
+    "description":"Enjoy our scrumptious donuts - soft, sweet, and satisfying in every bite. Choose from classic glazed, rich chocolate, or fun sprinkles. Dive into deliciousness now!"
+  },
+  {
+    "id":"p_strawberry_choc",
+    "code":"JD022124",
+    "name":"Strawberry Chocolate Donut",
+    "priceMmk":4500,
+    "isNew":false,
+    "discountPercent":20,
+    "imageUrl":"assets/images/products/product_3.png",
+    "description":"A soft donut topped with strawberry icing, chocolate drizzle, and a bright berry finish."
+  },
+  {
+    "id":"p_dalgona_coffee",
+    "code":"JD022125",
+    "name":"Dalgona Creamy Coffee",
+    "priceMmk":5200,
+    "isNew":true,
+    "discountPercent":null,
+    "imageUrl":"assets/images/products/product_2.png",
+    "description":"Smooth iced coffee crowned with a generous layer of whipped dalgona cream."
+  },
+  {
+    "id":"p_cookie_set",
+    "code":"JD022126",
+    "name":"Santa's Favorite Cookies Set",
+    "priceMmk":18000,
+    "isNew":false,
+    "discountPercent":null,
+    "imageUrl":"assets/images/seasonal_products/season_item_1.png",
+    "description":"A festive assortment of freshly baked treats, perfect for sharing through the holidays."
+  },
+  {
+    "id":"p_mistletoe_box",
+    "code":"JD022127",
+    "name":"Mistletoe Romance Box",
+    "priceMmk":22000,
+    "isNew":true,
+    "discountPercent":null,
+    "imageUrl":"assets/images/seasonal_products/season_item_2.png",
+    "description":"A gift-ready box of sweet seasonal favorites made for a cozy celebration."
+  },
+  {
+    "id":"p_family_box",
+    "code":"JD022128",
+    "name":"Christmas Family Box",
+    "priceMmk":25000,
+    "isNew":false,
+    "discountPercent":20,
+    "imageUrl":"assets/images/seasonal_products/season_item_3.png",
+    "description":"A generous holiday assortment with something delicious for everyone at the table."
+  },
+  {
+    "id":"p_pistachio_donut",
+    "code":"JD022129",
+    "name":"Pistachio Holiday Donut",
+    "priceMmk":5500,
+    "isNew":true,
+    "discountPercent":50,
+    "imageUrl":"assets/images/seasonal_products/season_item_4.png",
+    "description":"A festive donut finished with fragrant pistachio and a delicate sweet glaze."
+  },
+  {
+    "id":"p_peppermint_cocoa",
+    "code":"JD022130",
+    "name":"Peppermint Cocoa Donut",
+    "priceMmk":4800,
+    "isNew":true,
+    "discountPercent":null,
+    "imageUrl":"assets/images/seasonal_products/season_item_5.png",
+    "description":"A winter-inspired treat that pairs rich cocoa flavor with refreshing peppermint."
+  },
+  {
+    "id":"p_classic_glazed",
+    "code":"JD022131",
+    "name":"Classic Glazed Donut",
+    "priceMmk":2500,
+    "isNew":false,
+    "discountPercent":null,
+    "imageUrl":"assets/images/products/product_6.png",
+    "description":"A tender, golden donut finished with a simple, smooth vanilla glaze."
+  },
+  {
+    "id":"p_chocolate_sprinkle",
+    "code":"JD022132",
+    "name":"Chocolate Sprinkle Donut",
+    "priceMmk":3900,
+    "isNew":false,
+    "discountPercent":20,
+    "imageUrl":"assets/images/products/product_4.png",
+    "description":"A chocolate-coated donut covered with crunchy sprinkles in every bite."
+  }
+]

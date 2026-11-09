@@ -1,0 +1,6 @@
+[
+  {"id":"bronze","name":"Bronze","minPoints":0,"sortOrder":0},
+  {"id":"silver","name":"Silver","minPoints":500000,"sortOrder":1},
+  {"id":"gold","name":"Gold","minPoints":680500,"sortOrder":2},
+  {"id":"platinum","name":"Platinum","minPoints":1000000,"sortOrder":3}
+]
