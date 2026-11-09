@@ -107,6 +107,7 @@ class _OtpScreenState extends State<OtpScreen>
         );
         return AuthStepScaffold(
           title: l10n.otpTitle,
+          titleTextAlign: TextAlign.center,
           progress: 0.5,
           onBack: () {
             _otpCubit.leaveStep();
@@ -117,11 +118,12 @@ class _OtpScreenState extends State<OtpScreen>
           isLoading: state.isLoading,
           onContinue: _verify,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
                 l10n.otpSentTo(otpLength, phoneNumber),
                 style: AppTextStyles.bodySmall,
+                textAlign: TextAlign.center,
               ),
               const SizedBox(height: 26),
               AnimatedBuilder(
@@ -133,31 +135,35 @@ class _OtpScreenState extends State<OtpScreen>
                   ),
                   child: child,
                 ),
-                child: Semantics(
-                  label: l10n.otpSemanticsLabel(otpLength),
-                  child: material_ui.Material(
-                    color: Colors.transparent,
-                    child: Pinput(
-                      key: const ValueKey('otp_pinput'),
-                      length: otpLength,
-                      controller: _controller,
-                      enabled: !state.isLocked,
-                      keyboardType: TextInputType.number,
-                      autofillHints: const [AutofillHints.oneTimeCode],
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                      showCursor: false,
-                      defaultPinTheme: defaultPinTheme,
-                      focusedPinTheme: defaultPinTheme,
-                      submittedPinTheme: defaultPinTheme,
-                      followingPinTheme: defaultPinTheme,
-                      errorPinTheme: errorPinTheme,
-                      forceErrorState: state.failure != null,
-                      separatorBuilder: (_) => const SizedBox(width: 7),
-                      onChanged: (_) {
-                        _otpCubit.codeChanged(_controller.text);
-                        setState(() {});
-                      },
-                      onSubmitted: (_) => _verify(),
+                child: Center(
+                  child: Semantics(
+                    label: l10n.otpSemanticsLabel(otpLength),
+                    child: material_ui.Material(
+                      color: Colors.transparent,
+                      child: Pinput(
+                        key: const ValueKey('otp_pinput'),
+                        length: otpLength,
+                        controller: _controller,
+                        enabled: !state.isLocked,
+                        keyboardType: TextInputType.number,
+                        autofillHints: const [AutofillHints.oneTimeCode],
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                        ],
+                        showCursor: false,
+                        defaultPinTheme: defaultPinTheme,
+                        focusedPinTheme: defaultPinTheme,
+                        submittedPinTheme: defaultPinTheme,
+                        followingPinTheme: defaultPinTheme,
+                        errorPinTheme: errorPinTheme,
+                        forceErrorState: state.failure != null,
+                        separatorBuilder: (_) => const SizedBox(width: 7),
+                        onChanged: (_) {
+                          _otpCubit.codeChanged(_controller.text);
+                          setState(() {});
+                        },
+                        onSubmitted: (_) => _verify(),
+                      ),
                     ),
                   ),
                 ),
@@ -171,10 +177,12 @@ class _OtpScreenState extends State<OtpScreen>
                   style: AppTextStyles.bodySmall.copyWith(
                     color: AppColors.secondary,
                   ),
+                  textAlign: TextAlign.center,
                 ),
               ],
               const SizedBox(height: 16),
               Wrap(
+                alignment: WrapAlignment.center,
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
                   Text(l10n.otpNoCode, style: AppTextStyles.bodySmall),
