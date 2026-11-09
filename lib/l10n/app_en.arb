@@ -101,5 +101,50 @@
   "logout": "Log out",
   "homeTitle": "Home",
   "progressReady": "Ready",
-  "progressGettingStarted": "Getting started"
+  "progressGettingStarted": "Getting started",
+  "rewardsTitle": "J’ Donuts Rewards",
+  "rewardsBadge": "Rewards",
+  "rewardTabLabel": "Reward",
+  "orderTabLabel": "Order",
+  "walletTabLabel": "Wallet",
+  "profileTabLabel": "Profile",
+  "rewardsTotalPoints": "Total points",
+  "rewardsHereNow": "You’re here now",
+  "rewardsPointsRemaining": "{points} pts Remaining\nto become {tier}",
+  "@rewardsPointsRemaining": {
+    "placeholders": {
+      "points": {
+        "type": "String"
+      },
+      "tier": {}
+    }
+  },
+  "rewardsYoullBeHereSoon": "You’ll be here soon",
+  "rewardsTopTier": "Top tier reached",
+  "rewardsRetry": "Try again",
+  "rewardsEarnTab": "Eat more earn more",
+  "rewardsGiftTab": "Gift",
+  "rewardsEarnButton": "EARN",
+  "rewardsPointUnit": "{points} pts",
+  "@rewardsPointUnit": {
+    "placeholders": {
+      "points": {
+        "type": "String"
+      }
+    }
+  },
+  "rewardsChallengeProgress": "{progress}/{target}",
+  "@rewardsChallengeProgress": {
+    "placeholders": {
+      "progress": {
+        "type": "int"
+      },
+      "target": {
+        "type": "int"
+      }
+    }
+  },
+  "rewardsLoadError": "Rewards could not be loaded.",
+  "rewardsEmptyTitle": "No rewards here yet",
+  "rewardsEmptyMessage": "Check back soon for new challenges."
 }

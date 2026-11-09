@@ -193,4 +193,70 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get progressGettingStarted => 'Getting started';
+
+  @override
+  String get rewardsTitle => 'J’ Donuts Rewards';
+
+  @override
+  String get rewardsBadge => 'Rewards';
+
+  @override
+  String get rewardTabLabel => 'Reward';
+
+  @override
+  String get orderTabLabel => 'Order';
+
+  @override
+  String get walletTabLabel => 'Wallet';
+
+  @override
+  String get profileTabLabel => 'Profile';
+
+  @override
+  String get rewardsTotalPoints => 'Total points';
+
+  @override
+  String get rewardsHereNow => 'You’re here now';
+
+  @override
+  String rewardsPointsRemaining(String points, Object tier) {
+    return '$points pts Remaining\nto become $tier';
+  }
+
+  @override
+  String get rewardsYoullBeHereSoon => 'You’ll be here soon';
+
+  @override
+  String get rewardsTopTier => 'Top tier reached';
+
+  @override
+  String get rewardsRetry => 'Try again';
+
+  @override
+  String get rewardsEarnTab => 'Eat more earn more';
+
+  @override
+  String get rewardsGiftTab => 'Gift';
+
+  @override
+  String get rewardsEarnButton => 'EARN';
+
+  @override
+  String rewardsPointUnit(String points) {
+    return '$points pts';
+  }
+
+  @override
+  String rewardsChallengeProgress(int progress, int target) {
+    return '$progress/$target';
+  }
+
+  @override
+  String get rewardsLoadError => 'Rewards could not be loaded.';
+
+  @override
+  String get rewardsEmptyTitle => 'No rewards here yet';
+
+  @override
+  String get rewardsEmptyMessage => 'Check back soon for new challenges.';
 }

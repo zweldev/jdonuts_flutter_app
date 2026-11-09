@@ -193,4 +193,71 @@ class AppLocalizationsMy extends AppLocalizations {
 
   @override
   String get progressGettingStarted => 'Getting started';
+
+  @override
+  String get rewardsTitle => 'J’ Donuts Rewards';
+
+  @override
+  String get rewardsBadge => 'ဆုလက်ဆောင်များ';
+
+  @override
+  String get rewardTabLabel => 'ဆု';
+
+  @override
+  String get orderTabLabel => 'မှာယူရန်';
+
+  @override
+  String get walletTabLabel => 'ပိုက်ဆံအိတ်';
+
+  @override
+  String get profileTabLabel => 'ကိုယ်ရေးအချက်အလက်';
+
+  @override
+  String get rewardsTotalPoints => 'စုစုပေါင်း အမှတ်များ';
+
+  @override
+  String get rewardsHereNow => 'လက်ရှိအဆင့်';
+
+  @override
+  String rewardsPointsRemaining(String points, Object tier) {
+    return '$tier အဆင့်ရောက်ရန် $points မှတ်လိုပါသည်';
+  }
+
+  @override
+  String get rewardsYoullBeHereSoon => 'မကြာမီ ဤနေရာတွင် ရှိပါမည်';
+
+  @override
+  String get rewardsTopTier => 'အမြင့်ဆုံးအဆင့်သို့ ရောက်ရှိပါပြီ';
+
+  @override
+  String get rewardsRetry => 'ထပ်ကြိုးစားပါ';
+
+  @override
+  String get rewardsEarnTab => 'များများစားပြီး အမှတ်များများရယူပါ';
+
+  @override
+  String get rewardsGiftTab => 'လက်ဆောင်';
+
+  @override
+  String get rewardsEarnButton => 'ရယူရန်';
+
+  @override
+  String rewardsPointUnit(String points) {
+    return '$points မှတ်';
+  }
+
+  @override
+  String rewardsChallengeProgress(int progress, int target) {
+    return '$progress/$target';
+  }
+
+  @override
+  String get rewardsLoadError => 'ဆုလက်ဆောင်များကို ဖွင့်၍မရပါ။';
+
+  @override
+  String get rewardsEmptyTitle => 'လောလောဆယ် ဆုလက်ဆောင်မရှိသေးပါ';
+
+  @override
+  String get rewardsEmptyMessage =>
+      'စိန်ခေါ်မှုအသစ်များအတွက် နောက်မှပြန်စစ်ဆေးပါ။';
 }

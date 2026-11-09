@@ -433,6 +433,126 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Getting started'**
   String get progressGettingStarted;
+
+  /// No description provided for @rewardsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'J’ Donuts Rewards'**
+  String get rewardsTitle;
+
+  /// No description provided for @rewardsBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Rewards'**
+  String get rewardsBadge;
+
+  /// No description provided for @rewardTabLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Reward'**
+  String get rewardTabLabel;
+
+  /// No description provided for @orderTabLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Order'**
+  String get orderTabLabel;
+
+  /// No description provided for @walletTabLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Wallet'**
+  String get walletTabLabel;
+
+  /// No description provided for @profileTabLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get profileTabLabel;
+
+  /// No description provided for @rewardsTotalPoints.
+  ///
+  /// In en, this message translates to:
+  /// **'Total points'**
+  String get rewardsTotalPoints;
+
+  /// No description provided for @rewardsHereNow.
+  ///
+  /// In en, this message translates to:
+  /// **'You’re here now'**
+  String get rewardsHereNow;
+
+  /// No description provided for @rewardsPointsRemaining.
+  ///
+  /// In en, this message translates to:
+  /// **'{points} pts Remaining\nto become {tier}'**
+  String rewardsPointsRemaining(String points, Object tier);
+
+  /// No description provided for @rewardsYoullBeHereSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'You’ll be here soon'**
+  String get rewardsYoullBeHereSoon;
+
+  /// No description provided for @rewardsTopTier.
+  ///
+  /// In en, this message translates to:
+  /// **'Top tier reached'**
+  String get rewardsTopTier;
+
+  /// No description provided for @rewardsRetry.
+  ///
+  /// In en, this message translates to:
+  /// **'Try again'**
+  String get rewardsRetry;
+
+  /// No description provided for @rewardsEarnTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Eat more earn more'**
+  String get rewardsEarnTab;
+
+  /// No description provided for @rewardsGiftTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Gift'**
+  String get rewardsGiftTab;
+
+  /// No description provided for @rewardsEarnButton.
+  ///
+  /// In en, this message translates to:
+  /// **'EARN'**
+  String get rewardsEarnButton;
+
+  /// No description provided for @rewardsPointUnit.
+  ///
+  /// In en, this message translates to:
+  /// **'{points} pts'**
+  String rewardsPointUnit(String points);
+
+  /// No description provided for @rewardsChallengeProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'{progress}/{target}'**
+  String rewardsChallengeProgress(int progress, int target);
+
+  /// No description provided for @rewardsLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Rewards could not be loaded.'**
+  String get rewardsLoadError;
+
+  /// No description provided for @rewardsEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No rewards here yet'**
+  String get rewardsEmptyTitle;
+
+  /// No description provided for @rewardsEmptyMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Check back soon for new challenges.'**
+  String get rewardsEmptyMessage;
 }
 
 class _AppLocalizationsDelegate
