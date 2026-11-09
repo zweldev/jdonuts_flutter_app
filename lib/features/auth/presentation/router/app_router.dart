@@ -28,8 +28,8 @@ import '../screens/otp_screen.dart';
 import '../screens/phone_screen.dart';
 import '../screens/welcome_screen.dart';
 
-class AuthRouterRefresh extends ChangeNotifier {
-  AuthRouterRefresh(Stream<SessionState> stream) {
+class AppRouterRefresh extends ChangeNotifier {
+  AppRouterRefresh(Stream<SessionState> stream) {
     _subscription = stream.listen((_) => notifyListeners());
   }
 
@@ -42,7 +42,7 @@ class AuthRouterRefresh extends ChangeNotifier {
   }
 }
 
-GoRouter createAuthRouter(SessionCubit cubit, AuthRouterRefresh refresh) {
+GoRouter createAppRouter(SessionCubit cubit, AppRouterRefresh refresh) {
   return GoRouter(
     initialLocation: '/splash',
     refreshListenable: refresh,

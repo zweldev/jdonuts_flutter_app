@@ -10,7 +10,7 @@ import 'features/auth/domain/repositories/auth_repository.dart';
 import 'l10n/app_localizations.dart';
 import 'features/auth/presentation/cubit/otp_cubit.dart';
 import 'features/auth/presentation/cubit/registration_cubit.dart';
-import 'features/auth/presentation/router/auth_router.dart';
+import 'features/auth/presentation/router/app_router.dart';
 import 'features/auth/presentation/cubit/session_cubit.dart';
 
 Future<void> main() async {
@@ -59,7 +59,7 @@ class _MyAppState extends State<MyApp> {
   late final SessionCubit _sessionCubit;
   late final RegistrationCubit _registrationCubit;
   late final OtpCubit _otpCubit;
-  late final AuthRouterRefresh _refresh;
+  late final AppRouterRefresh _refresh;
   late final GoRouter _router;
 
   @override
@@ -69,8 +69,8 @@ class _MyAppState extends State<MyApp> {
     _sessionCubit = SessionCubit(repository);
     _registrationCubit = RegistrationCubit(repository, _sessionCubit);
     _otpCubit = OtpCubit(repository, _registrationCubit, _sessionCubit);
-    _refresh = AuthRouterRefresh(_sessionCubit.stream);
-    _router = createAuthRouter(_sessionCubit, _refresh);
+    _refresh = AppRouterRefresh(_sessionCubit.stream);
+    _router = createAppRouter(_sessionCubit, _refresh);
     _sessionCubit.restoreSession();
   }
 
