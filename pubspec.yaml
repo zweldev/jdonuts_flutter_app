@@ -58,5 +58,10 @@ flutter:
   generate: true
   uses-material-design: true
   assets:
-    - assets/images/
+    - assets/images/challenge_items/
+    - assets/images/onboarding/
+    - assets/images/products/
+    - assets/images/seasonal_products/
+    - assets/images/shops/
+    - assets/images/welcome_screen/
     - assets/icons/
