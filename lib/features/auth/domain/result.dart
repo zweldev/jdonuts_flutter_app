@@ -22,6 +22,10 @@ final class UserNotFound extends AuthFailure {
   const UserNotFound();
 }
 
+final class AlreadyRegistered extends AuthFailure {
+  const AlreadyRegistered();
+}
+
 final class InvalidOtp extends AuthFailure {
   const InvalidOtp();
 }
