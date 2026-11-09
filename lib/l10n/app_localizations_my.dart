@@ -202,6 +202,89 @@ class AppLocalizationsMy extends AppLocalizations {
   String get burmeseLanguage => 'မြန်မာ';
 
   @override
+  String get offlineBanner => 'You’re offline. Showing saved data.';
+
+  @override
+  String get productUnavailable => 'Product details are unavailable.';
+
+  @override
+  String get productLoadError =>
+      'Could not load this product. Please try again.';
+
+  @override
+  String cartAdded(Object productName) {
+    return '$productName added to cart.';
+  }
+
+  @override
+  String get cartAddFailed => 'Could not add this product to your cart.';
+
+  @override
+  String get notifications => 'Notifications';
+
+  @override
+  String get noNotifications => 'No new notifications.';
+
+  @override
+  String get noProductSections => 'No product sections yet.';
+
+  @override
+  String get noProducts => 'Nothing here yet.';
+
+  @override
+  String get noNearbyShops => 'No nearby shops found.';
+
+  @override
+  String get sectionLoadError => 'This section could not be loaded.';
+
+  @override
+  String get newBadge => 'New';
+
+  @override
+  String discountPercentOff(int discount) {
+    return '$discount% off';
+  }
+
+  @override
+  String get decreaseQuantity => 'Decrease quantity';
+
+  @override
+  String get increaseQuantity => 'Increase quantity';
+
+  @override
+  String get memberFallback => 'J’Donuts member';
+
+  @override
+  String homeMemberTier(Object tier) {
+    return '$tier member';
+  }
+
+  @override
+  String get popularSectionTitle => 'Popular 🔥';
+
+  @override
+  String nearbyShopsCount(int count) {
+    return 'There are $count J’Donut shops near you. 😊';
+  }
+
+  @override
+  String get exploreNow => 'EXPLORE NOW';
+
+  @override
+  String get orderOnline => 'Order Online';
+
+  @override
+  String get whatsThis => 'What’s\nthis?';
+
+  @override
+  String get addToCart => 'ADD TO CART';
+
+  @override
+  String discountPercent(int discount) {
+    return '$discount%';
+  }
+
+  @override
   String get homeTitle => 'ပင်မစာမျက်နှာ';
 
   @override
