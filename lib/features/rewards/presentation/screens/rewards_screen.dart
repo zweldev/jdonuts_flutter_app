@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/theme/app_design_system.dart';
+import '../../../../core/network/connectivity_monitor.dart';
 import '../../../../core/widgets/app_bottom_navigation.dart';
 import '../../../../core/widgets/app_settings_sheet.dart';
+import '../../../../core/widgets/connectivity_banner.dart';
 import '../../../../database/app_database.dart';
 import '../../../../database/daos/rewards_dao.dart';
 import '../../../../features/auth/domain/repositories/session_store.dart';
@@ -23,11 +25,13 @@ class RewardsScreen extends StatefulWidget {
     required this.memberStore,
     required this.sessionStore,
     required this.rewardsDao,
+    this.connectivityMonitor,
   });
 
   final MemberStore memberStore;
   final SessionStore sessionStore;
   final RewardsDao rewardsDao;
+  final ConnectivityMonitor? connectivityMonitor;
 
   @override
   State<RewardsScreen> createState() => _RewardsScreenState();
@@ -40,6 +44,7 @@ class _RewardsScreenState extends State<RewardsScreen>
   String _selectedTab = 'earn';
   var _reduceMotion = false;
   var _entryStarted = false;
+  late bool _wasOnline = widget.connectivityMonitor?.isOnline ?? true;
 
   @override
   void initState() {
@@ -49,6 +54,13 @@ class _RewardsScreenState extends State<RewardsScreen>
       duration: AppMotion.rewardsEntry,
     );
     _data = _loadData();
+    widget.connectivityMonitor?.addListener(_onConnectivityChanged);
+  }
+
+  void _onConnectivityChanged() {
+    final isOnline = widget.connectivityMonitor?.isOnline ?? true;
+    if (isOnline && !_wasOnline) _refresh();
+    _wasOnline = isOnline;
   }
 
   @override
@@ -134,6 +146,7 @@ class _RewardsScreenState extends State<RewardsScreen>
 
   @override
   void dispose() {
+    widget.connectivityMonitor?.removeListener(_onConnectivityChanged);
     _entryAnimation.dispose();
     super.dispose();
   }
@@ -143,41 +156,48 @@ class _RewardsScreenState extends State<RewardsScreen>
     backgroundColor: AppColors.homeBackground,
     body: SafeArea(
       bottom: false,
-      child: FutureBuilder<_RewardsData>(
-        future: _data,
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return _RewardsError(onRetry: _refresh);
-          }
-          if (!snapshot.hasData) return const _RewardsLoading();
-          _startEntryAnimation();
-          final data = snapshot.data!;
-          return RefreshIndicator(
-            onRefresh: _refresh,
-            color: AppColors.primary,
-            child: CustomScrollView(
-              physics: const AlwaysScrollableScrollPhysics(),
-              slivers: [
-                SliverToBoxAdapter(
-                  child: RewardsHeader(
-                    member: data.member,
-                    tiers: data.tiers,
-                    entryAnimation: _entryAnimation,
+      child: Column(
+        children: [
+          ConnectivityBanner(monitor: widget.connectivityMonitor),
+          Expanded(
+            child: FutureBuilder<_RewardsData>(
+              future: _data,
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return _RewardsError(onRetry: _refresh);
+                }
+                if (!snapshot.hasData) return const _RewardsLoading();
+                _startEntryAnimation();
+                final data = snapshot.data!;
+                return RefreshIndicator(
+                  onRefresh: _refresh,
+                  color: AppColors.primary,
+                  child: CustomScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    slivers: [
+                      SliverToBoxAdapter(
+                        child: RewardsHeader(
+                          member: data.member,
+                          tiers: data.tiers,
+                          entryAnimation: _entryAnimation,
+                        ),
+                      ),
+                      SliverToBoxAdapter(
+                        child: RewardsChallenges(
+                          selectedTab: _selectedTab,
+                          challenges: data.challenges,
+                          onTabSelected: _selectTab,
+                          entryAnimation: _entryAnimation,
+                          reduceMotion: _reduceMotion,
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                SliverToBoxAdapter(
-                  child: RewardsChallenges(
-                    selectedTab: _selectedTab,
-                    challenges: data.challenges,
-                    onTabSelected: _selectTab,
-                    entryAnimation: _entryAnimation,
-                    reduceMotion: _reduceMotion,
-                  ),
-                ),
-              ],
+                );
+              },
             ),
-          );
-        },
+          ),
+        ],
       ),
     ),
     bottomNavigationBar: AppBottomNavigation(
