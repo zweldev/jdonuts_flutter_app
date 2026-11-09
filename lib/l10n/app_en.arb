@@ -90,6 +90,7 @@
       }
     }
   },
+  "alreadyRegisteredMessage": "An account with this number already exists.",
   "userNotFound": "No account found. Register to get started.",
   "networkFailure": "Could not connect. Please try again.",
   "storageFailure": "Could not save your account. Please try again.",

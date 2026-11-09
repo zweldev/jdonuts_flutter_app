@@ -158,6 +158,10 @@ class AppLocalizationsMy extends AppLocalizations {
   }
 
   @override
+  String get alreadyRegisteredMessage =>
+      'ဤဖုန်းနံပါတ်ဖြင့် အကောင့်ရှိပြီးသားဖြစ်သည်။';
+
+  @override
   String get userNotFound => 'No account found. Register to get started.';
 
   @override

@@ -158,6 +158,10 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get alreadyRegisteredMessage =>
+      'An account with this number already exists.';
+
+  @override
   String get userNotFound => 'No account found. Register to get started.';
 
   @override

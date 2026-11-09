@@ -362,6 +362,12 @@ abstract class AppLocalizations {
   /// **'You must be at least {minAge} years old.'**
   String dobTooYoung(int minAge);
 
+  /// No description provided for @alreadyRegisteredMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'An account with this number already exists.'**
+  String get alreadyRegisteredMessage;
+
   /// No description provided for @userNotFound.
   ///
   /// In en, this message translates to:
