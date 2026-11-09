@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/theme/app_design_system.dart';
 import '../../domain/auth_constants.dart';
 import '../../domain/validators/auth_validators.dart';
 import '../../../../l10n/app_localizations.dart';
@@ -87,7 +88,9 @@ class _NameScreenState extends State<NameScreen> {
                 const SizedBox(height: 12),
                 Text(
                   authFailureMessage(l10n, state.failure!),
-                  style: const TextStyle(color: Colors.red),
+                  style: AppTextStyles.bodyMedium.copyWith(
+                    color: AppColors.error,
+                  ),
                 ),
               ],
             ],

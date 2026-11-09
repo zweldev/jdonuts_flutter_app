@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/theme/app_design_system.dart';
 import '../../domain/auth_constants.dart';
 import '../../domain/result.dart';
 import '../../domain/validators/auth_validators.dart';
@@ -78,12 +79,12 @@ class _PhoneScreenState extends State<PhoneScreen> {
             children: [
               Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: AppColors.surface,
                   borderRadius: BorderRadius.circular(9),
                   border: Border.all(
                     color: phoneError == null
-                        ? Colors.transparent
-                        : const Color(0xFFF7B9D2),
+                        ? AppColors.surface
+                        : AppColors.secondary.withValues(alpha: 0.4),
                   ),
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -91,9 +92,8 @@ class _PhoneScreenState extends State<PhoneScreen> {
                   children: [
                     Text(
                       l10n.phoneCountryPrefix,
-                      style: TextStyle(
-                        color: Color(0xFF8A929E),
-                        fontSize: 16,
+                      style: AppTextStyles.bodyLarge.copyWith(
+                        color: AppColors.textSecondary,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -123,7 +123,9 @@ class _PhoneScreenState extends State<PhoneScreen> {
                                   errorText: phoneError == null
                                       ? null
                                       : _phoneErrorText(l10n, phoneError),
-                                  errorStyle: const TextStyle(fontSize: 11),
+                                  errorStyle: AppTextStyles.labelSmall.copyWith(
+                                    color: AppColors.error,
+                                  ),
                                 ),
                       ),
                     ),
@@ -131,17 +133,13 @@ class _PhoneScreenState extends State<PhoneScreen> {
                 ),
               ),
               const SizedBox(height: 14),
-              Text(
-                l10n.phoneHelp(otpLength),
-                style: const TextStyle(color: Color(0xFF737782), fontSize: 13),
-              ),
+              Text(l10n.phoneHelp(otpLength), style: AppTextStyles.bodySmall),
               if (state.failure != null) ...[
                 const SizedBox(height: 10),
                 Text(
                   authFailureMessage(l10n, state.failure!),
-                  style: const TextStyle(
-                    color: Color(0xFFEF4F9B),
-                    fontSize: 13,
+                  style: AppTextStyles.bodySmall.copyWith(
+                    color: AppColors.secondary,
                   ),
                 ),
                 if (state.failure is UserNotFound)

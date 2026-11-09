@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart' as material_ui;
 import 'package:pinput/pinput.dart';
 
+import '../../../../core/theme/app_design_system.dart';
 import '../../domain/auth_constants.dart';
 import '../../domain/result.dart';
 import '../../domain/validators/auth_validators.dart';
@@ -85,23 +86,23 @@ class _OtpScreenState extends State<OtpScreen>
             _controller.text.length == otpLength &&
             !state.isLocked &&
             !state.isLoading;
-        const defaultPinTheme = PinTheme(
+        final defaultPinTheme = PinTheme(
           width: 46,
           height: 54,
-          textStyle: TextStyle(
-            color: Color(0xFF282B33),
+          textStyle: AppTextStyles.titleLarge.copyWith(
+            color: AppColors.textPrimary,
             fontSize: 19,
             fontWeight: FontWeight.w600,
           ),
           decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(9)),
-            border: Border.fromBorderSide(BorderSide(color: Colors.white)),
+            color: AppColors.surface,
+            borderRadius: BorderRadius.all(Radius.circular(AppRadius.sm)),
+            border: Border.fromBorderSide(BorderSide(color: AppColors.surface)),
           ),
         );
         final errorPinTheme = defaultPinTheme.copyDecorationWith(
           border: const Border.fromBorderSide(
-            BorderSide(color: Color(0xFFF7B9D2)),
+            BorderSide(color: AppColors.secondary),
           ),
         );
         return AuthStepScaffold(
@@ -120,7 +121,7 @@ class _OtpScreenState extends State<OtpScreen>
             children: [
               Text(
                 l10n.otpSentTo(otpLength, phoneNumber),
-                style: const TextStyle(color: Color(0xFF737782), fontSize: 13),
+                style: AppTextStyles.bodySmall,
               ),
               const SizedBox(height: 26),
               AnimatedBuilder(
@@ -167,9 +168,8 @@ class _OtpScreenState extends State<OtpScreen>
                   state.isLocked
                       ? l10n.otpLocked
                       : authFailureMessage(l10n, state.failure!),
-                  style: const TextStyle(
-                    color: Color(0xFFEF4F9B),
-                    fontSize: 12,
+                  style: AppTextStyles.bodySmall.copyWith(
+                    color: AppColors.secondary,
                   ),
                 ),
               ],
@@ -177,10 +177,7 @@ class _OtpScreenState extends State<OtpScreen>
               Wrap(
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
-                  Text(
-                    l10n.otpNoCode,
-                    style: TextStyle(color: Color(0xFF737782), fontSize: 12),
-                  ),
+                  Text(l10n.otpNoCode, style: AppTextStyles.bodySmall),
                   _OtpResendButton(
                     isLoading: state.isLoading,
                     onResend: _resend,

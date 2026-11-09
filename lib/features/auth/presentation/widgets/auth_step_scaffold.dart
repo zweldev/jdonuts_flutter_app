@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/theme/app_design_system.dart';
+
 class AuthStepScaffold extends StatelessWidget {
   const AuthStepScaffold({
     required this.title,
@@ -25,18 +27,26 @@ class AuthStepScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFF6F9),
+      backgroundColor: AppColors.onboardingBackground,
       body: DecoratedBox(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Color(0xFFFFEAF2), Color(0xFFFFF9FB)],
+            colors: [
+              AppColors.onboardingGradientStart,
+              AppColors.onboardingGradientEnd,
+            ],
           ),
         ),
         child: SafeArea(
           child: SingleChildScrollView(
-            padding: const EdgeInsets.fromLTRB(24, 12, 24, 18),
+            padding: const EdgeInsets.fromLTRB(
+              AppDimensions.screenHorizontalPadding,
+              AppSpacing.sm,
+              AppDimensions.screenHorizontalPadding,
+              AppSpacing.md,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -44,18 +54,18 @@ class AuthStepScaffold extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Material(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(9),
+                      color: AppColors.surface,
+                      borderRadius: BorderRadius.circular(AppRadius.sm),
                       child: InkWell(
-                        borderRadius: BorderRadius.circular(9),
+                        borderRadius: BorderRadius.circular(AppRadius.sm),
                         onTap: onBack,
                         child: const SizedBox(
-                          width: 42,
-                          height: 42,
+                          width: AppDimensions.backButtonSize,
+                          height: AppDimensions.backButtonSize,
                           child: Icon(
                             Icons.arrow_back,
-                            color: Color(0xFF282B33),
-                            size: 22,
+                            color: AppColors.textPrimary,
+                            size: AppDimensions.iconLarge,
                           ),
                         ),
                       ),
@@ -63,20 +73,19 @@ class AuthStepScaffold extends StatelessWidget {
                     AuthProgressBadge(progress: progress),
                   ],
                 ),
-                const SizedBox(height: 28),
+                const SizedBox(height: AppSpacing.xxl),
                 Text(
                   title,
-                  style: const TextStyle(
-                    color: Color(0xFF282B33),
+                  style: AppTextStyles.headlineLarge.copyWith(
+                    color: AppColors.textPrimary,
                     fontSize: 27,
                     height: 1.14,
-                    fontWeight: FontWeight.w800,
-                    letterSpacing: -0.4,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: AppSpacing.md),
                 child,
-                const SizedBox(height: 28),
+                const SizedBox(height: AppSpacing.xxl),
                 AuthPrimaryButton(
                   label: continueLabel,
                   onPressed: isContinueEnabled ? onContinue : null,
@@ -106,34 +115,30 @@ class AuthPrimaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 52,
+      height: AppDimensions.buttonHeight,
       width: double.infinity,
       child: ElevatedButton(
         onPressed: isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF55C9E0),
-          foregroundColor: Colors.white,
-          disabledBackgroundColor: const Color(0xFF9BDDEA),
-          disabledForegroundColor: Colors.white,
+          backgroundColor: AppColors.primary,
+          foregroundColor: AppColors.textInverse,
+          disabledBackgroundColor: AppColors.disabledSurface,
+          disabledForegroundColor: AppColors.textInverse,
           shape: const StadiumBorder(),
           elevation: 0,
         ),
         child: isLoading
             ? const SizedBox(
-                width: 20,
-                height: 20,
+                width: AppDimensions.loaderSize,
+                height: AppDimensions.loaderSize,
                 child: CircularProgressIndicator(
-                  strokeWidth: 2,
-                  color: Colors.white,
+                  strokeWidth: AppDimensions.loaderStrokeWidth,
+                  color: AppColors.textInverse,
                 ),
               )
             : Text(
                 label,
-                style: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w800,
-                  letterSpacing: 0.6,
-                ),
+                style: AppTextStyles.labelLarge.copyWith(letterSpacing: 0.6),
               ),
       ),
     );
@@ -153,19 +158,23 @@ class AuthProgressBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 29,
-      height: 29,
+      width: AppDimensions.progressIndicatorSize,
+      height: AppDimensions.progressIndicatorSize,
       child: Stack(
         alignment: Alignment.center,
         children: [
           CircularProgressIndicator(
             value: progress,
-            strokeWidth: 6,
-            backgroundColor: const Color(0xFF9BE5F0),
-            valueColor: const AlwaysStoppedAnimation(Color(0xFFEF4F9B)),
+            strokeWidth: AppDimensions.progressStrokeWidth,
+            backgroundColor: AppColors.primary.withValues(alpha: 0.35),
+            valueColor: const AlwaysStoppedAnimation(AppColors.secondary),
           ),
           if (isComplete || progress >= 1)
-            const Icon(Icons.check, color: Colors.white, size: 14),
+            const Icon(
+              Icons.check,
+              color: AppColors.textInverse,
+              size: AppDimensions.iconSmall,
+            ),
         ],
       ),
     );
@@ -175,21 +184,24 @@ class AuthProgressBadge extends StatelessWidget {
 InputDecoration authInputDecoration({required String hint}) {
   return InputDecoration(
     hintText: hint,
-    hintStyle: const TextStyle(color: Color(0xFF9AA1AB), fontSize: 15),
+    hintStyle: AppTextStyles.bodyMedium.copyWith(color: AppColors.textTertiary),
     filled: true,
-    fillColor: Colors.white,
-    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+    fillColor: AppColors.surface,
+    contentPadding: const EdgeInsets.symmetric(
+      horizontal: AppSpacing.md,
+      vertical: AppSpacing.md,
+    ),
     border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(9),
+      borderRadius: BorderRadius.circular(AppRadius.md),
       borderSide: BorderSide.none,
     ),
     enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(9),
+      borderRadius: BorderRadius.circular(AppRadius.md),
       borderSide: BorderSide.none,
     ),
     focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(9),
-      borderSide: const BorderSide(color: Color(0xFF8BDDEC), width: 1.3),
+      borderRadius: BorderRadius.circular(AppRadius.md),
+      borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
     ),
   );
 }

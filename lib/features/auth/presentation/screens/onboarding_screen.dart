@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../constants/app_images.dart';
+import '../../../../core/theme/app_design_system.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../cubit/registration_cubit.dart';
 import '../cubit/otp_cubit.dart';
@@ -16,7 +17,7 @@ class OnboardingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     return Scaffold(
-      backgroundColor: const Color(0xFFFFF1F6),
+      backgroundColor: AppColors.onboardingBackground,
       body: Stack(
         fit: StackFit.expand,
         children: [
@@ -25,15 +26,15 @@ class OnboardingScreen extends StatelessWidget {
             fit: BoxFit.cover,
             alignment: Alignment.center,
           ),
-          const DecoratedBox(
+          DecoratedBox(
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Color(0x12FFFFFF),
-                  Color(0x18FDECF3),
-                  Color(0xE6FFF1F6),
+                  AppColors.surface.withValues(alpha: 0.07),
+                  AppColors.secondaryLight.withValues(alpha: 0.09),
+                  AppColors.onboardingBackground.withValues(alpha: 0.9),
                 ],
                 stops: [0, 0.48, 0.78],
               ),
@@ -48,7 +49,12 @@ class OnboardingScreen extends StatelessWidget {
                       minHeight: constraints.maxHeight,
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.fromLTRB(28, 12, 28, 16),
+                      padding: const EdgeInsets.fromLTRB(
+                        AppSpacing.xxxl - AppSpacing.xs,
+                        AppSpacing.sm,
+                        AppSpacing.xxxl - AppSpacing.xs,
+                        AppSpacing.md,
+                      ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
@@ -56,15 +62,14 @@ class OnboardingScreen extends StatelessWidget {
                           Text(
                             l10n.onboardingTitle,
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Color(0xFF282B33),
+                            style: AppTextStyles.displaySmall.copyWith(
+                              color: AppColors.textPrimary,
                               height: 1.14,
                               fontSize: 29,
-                              fontWeight: FontWeight.w800,
                               letterSpacing: -0.5,
                             ),
                           ),
-                          const SizedBox(height: 24),
+                          const SizedBox(height: AppSpacing.xl),
                           AuthPrimaryButton(
                             label: l10n.getStarted,
                             onPressed: () => _startFlow(
@@ -159,9 +164,11 @@ class OnboardingScreen extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
     showModalBottomSheet<void>(
       context: context,
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.surface,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(AppRadius.xxl),
+        ),
       ),
       builder: (context) => SafeArea(
         child: Padding(
@@ -171,23 +178,18 @@ class OnboardingScreen extends StatelessWidget {
             children: [
               const Icon(
                 Icons.info_outline,
-                color: Color(0xFFEF4F9B),
+                color: AppColors.secondary,
                 size: 32,
               ),
               const SizedBox(height: 12),
-              Text(
-                feature,
-                style: const TextStyle(
-                  color: Color(0xFF282B33),
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
+              Text(feature, style: AppTextStyles.headlineSmall),
               const SizedBox(height: 8),
               Text(
                 l10n.placeholderNotConnected,
                 textAlign: TextAlign.center,
-                style: const TextStyle(color: Color(0xFF737782)),
+                style: AppTextStyles.bodyMedium.copyWith(
+                  color: AppColors.textSecondary,
+                ),
               ),
             ],
           ),
@@ -219,11 +221,11 @@ class _SocialButton extends StatelessWidget {
             width: 52,
             height: 52,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: AppColors.surface,
               borderRadius: BorderRadius.circular(15),
-              boxShadow: const [
+              boxShadow: [
                 BoxShadow(
-                  color: Color(0x10000000),
+                  color: AppColors.shadow.withValues(alpha: 0.8),
                   blurRadius: 12,
                   offset: Offset(0, 4),
                 ),
@@ -233,7 +235,7 @@ class _SocialButton extends StatelessWidget {
             child: SvgPicture.asset(asset, width: 24, height: 24),
           ),
           const SizedBox(height: 7),
-          Text(label, style: const TextStyle(fontSize: 11)),
+          Text(label, style: AppTextStyles.labelSmall),
         ],
       ),
     );
