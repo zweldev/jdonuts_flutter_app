@@ -126,6 +126,18 @@ void main() {
       (pointsRing.painter! as RewardsRingPainter).progress,
       closeTo(0.7, 0.001),
     );
+    final tierLadder = tester.widget<CustomPaint>(
+      find.byWidgetPredicate(
+        (widget) =>
+            widget is CustomPaint && widget.painter is TierLadderPainter,
+      ),
+    );
+    final ladderPainter = tierLadder.painter! as TierLadderPainter;
+    expect(ladderPainter.progress, closeTo(0.7, 0.001));
+    expect(
+      ladderPainter.progress,
+      (pointsRing.painter! as RewardsRingPainter).progress,
+    );
     expect(find.text('3'), findsOneWidget);
     expect(find.text('Eat 4 Coco donuts'), findsOneWidget);
     expect(find.text('Drink 12 Americanos'), findsOneWidget);
@@ -167,6 +179,41 @@ void main() {
       )..where((row) => row.id.equals('eat_donut'))).getSingle()).claimed,
       isFalse,
     );
+  });
+
+  testWidgets('shows the completed Bronze-to-Silver ladder progression', (
+    tester,
+  ) async {
+    await (database.update(
+      database.members,
+    )..where((member) => member.id.equals('member'))).write(
+      const MembersCompanion(
+        tierId: Value('silver'),
+        totalPoints: Value(500000),
+      ),
+    );
+    await _pumpRewardsScreen(tester, database, disableAnimations: true);
+
+    expect(find.text('500,000'), findsOneWidget);
+    expect(find.text('Silver'), findsOneWidget);
+
+    final ladder = tester.widget<CustomPaint>(
+      find.byWidgetPredicate(
+        (widget) =>
+            widget is CustomPaint && widget.painter is TierLadderPainter,
+      ),
+    );
+    final painter = ladder.painter! as TierLadderPainter;
+    expect(painter.tierCount, 3);
+    expect(painter.currentIndex, 0);
+    expect(painter.progress, 0.7);
+    final ring = tester.widget<CustomPaint>(
+      find.byWidgetPredicate(
+        (widget) =>
+            widget is CustomPaint && widget.painter is RewardsRingPainter,
+      ),
+    );
+    expect((ring.painter! as RewardsRingPainter).progress, 0.7);
   });
 
   testWidgets('switches to the Gift tab and displays its challenges', (
