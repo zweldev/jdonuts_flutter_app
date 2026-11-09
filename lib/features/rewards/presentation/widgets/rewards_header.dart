@@ -423,7 +423,7 @@ class _PointsRing extends StatelessWidget {
                     maxLines: 1,
                     style: AppTextStyles.displaySmall.copyWith(
                       color: AppColors.secondary,
-                      fontSize: size * 0.135,
+                      fontSize: size * 0.10,
                     ),
                   ),
                 ],
