@@ -1,8 +1,9 @@
 import 'package:get_it/get_it.dart';
 
+import '../core/network/connectivity_monitor.dart';
 import '../database/app_database.dart';
 import '../database/daos/cart_dao.dart';
-import '../database/daos/home_dao.dart';
+import '../features/home/data/home_dao.dart';
 import '../database/daos/meta_dao.dart';
 import '../database/daos/rewards_dao.dart';
 import '../database/seed/seed_loader.dart';
@@ -17,6 +18,9 @@ import '../features/members/domain/repositories/member_store.dart';
 final getIt = GetIt.instance;
 
 void configureDependencies() {
+  if (!getIt.isRegistered<ConnectivityMonitor>()) {
+    getIt.registerLazySingleton<ConnectivityMonitor>(ConnectivityMonitor.new);
+  }
   if (!getIt.isRegistered<AppDatabase>()) {
     getIt.registerLazySingleton<AppDatabase>(AppDatabase.new);
   }
