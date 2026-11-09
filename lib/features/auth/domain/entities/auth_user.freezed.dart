@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AuthUser {
 
- String get phoneNumber; String get firstName; String get lastName; DateTime get dateOfBirth;
+ String? get id; String get phoneNumber; String get firstName; String get lastName; DateTime get dateOfBirth;
 /// Create a copy of AuthUser
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -30,20 +30,20 @@ $AuthUserCopyWith<AuthUser> get copyWith => _$AuthUserCopyWithImpl<AuthUser>(thi
 @override
 bool operator ==(Object other) {
   final _this = this as AuthUser;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthUser&&(identical(other.phoneNumber, _this.phoneNumber) || other.phoneNumber == _this.phoneNumber)&&(identical(other.firstName, _this.firstName) || other.firstName == _this.firstName)&&(identical(other.lastName, _this.lastName) || other.lastName == _this.lastName)&&(identical(other.dateOfBirth, _this.dateOfBirth) || other.dateOfBirth == _this.dateOfBirth));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthUser&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.phoneNumber, _this.phoneNumber) || other.phoneNumber == _this.phoneNumber)&&(identical(other.firstName, _this.firstName) || other.firstName == _this.firstName)&&(identical(other.lastName, _this.lastName) || other.lastName == _this.lastName)&&(identical(other.dateOfBirth, _this.dateOfBirth) || other.dateOfBirth == _this.dateOfBirth));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
   final _this = this as AuthUser;
-  return Object.hash(runtimeType,_this.phoneNumber,_this.firstName,_this.lastName,_this.dateOfBirth);
+  return Object.hash(runtimeType,_this.id,_this.phoneNumber,_this.firstName,_this.lastName,_this.dateOfBirth);
 }
 
 @override
 String toString() {
   final _this = this as AuthUser;
-  return 'AuthUser(phoneNumber: ${_this.phoneNumber}, firstName: ${_this.firstName}, lastName: ${_this.lastName}, dateOfBirth: ${_this.dateOfBirth})';
+  return 'AuthUser(id: ${_this.id}, phoneNumber: ${_this.phoneNumber}, firstName: ${_this.firstName}, lastName: ${_this.lastName}, dateOfBirth: ${_this.dateOfBirth})';
 }
 
 
@@ -54,7 +54,7 @@ abstract mixin class $AuthUserCopyWith<$Res>  {
   factory $AuthUserCopyWith(AuthUser value, $Res Function(AuthUser) _then) = _$AuthUserCopyWithImpl;
 @useResult
 $Res call({
- String phoneNumber, String firstName, String lastName, DateTime dateOfBirth
+ String? id, String phoneNumber, String firstName, String lastName, DateTime dateOfBirth
 });
 
 
@@ -71,9 +71,10 @@ class _$AuthUserCopyWithImpl<$Res>
 
 /// Create a copy of AuthUser
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? phoneNumber = null,Object? firstName = null,Object? lastName = null,Object? dateOfBirth = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? phoneNumber = null,Object? firstName = null,Object? lastName = null,Object? dateOfBirth = null,}) {
   return _then(AuthUser(
-phoneNumber: null == phoneNumber ? _self.phoneNumber : phoneNumber // ignore: cast_nullable_to_non_nullable
+id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String?,phoneNumber: null == phoneNumber ? _self.phoneNumber : phoneNumber // ignore: cast_nullable_to_non_nullable
 as String,firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
 as String,lastName: null == lastName ? _self.lastName : lastName // ignore: cast_nullable_to_non_nullable
 as String,dateOfBirth: null == dateOfBirth ? _self.dateOfBirth : dateOfBirth // ignore: cast_nullable_to_non_nullable
@@ -162,10 +163,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String phoneNumber,  String firstName,  String lastName,  DateTime dateOfBirth)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? id,  String phoneNumber,  String firstName,  String lastName,  DateTime dateOfBirth)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AuthUser() when $default != null:
-return $default(_that.phoneNumber,_that.firstName,_that.lastName,_that.dateOfBirth);case _:
+return $default(_that.id,_that.phoneNumber,_that.firstName,_that.lastName,_that.dateOfBirth);case _:
   return orElse();
 
 }
@@ -183,10 +184,10 @@ return $default(_that.phoneNumber,_that.firstName,_that.lastName,_that.dateOfBir
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String phoneNumber,  String firstName,  String lastName,  DateTime dateOfBirth)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? id,  String phoneNumber,  String firstName,  String lastName,  DateTime dateOfBirth)  $default,) {final _that = this;
 switch (_that) {
 case _AuthUser():
-return $default(_that.phoneNumber,_that.firstName,_that.lastName,_that.dateOfBirth);case _:
+return $default(_that.id,_that.phoneNumber,_that.firstName,_that.lastName,_that.dateOfBirth);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -203,10 +204,10 @@ return $default(_that.phoneNumber,_that.firstName,_that.lastName,_that.dateOfBir
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String phoneNumber,  String firstName,  String lastName,  DateTime dateOfBirth)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? id,  String phoneNumber,  String firstName,  String lastName,  DateTime dateOfBirth)?  $default,) {final _that = this;
 switch (_that) {
 case _AuthUser() when $default != null:
-return $default(_that.phoneNumber,_that.firstName,_that.lastName,_that.dateOfBirth);case _:
+return $default(_that.id,_that.phoneNumber,_that.firstName,_that.lastName,_that.dateOfBirth);case _:
   return null;
 
 }
@@ -218,9 +219,10 @@ return $default(_that.phoneNumber,_that.firstName,_that.lastName,_that.dateOfBir
 @JsonSerializable()
 
 class _AuthUser implements AuthUser {
-  const _AuthUser({required this.phoneNumber, required this.firstName, required this.lastName, required this.dateOfBirth});
+  const _AuthUser({this.id, required this.phoneNumber, required this.firstName, required this.lastName, required this.dateOfBirth});
   factory _AuthUser.fromJson(Map<String, dynamic> json) => _$AuthUserFromJson(json);
 
+@override final  String? id;
 @override final  String phoneNumber;
 @override final  String firstName;
 @override final  String lastName;
@@ -239,18 +241,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthUser&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.dateOfBirth, dateOfBirth) || other.dateOfBirth == dateOfBirth));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthUser&&(identical(other.id, id) || other.id == id)&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.dateOfBirth, dateOfBirth) || other.dateOfBirth == dateOfBirth));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
-    return Object.hash(runtimeType,phoneNumber,firstName,lastName,dateOfBirth);
+    return Object.hash(runtimeType,id,phoneNumber,firstName,lastName,dateOfBirth);
 }
 
 @override
 String toString() {
-    return 'AuthUser(phoneNumber: $phoneNumber, firstName: $firstName, lastName: $lastName, dateOfBirth: $dateOfBirth)';
+    return 'AuthUser(id: $id, phoneNumber: $phoneNumber, firstName: $firstName, lastName: $lastName, dateOfBirth: $dateOfBirth)';
 }
 
 
@@ -261,7 +263,7 @@ abstract mixin class _$AuthUserCopyWith<$Res> implements $AuthUserCopyWith<$Res>
   factory _$AuthUserCopyWith(_AuthUser value, $Res Function(_AuthUser) _then) = __$AuthUserCopyWithImpl;
 @override @useResult
 $Res call({
- String phoneNumber, String firstName, String lastName, DateTime dateOfBirth
+ String? id, String phoneNumber, String firstName, String lastName, DateTime dateOfBirth
 });
 
 
@@ -278,9 +280,10 @@ class __$AuthUserCopyWithImpl<$Res>
 
 /// Create a copy of AuthUser
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? phoneNumber = null,Object? firstName = null,Object? lastName = null,Object? dateOfBirth = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? phoneNumber = null,Object? firstName = null,Object? lastName = null,Object? dateOfBirth = null,}) {
   return _then(_AuthUser(
-phoneNumber: null == phoneNumber ? _self.phoneNumber : phoneNumber // ignore: cast_nullable_to_non_nullable
+id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String?,phoneNumber: null == phoneNumber ? _self.phoneNumber : phoneNumber // ignore: cast_nullable_to_non_nullable
 as String,firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
 as String,lastName: null == lastName ? _self.lastName : lastName // ignore: cast_nullable_to_non_nullable
 as String,dateOfBirth: null == dateOfBirth ? _self.dateOfBirth : dateOfBirth // ignore: cast_nullable_to_non_nullable
