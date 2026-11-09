@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../constants/app_icons.dart';
 import '../../../../core/theme/app_design_system.dart';
 import '../../../../core/widgets/app_bottom_navigation.dart';
+import '../../../../core/widgets/app_settings_sheet.dart';
 import '../../../../database/app_database.dart';
 import '../../../../database/daos/home_dao.dart';
 import '../../../../l10n/app_localizations.dart';
@@ -79,20 +80,7 @@ class _MemberHomeScreenState extends State<MemberHomeScreen> {
       return;
     }
     if (index == 4) {
-      showModalBottomSheet<void>(
-        context: context,
-        showDragHandle: true,
-        builder: (context) => SafeArea(
-          child: ListTile(
-            leading: const Icon(Icons.logout_rounded),
-            title: Text(AppLocalizations.of(context).logout),
-            onTap: () {
-              Navigator.pop(context);
-              _signOut();
-            },
-          ),
-        ),
-      );
+      showAppSettingsSheet(context, onLogOut: _signOut);
       return;
     }
     if (index == 0) {

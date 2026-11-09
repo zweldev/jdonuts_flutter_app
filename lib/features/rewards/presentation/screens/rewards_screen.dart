@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/theme/app_design_system.dart';
 import '../../../../core/widgets/app_bottom_navigation.dart';
+import '../../../../core/widgets/app_settings_sheet.dart';
 import '../../../../database/app_database.dart';
 import '../../../../database/daos/rewards_dao.dart';
 import '../../../../features/auth/domain/repositories/session_store.dart';
@@ -122,22 +123,13 @@ class _RewardsScreenState extends State<RewardsScreen>
   }
 
   void _showLogoutSheet() {
-    showModalBottomSheet<void>(
-      context: context,
-      showDragHandle: true,
-      builder: (context) => SafeArea(
-        child: ListTile(
-          leading: const Icon(Icons.logout_rounded),
-          title: Text(AppLocalizations.of(context).logout),
-          onTap: () async {
-            Navigator.pop(context);
-            context.read<OtpCubit>().reset();
-            context.read<RegistrationCubit>().resetFlow();
-            await context.read<SessionCubit>().signOut();
-          },
-        ),
-      ),
-    );
+    showAppSettingsSheet(context, onLogOut: _signOut);
+  }
+
+  Future<void> _signOut() async {
+    context.read<OtpCubit>().reset();
+    context.read<RegistrationCubit>().resetFlow();
+    await context.read<SessionCubit>().signOut();
   }
 
   @override

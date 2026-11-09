@@ -1,79 +1,154 @@
 {
   "@@locale": "my",
   "appTitle": "J'Donuts",
-  "onboardingTitle": "Round food for\nevery mood",
-  "getStarted": "LET'S GET STARTED",
-  "alreadyHaveAccount": "Already have an account? ",
-  "logIn": "Log In",
+  "onboardingTitle": "စိတ်ခံစားချက်တိုင်းအတွက်\nအရသာရှိတဲ့ မုန့်ဝိုင်း",
+  "getStarted": "စလိုက်ကြစို့",
+  "alreadyHaveAccount": "အကောင့်ရှိပြီးသားလား? ",
+  "logIn": "အကောင့်ဝင်ရန်",
   "socialGoogle": "Google",
   "socialApple": "Apple",
   "socialFacebook": "Facebook",
-  "termsOfUse": "Terms of Use",
-  "privacyPolicy": "Privacy Policy",
-  "placeholderNotConnected": "This feature is a demo placeholder and is not connected.",
-  "phoneTitle": "Enter your phone\nnumber",
+  "termsOfUse": "အသုံးပြုမှု စည်းမျဉ်းများ",
+  "privacyPolicy": "ကိုယ်ရေးအချက်အလက် မူဝါဒ",
+  "placeholderNotConnected": "ဤလုပ်ဆောင်ချက်သည် ဒီမိုအတွက်သာဖြစ်ပြီး ချိတ်ဆက်ထားခြင်း မရှိသေးပါ။",
+  "phoneTitle": "သင့်ဖုန်း\nနံပါတ်ကို ထည့်ပါ",
   "phoneCountryPrefix": "+95",
-  "phoneNumberHint": "Phone number",
-  "phoneHelp": "We’ll text a {otpLength}-digit code to this number.",
-  "phoneEmpty": "Enter your phone number.",
-  "phoneInvalid": "Enter a valid phone number after {prefix}.",
-  "continueLabel": "CONTINUE",
-  "verifyLabel": "VERIFY",
-  "otpTitle": "Verify your number",
-  "otpSentTo": "We've sent a {otpLength} digit OTP to {phoneNumber}",
-  "otpSemanticsLabel": "{otpLength} digit verification code",
-  "otpIncorrect": "That code is incorrect. Please try again.",
-  "otpLocked": "Too many incorrect codes. Resend a code to try again.",
-  "otpNoCode": "Didn't receive the code? ",
-  "resendCode": "Resend code",
-  "resendCountdown": "resend in {countdown} min",
-  "registerNewAccount": "Register a new account",
-  "nameTitle": "What's your\nname?",
-  "firstNameHint": "First Name",
-  "lastNameHint": "Last Name",
-  "nameRequired": "Please enter your first name.",
-  "nameTooLong": "Use no more than {maxLength} characters.",
-  "nameInvalid": "Use letters and spaces only.",
-  "dobTitle": "What's your\ndate of birth?",
-  "selectBirthday": "Select your Birthday",
-  "select": "SELECT",
-  "close": "Close",
-  "dobMonthHint": "Month",
-  "dobDayHint": "Day",
-  "dobYearHint": "Year",
-  "dobIncomplete": "Enter your complete date of birth.",
-  "dobFuture": "Date of birth cannot be in the future.",
-  "dobTooYoung": "You must be at least {minAge} years old.",
+  "phoneNumberHint": "ဖုန်းနံပါတ်",
+  "phoneHelp": "ဤဖုန်းနံပါတ်သို့ ဂဏန်း {otpLength} လုံးပါသော အတည်ပြုကုဒ် ပို့ပေးပါမည်။",
+  "@phoneHelp": {
+    "placeholders": {
+      "otpLength": {
+        "type": "int"
+      }
+    }
+  },
+  "phoneEmpty": "သင့်ဖုန်းနံပါတ်ကို ထည့်ပါ။",
+  "phoneInvalid": "{prefix} နောက်တွင် မှန်ကန်သော ဖုန်းနံပါတ်ကို ထည့်ပါ။",
+  "@phoneInvalid": {
+    "placeholders": {
+      "prefix": {}
+    }
+  },
+  "continueLabel": "ဆက်လုပ်ရန်",
+  "verifyLabel": "အတည်ပြုရန်",
+  "otpTitle": "သင့်ဖုန်းနံပါတ်ကို အတည်ပြုပါ",
+  "otpSentTo": "ဂဏန်း {otpLength} လုံးပါသော အတည်ပြုကုဒ်ကို {phoneNumber} သို့ ပို့ထားပါသည်။",
+  "@otpSentTo": {
+    "placeholders": {
+      "otpLength": {
+        "type": "int"
+      },
+      "phoneNumber": {}
+    }
+  },
+  "otpSemanticsLabel": "ဂဏန်း {otpLength} လုံးပါသော အတည်ပြုကုဒ်",
+  "@otpSemanticsLabel": {
+    "placeholders": {
+      "otpLength": {
+        "type": "int"
+      }
+    }
+  },
+  "otpIncorrect": "အတည်ပြုကုဒ် မှားနေပါသည်။ ထပ်ကြိုးစားပါ။",
+  "otpLocked": "ကုဒ်ကို အကြိမ်များစွာ မှားယွင်းထည့်သွင်းထားပါသည်။ ထပ်ကြိုးစားရန် ကုဒ်အသစ်တောင်းပါ။",
+  "otpNoCode": "ကုဒ်မရရှိဘူးလား? ",
+  "resendCode": "ကုဒ်အသစ်တောင်းရန်",
+  "resendCountdown": "{countdown} မိနစ်အတွင်း ကုဒ်အသစ်တောင်းနိုင်ပါမည်",
+  "@resendCountdown": {
+    "placeholders": {
+      "countdown": {}
+    }
+  },
+  "registerNewAccount": "အကောင့်အသစ်ဖွင့်ရန်",
+  "nameTitle": "သင့်နာမည်\nဘယ်လိုခေါ်ပါသလဲ?",
+  "firstNameHint": "ရှေ့နာမည်",
+  "lastNameHint": "နောက်နာမည်",
+  "nameRequired": "သင့်ရှေ့နာမည်ကို ထည့်ပါ။",
+  "nameTooLong": "စာလုံးရေ {maxLength} ထက် မပိုစေရပါ။",
+  "@nameTooLong": {
+    "placeholders": {
+      "maxLength": {
+        "type": "int"
+      }
+    }
+  },
+  "nameInvalid": "အက္ခရာများနှင့် စကားလုံးကြားလပ်နေရာကိုသာ အသုံးပြုပါ။",
+  "dobTitle": "သင့်မွေးနေ့\nဘယ်နေ့ဖြစ်ပါသလဲ?",
+  "selectBirthday": "မွေးနေ့ကို ရွေးပါ",
+  "select": "ရွေးရန်",
+  "close": "ပိတ်ရန်",
+  "dobMonthHint": "လ",
+  "dobDayHint": "ရက်",
+  "dobYearHint": "နှစ်",
+  "dobIncomplete": "မွေးသက္ကရာဇ် အပြည့်အစုံကို ထည့်ပါ။",
+  "dobFuture": "မွေးသက္ကရာဇ်သည် ယနေ့ထက် နောက်ကျ၍ မရပါ။",
+  "dobTooYoung": "အသက် {minAge} နှစ် ပြည့်ပြီးသူ ဖြစ်ရပါမည်။",
+  "@dobTooYoung": {
+    "placeholders": {
+      "minAge": {
+        "type": "int"
+      }
+    }
+  },
   "alreadyRegisteredMessage": "ဤဖုန်းနံပါတ်ဖြင့် အကောင့်ရှိပြီးသားဖြစ်သည်။",
-  "userNotFound": "No account found. Register to get started.",
-  "networkFailure": "Could not connect. Please try again.",
-  "storageFailure": "Could not save your account. Please try again.",
-  "unknownFailure": "Something went wrong. Please try again.",
-  "welcomeTitle": "Welcome to the\nworld of J’donuts",
-  "welcomeMessage": "Your account is ready. Let's explore!",
-  "letsExplore": "LET'S EXPLORE",
-  "logout": "Log out",
-  "homeTitle": "Home",
-  "progressReady": "Ready",
-  "progressGettingStarted": "Getting started",
-  "rewardsTitle": "J’ Donuts Rewards",
-  "rewardsBadge": "ဆုလက်ဆောင်များ",
-  "rewardTabLabel": "ဆု",
+  "userNotFound": "အကောင့်မတွေ့ပါ။ စတင်အသုံးပြုရန် အကောင့်အသစ်ဖွင့်ပါ။",
+  "networkFailure": "ချိတ်ဆက်၍ မရပါ။ ထပ်ကြိုးစားပါ။",
+  "storageFailure": "သင့်အကောင့်ကို သိမ်းဆည်း၍ မရပါ။ ထပ်ကြိုးစားပါ။",
+  "unknownFailure": "တစ်ခုခု မှားယွင်းသွားပါသည်။ ထပ်ကြိုးစားပါ။",
+  "welcomeTitle": "J’donuts\nလောကမှ ကြိုဆိုပါသည်",
+  "welcomeMessage": "သင့်အကောင့် အဆင်သင့်ဖြစ်ပါပြီ။ စူးစမ်းကြည့်လိုက်ပါ။",
+  "letsExplore": "စူးစမ်းကြည့်ရန်",
+  "logout": "အကောင့်မှ ထွက်ရန်",
+  "settingsTitle": "ဆက်တင်များ",
+  "languageLabel": "မြန်မာဘာသာ အသုံးပြုရန်",
+  "englishLanguage": "အင်္ဂလိပ်",
+  "burmeseLanguage": "မြန်မာ",
+  "homeTitle": "ပင်မစာမျက်နှာ",
+  "progressReady": "အဆင်သင့်",
+  "progressGettingStarted": "စတင်အသုံးပြုနေပါသည်",
+  "rewardsTitle": "J’ Donuts ဆုလာဘ်များ",
+  "rewardsBadge": "ဆုလာဘ်များ",
+  "rewardTabLabel": "ဆုလာဘ်",
   "orderTabLabel": "မှာယူရန်",
   "walletTabLabel": "ပိုက်ဆံအိတ်",
   "profileTabLabel": "ကိုယ်ရေးအချက်အလက်",
   "rewardsTotalPoints": "စုစုပေါင်း အမှတ်များ",
-  "rewardsHereNow": "လက်ရှိအဆင့်",
-  "rewardsPointsRemaining": "{tier} အဆင့်ရောက်ရန် {points} မှတ်လိုပါသည်",
-  "rewardsYoullBeHereSoon": "မကြာမီ ဤနေရာတွင် ရှိပါမည်",
+  "rewardsHereNow": "သင်ရောက်ရှိနေသော အဆင့်",
+  "rewardsPointsRemaining": "{tier} အဆင့်သို့ ရောက်ရန် {points} မှတ် လိုအပ်ပါသည်",
+  "@rewardsPointsRemaining": {
+    "placeholders": {
+      "points": {
+        "type": "String"
+      },
+      "tier": {}
+    }
+  },
+  "rewardsYoullBeHereSoon": "မကြာမီ ဤနေရာသို့ ရောက်ရှိပါမည်",
   "rewardsTopTier": "အမြင့်ဆုံးအဆင့်သို့ ရောက်ရှိပါပြီ",
-  "rewardsRetry": "ထပ်ကြိုးစားပါ",
+  "rewardsRetry": "ထပ်ကြိုးစားရန်",
   "rewardsEarnTab": "များများစားပြီး အမှတ်များများရယူပါ",
   "rewardsGiftTab": "လက်ဆောင်",
   "rewardsEarnButton": "ရယူရန်",
   "rewardsPointUnit": "{points} မှတ်",
+  "@rewardsPointUnit": {
+    "placeholders": {
+      "points": {
+        "type": "String"
+      }
+    }
+  },
   "rewardsChallengeProgress": "{progress}/{target}",
-  "rewardsLoadError": "ဆုလက်ဆောင်များကို ဖွင့်၍မရပါ။",
-  "rewardsEmptyTitle": "လောလောဆယ် ဆုလက်ဆောင်မရှိသေးပါ",
-  "rewardsEmptyMessage": "စိန်ခေါ်မှုအသစ်များအတွက် နောက်မှပြန်စစ်ဆေးပါ။"
+  "@rewardsChallengeProgress": {
+    "placeholders": {
+      "progress": {
+        "type": "int"
+      },
+      "target": {
+        "type": "int"
+      }
+    }
+  },
+  "rewardsLoadError": "ဆုလာဘ်များကို ဖွင့်၍မရပါ။",
+  "rewardsEmptyTitle": "လောလောဆယ် ဆုလာဘ်များ မရှိသေးပါ",
+  "rewardsEmptyMessage": "စိန်ခေါ်မှုအသစ်များအတွက် နောက်မှ ပြန်စစ်ဆေးပါ။"
 }

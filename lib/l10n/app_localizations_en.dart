@@ -186,6 +186,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get logout => 'Log out';
 
   @override
+  String get settingsTitle => 'Settings';
+
+  @override
+  String get languageLabel => 'Use Burmese';
+
+  @override
+  String get englishLanguage => 'English';
+
+  @override
+  String get burmeseLanguage => 'မြန်မာ';
+
+  @override
   String get homeTitle => 'Home';
 
   @override

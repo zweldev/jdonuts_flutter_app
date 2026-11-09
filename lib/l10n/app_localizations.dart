@@ -416,6 +416,30 @@ abstract class AppLocalizations {
   /// **'Log out'**
   String get logout;
 
+  /// No description provided for @settingsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settingsTitle;
+
+  /// No description provided for @languageLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Use Burmese'**
+  String get languageLabel;
+
+  /// No description provided for @englishLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get englishLanguage;
+
+  /// No description provided for @burmeseLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'မြန်မာ'**
+  String get burmeseLanguage;
+
   /// No description provided for @homeTitle.
   ///
   /// In en, this message translates to:

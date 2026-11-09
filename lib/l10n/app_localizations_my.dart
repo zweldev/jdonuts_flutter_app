@@ -13,16 +13,17 @@ class AppLocalizationsMy extends AppLocalizations {
   String get appTitle => 'J\'Donuts';
 
   @override
-  String get onboardingTitle => 'Round food for\nevery mood';
+  String get onboardingTitle =>
+      'စိတ်ခံစားချက်တိုင်းအတွက်\nအရသာရှိတဲ့ မုန့်ဝိုင်း';
 
   @override
-  String get getStarted => 'LET\'S GET STARTED';
+  String get getStarted => 'စလိုက်ကြစို့';
 
   @override
-  String get alreadyHaveAccount => 'Already have an account? ';
+  String get alreadyHaveAccount => 'အကောင့်ရှိပြီးသားလား? ';
 
   @override
-  String get logIn => 'Log In';
+  String get logIn => 'အကောင့်ဝင်ရန်';
 
   @override
   String get socialGoogle => 'Google';
@@ -34,127 +35,128 @@ class AppLocalizationsMy extends AppLocalizations {
   String get socialFacebook => 'Facebook';
 
   @override
-  String get termsOfUse => 'Terms of Use';
+  String get termsOfUse => 'အသုံးပြုမှု စည်းမျဉ်းများ';
 
   @override
-  String get privacyPolicy => 'Privacy Policy';
+  String get privacyPolicy => 'ကိုယ်ရေးအချက်အလက် မူဝါဒ';
 
   @override
   String get placeholderNotConnected =>
-      'This feature is a demo placeholder and is not connected.';
+      'ဤလုပ်ဆောင်ချက်သည် ဒီမိုအတွက်သာဖြစ်ပြီး ချိတ်ဆက်ထားခြင်း မရှိသေးပါ။';
 
   @override
-  String get phoneTitle => 'Enter your phone\nnumber';
+  String get phoneTitle => 'သင့်ဖုန်း\nနံပါတ်ကို ထည့်ပါ';
 
   @override
   String get phoneCountryPrefix => '+95';
 
   @override
-  String get phoneNumberHint => 'Phone number';
+  String get phoneNumberHint => 'ဖုန်းနံပါတ်';
 
   @override
   String phoneHelp(int otpLength) {
-    return 'We’ll text a $otpLength-digit code to this number.';
+    return 'ဤဖုန်းနံပါတ်သို့ ဂဏန်း $otpLength လုံးပါသော အတည်ပြုကုဒ် ပို့ပေးပါမည်။';
   }
 
   @override
-  String get phoneEmpty => 'Enter your phone number.';
+  String get phoneEmpty => 'သင့်ဖုန်းနံပါတ်ကို ထည့်ပါ။';
 
   @override
   String phoneInvalid(Object prefix) {
-    return 'Enter a valid phone number after $prefix.';
+    return '$prefix နောက်တွင် မှန်ကန်သော ဖုန်းနံပါတ်ကို ထည့်ပါ။';
   }
 
   @override
-  String get continueLabel => 'CONTINUE';
+  String get continueLabel => 'ဆက်လုပ်ရန်';
 
   @override
-  String get verifyLabel => 'VERIFY';
+  String get verifyLabel => 'အတည်ပြုရန်';
 
   @override
-  String get otpTitle => 'Verify your number';
+  String get otpTitle => 'သင့်ဖုန်းနံပါတ်ကို အတည်ပြုပါ';
 
   @override
   String otpSentTo(int otpLength, Object phoneNumber) {
-    return 'We\'ve sent a $otpLength digit OTP to $phoneNumber';
+    return 'ဂဏန်း $otpLength လုံးပါသော အတည်ပြုကုဒ်ကို $phoneNumber သို့ ပို့ထားပါသည်။';
   }
 
   @override
   String otpSemanticsLabel(int otpLength) {
-    return '$otpLength digit verification code';
+    return 'ဂဏန်း $otpLength လုံးပါသော အတည်ပြုကုဒ်';
   }
 
   @override
-  String get otpIncorrect => 'That code is incorrect. Please try again.';
+  String get otpIncorrect => 'အတည်ပြုကုဒ် မှားနေပါသည်။ ထပ်ကြိုးစားပါ။';
 
   @override
   String get otpLocked =>
-      'Too many incorrect codes. Resend a code to try again.';
+      'ကုဒ်ကို အကြိမ်များစွာ မှားယွင်းထည့်သွင်းထားပါသည်။ ထပ်ကြိုးစားရန် ကုဒ်အသစ်တောင်းပါ။';
 
   @override
-  String get otpNoCode => 'Didn\'t receive the code? ';
+  String get otpNoCode => 'ကုဒ်မရရှိဘူးလား? ';
 
   @override
-  String get resendCode => 'Resend code';
+  String get resendCode => 'ကုဒ်အသစ်တောင်းရန်';
 
   @override
   String resendCountdown(Object countdown) {
-    return 'resend in $countdown min';
+    return '$countdown မိနစ်အတွင်း ကုဒ်အသစ်တောင်းနိုင်ပါမည်';
   }
 
   @override
-  String get registerNewAccount => 'Register a new account';
+  String get registerNewAccount => 'အကောင့်အသစ်ဖွင့်ရန်';
 
   @override
-  String get nameTitle => 'What\'s your\nname?';
+  String get nameTitle => 'သင့်နာမည်\nဘယ်လိုခေါ်ပါသလဲ?';
 
   @override
-  String get firstNameHint => 'First Name';
+  String get firstNameHint => 'ရှေ့နာမည်';
 
   @override
-  String get lastNameHint => 'Last Name';
+  String get lastNameHint => 'နောက်နာမည်';
 
   @override
-  String get nameRequired => 'Please enter your first name.';
+  String get nameRequired => 'သင့်ရှေ့နာမည်ကို ထည့်ပါ။';
 
   @override
   String nameTooLong(int maxLength) {
-    return 'Use no more than $maxLength characters.';
+    return 'စာလုံးရေ $maxLength ထက် မပိုစေရပါ။';
   }
 
   @override
-  String get nameInvalid => 'Use letters and spaces only.';
+  String get nameInvalid =>
+      'အက္ခရာများနှင့် စကားလုံးကြားလပ်နေရာကိုသာ အသုံးပြုပါ။';
 
   @override
-  String get dobTitle => 'What\'s your\ndate of birth?';
+  String get dobTitle => 'သင့်မွေးနေ့\nဘယ်နေ့ဖြစ်ပါသလဲ?';
 
   @override
-  String get selectBirthday => 'Select your Birthday';
+  String get selectBirthday => 'မွေးနေ့ကို ရွေးပါ';
 
   @override
-  String get select => 'SELECT';
+  String get select => 'ရွေးရန်';
 
   @override
-  String get close => 'Close';
+  String get close => 'ပိတ်ရန်';
 
   @override
-  String get dobMonthHint => 'Month';
+  String get dobMonthHint => 'လ';
 
   @override
-  String get dobDayHint => 'Day';
+  String get dobDayHint => 'ရက်';
 
   @override
-  String get dobYearHint => 'Year';
+  String get dobYearHint => 'နှစ်';
 
   @override
-  String get dobIncomplete => 'Enter your complete date of birth.';
+  String get dobIncomplete => 'မွေးသက္ကရာဇ် အပြည့်အစုံကို ထည့်ပါ။';
 
   @override
-  String get dobFuture => 'Date of birth cannot be in the future.';
+  String get dobFuture => 'မွေးသက္ကရာဇ်သည် ယနေ့ထက် နောက်ကျ၍ မရပါ။';
 
   @override
   String dobTooYoung(int minAge) {
-    return 'You must be at least $minAge years old.';
+    return 'အသက် $minAge နှစ် ပြည့်ပြီးသူ ဖြစ်ရပါမည်။';
   }
 
   @override
@@ -162,46 +164,60 @@ class AppLocalizationsMy extends AppLocalizations {
       'ဤဖုန်းနံပါတ်ဖြင့် အကောင့်ရှိပြီးသားဖြစ်သည်။';
 
   @override
-  String get userNotFound => 'No account found. Register to get started.';
+  String get userNotFound =>
+      'အကောင့်မတွေ့ပါ။ စတင်အသုံးပြုရန် အကောင့်အသစ်ဖွင့်ပါ။';
 
   @override
-  String get networkFailure => 'Could not connect. Please try again.';
+  String get networkFailure => 'ချိတ်ဆက်၍ မရပါ။ ထပ်ကြိုးစားပါ။';
 
   @override
-  String get storageFailure => 'Could not save your account. Please try again.';
+  String get storageFailure => 'သင့်အကောင့်ကို သိမ်းဆည်း၍ မရပါ။ ထပ်ကြိုးစားပါ။';
 
   @override
-  String get unknownFailure => 'Something went wrong. Please try again.';
+  String get unknownFailure => 'တစ်ခုခု မှားယွင်းသွားပါသည်။ ထပ်ကြိုးစားပါ။';
 
   @override
-  String get welcomeTitle => 'Welcome to the\nworld of J’donuts';
+  String get welcomeTitle => 'J’donuts\nလောကမှ ကြိုဆိုပါသည်';
 
   @override
-  String get welcomeMessage => 'Your account is ready. Let\'s explore!';
+  String get welcomeMessage =>
+      'သင့်အကောင့် အဆင်သင့်ဖြစ်ပါပြီ။ စူးစမ်းကြည့်လိုက်ပါ။';
 
   @override
-  String get letsExplore => 'LET\'S EXPLORE';
+  String get letsExplore => 'စူးစမ်းကြည့်ရန်';
 
   @override
-  String get logout => 'Log out';
+  String get logout => 'အကောင့်မှ ထွက်ရန်';
 
   @override
-  String get homeTitle => 'Home';
+  String get settingsTitle => 'ဆက်တင်များ';
 
   @override
-  String get progressReady => 'Ready';
+  String get languageLabel => 'မြန်မာဘာသာ အသုံးပြုရန်';
 
   @override
-  String get progressGettingStarted => 'Getting started';
+  String get englishLanguage => 'အင်္ဂလိပ်';
 
   @override
-  String get rewardsTitle => 'J’ Donuts Rewards';
+  String get burmeseLanguage => 'မြန်မာ';
 
   @override
-  String get rewardsBadge => 'ဆုလက်ဆောင်များ';
+  String get homeTitle => 'ပင်မစာမျက်နှာ';
 
   @override
-  String get rewardTabLabel => 'ဆု';
+  String get progressReady => 'အဆင်သင့်';
+
+  @override
+  String get progressGettingStarted => 'စတင်အသုံးပြုနေပါသည်';
+
+  @override
+  String get rewardsTitle => 'J’ Donuts ဆုလာဘ်များ';
+
+  @override
+  String get rewardsBadge => 'ဆုလာဘ်များ';
+
+  @override
+  String get rewardTabLabel => 'ဆုလာဘ်';
 
   @override
   String get orderTabLabel => 'မှာယူရန်';
@@ -216,21 +232,21 @@ class AppLocalizationsMy extends AppLocalizations {
   String get rewardsTotalPoints => 'စုစုပေါင်း အမှတ်များ';
 
   @override
-  String get rewardsHereNow => 'လက်ရှိအဆင့်';
+  String get rewardsHereNow => 'သင်ရောက်ရှိနေသော အဆင့်';
 
   @override
   String rewardsPointsRemaining(String points, Object tier) {
-    return '$tier အဆင့်ရောက်ရန် $points မှတ်လိုပါသည်';
+    return '$tier အဆင့်သို့ ရောက်ရန် $points မှတ် လိုအပ်ပါသည်';
   }
 
   @override
-  String get rewardsYoullBeHereSoon => 'မကြာမီ ဤနေရာတွင် ရှိပါမည်';
+  String get rewardsYoullBeHereSoon => 'မကြာမီ ဤနေရာသို့ ရောက်ရှိပါမည်';
 
   @override
   String get rewardsTopTier => 'အမြင့်ဆုံးအဆင့်သို့ ရောက်ရှိပါပြီ';
 
   @override
-  String get rewardsRetry => 'ထပ်ကြိုးစားပါ';
+  String get rewardsRetry => 'ထပ်ကြိုးစားရန်';
 
   @override
   String get rewardsEarnTab => 'များများစားပြီး အမှတ်များများရယူပါ';
@@ -252,12 +268,12 @@ class AppLocalizationsMy extends AppLocalizations {
   }
 
   @override
-  String get rewardsLoadError => 'ဆုလက်ဆောင်များကို ဖွင့်၍မရပါ။';
+  String get rewardsLoadError => 'ဆုလာဘ်များကို ဖွင့်၍မရပါ။';
 
   @override
-  String get rewardsEmptyTitle => 'လောလောဆယ် ဆုလက်ဆောင်မရှိသေးပါ';
+  String get rewardsEmptyTitle => 'လောလောဆယ် ဆုလာဘ်များ မရှိသေးပါ';
 
   @override
   String get rewardsEmptyMessage =>
-      'စိန်ခေါ်မှုအသစ်များအတွက် နောက်မှပြန်စစ်ဆေးပါ။';
+      'စိန်ခေါ်မှုအသစ်များအတွက် နောက်မှ ပြန်စစ်ဆေးပါ။';
 }

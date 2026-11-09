@@ -12,6 +12,7 @@ import 'features/auth/presentation/cubit/otp_cubit.dart';
 import 'features/auth/presentation/cubit/registration_cubit.dart';
 import 'features/auth/presentation/router/app_router.dart';
 import 'features/auth/presentation/cubit/session_cubit.dart';
+import 'l10n/app_locale_controller.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -61,6 +62,7 @@ class _MyAppState extends State<MyApp> {
   late final OtpCubit _otpCubit;
   late final AppRouterRefresh _refresh;
   late final GoRouter _router;
+  late final AppLocaleController _localeController;
 
   @override
   void initState() {
@@ -71,6 +73,7 @@ class _MyAppState extends State<MyApp> {
     _otpCubit = OtpCubit(repository, _registrationCubit, _sessionCubit);
     _refresh = AppRouterRefresh(_sessionCubit.stream);
     _router = createAppRouter(_sessionCubit, _refresh);
+    _localeController = AppLocaleController();
     _sessionCubit.restoreSession();
   }
 
@@ -78,6 +81,7 @@ class _MyAppState extends State<MyApp> {
   void dispose() {
     _router.dispose();
     _refresh.dispose();
+    _localeController.dispose();
     _otpCubit.close();
     _registrationCubit.close();
     _sessionCubit.close();
@@ -86,22 +90,29 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider.value(value: _sessionCubit),
-        BlocProvider.value(value: _registrationCubit),
-        BlocProvider.value(value: _otpCubit),
-      ],
-      child: MaterialApp.router(
-        onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
-        debugShowCheckedModeBanner: false,
-        localizationsDelegates: [
-          ...AppLocalizations.localizationsDelegates,
-          material_ui.GlobalMaterialLocalizations.delegate,
-        ],
-        supportedLocales: AppLocalizations.supportedLocales,
-        theme: AppTheme.light,
-        routerConfig: _router,
+    return AppLocaleScope(
+      controller: _localeController,
+      child: AnimatedBuilder(
+        animation: _localeController,
+        builder: (context, _) => MultiBlocProvider(
+          providers: [
+            BlocProvider.value(value: _sessionCubit),
+            BlocProvider.value(value: _registrationCubit),
+            BlocProvider.value(value: _otpCubit),
+          ],
+          child: MaterialApp.router(
+            locale: _localeController.locale,
+            onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
+            debugShowCheckedModeBanner: false,
+            localizationsDelegates: [
+              ...AppLocalizations.localizationsDelegates,
+              material_ui.GlobalMaterialLocalizations.delegate,
+            ],
+            supportedLocales: AppLocalizations.supportedLocales,
+            theme: AppTheme.light,
+            routerConfig: _router,
+          ),
+        ),
       ),
     );
   }
