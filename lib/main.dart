@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart' as material_ui;
 
 import 'di/service_locator.dart';
 import 'features/auth/domain/repositories/auth_repository.dart';
@@ -62,7 +63,10 @@ class _MyAppState extends State<MyApp> {
       child: MaterialApp.router(
         onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
         debugShowCheckedModeBanner: false,
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        localizationsDelegates: [
+          ...AppLocalizations.localizationsDelegates,
+          material_ui.GlobalMaterialLocalizations.delegate,
+        ],
         supportedLocales: AppLocalizations.supportedLocales,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(
