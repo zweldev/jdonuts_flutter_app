@@ -131,41 +131,58 @@ class _ChallengeTabs extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
     return LayoutBuilder(
       builder: (context, constraints) {
-        final tabWidth = constraints.maxWidth / 4;
+        const inset = 4.0;
+        final tabWidth = (constraints.maxWidth - inset * 2) / 2;
         final earnTab = selectedTab == 'earn';
-        return SizedBox(
-          height: AppSpacing.xxxl + AppSpacing.xs,
+        return Container(
+          height: 68,
+          padding: const EdgeInsets.all(inset),
+          decoration: BoxDecoration(
+            color: AppColors.surface,
+            borderRadius: BorderRadius.circular(AppRadius.xl),
+            border: Border.all(color: AppColors.border),
+          ),
           child: Stack(
             children: [
               AnimatedPositioned(
                 duration: reduceMotion ? Duration.zero : AppMotion.tabIndicator,
                 curve: AppMotion.tabCurve,
-                left: earnTab ? 0 : tabWidth * 2,
+                left: earnTab ? 0 : tabWidth,
                 top: 0,
                 bottom: 0,
-                width: tabWidth * (earnTab ? 2 : 1),
+                width: tabWidth,
                 child: DecoratedBox(
                   decoration: BoxDecoration(
-                    color: AppColors.primary,
-                    borderRadius: BorderRadius.circular(AppRadius.pill),
-                    border: Border.all(color: AppColors.surface, width: 2),
+                    gradient: const LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [AppColors.primary, AppColors.primaryDark],
+                    ),
+                    borderRadius: BorderRadius.circular(AppRadius.lg),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: AppColors.shadow,
+                        blurRadius: 8,
+                        offset: Offset(0, 3),
+                      ),
+                    ],
                   ),
                 ),
               ),
               Row(
                 children: [
                   Expanded(
-                    flex: 2,
                     child: _TabTarget(
                       label: l10n.rewardsEarnTab,
+                      icon: Icons.local_dining_rounded,
                       selected: earnTab,
                       onTap: () => onSelected('earn'),
                     ),
                   ),
-                  const Expanded(child: SizedBox.shrink()),
                   Expanded(
                     child: _TabTarget(
                       label: l10n.rewardsGiftTab,
+                      icon: Icons.card_giftcard_rounded,
                       selected: false,
                     ),
                   ),
@@ -180,23 +197,42 @@ class _ChallengeTabs extends StatelessWidget {
 }
 
 class _TabTarget extends StatelessWidget {
-  const _TabTarget({required this.label, required this.selected, this.onTap});
+  const _TabTarget({
+    required this.label,
+    required this.icon,
+    required this.selected,
+    this.onTap,
+  });
 
   final String label;
+  final IconData icon;
   final bool selected;
   final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
-    final labelWidget = Center(
-      child: Text(
-        label,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-        style: AppTextStyles.titleLarge.copyWith(
-          color: selected ? AppColors.textInverse : AppColors.textSecondary,
+    final labelWidget = Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(
+          icon,
+          size: 19,
+          color: selected ? AppColors.textInverse : AppColors.iconSecondary,
         ),
-      ),
+        const SizedBox(height: 3),
+        Text(
+          label,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          textAlign: TextAlign.center,
+          style: AppTextStyles.titleMedium.copyWith(
+            fontSize: 13,
+            height: 1.15,
+            color: selected ? AppColors.textInverse : AppColors.textSecondary,
+            fontWeight: selected ? FontWeight.w700 : FontWeight.w600,
+          ),
+        ),
+      ],
     );
     final onTap = this.onTap;
     if (onTap == null) {
