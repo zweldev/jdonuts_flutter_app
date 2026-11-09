@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 
 import '../database/app_database.dart';
+import '../database/daos/home_dao.dart';
 import '../database/daos/meta_dao.dart';
 import '../database/seed/seed_loader.dart';
 import '../database/seed/seed_source.dart';
@@ -19,6 +20,9 @@ void configureDependencies() {
   }
   if (!getIt.isRegistered<MetaDao>()) {
     getIt.registerLazySingleton<MetaDao>(() => getIt<AppDatabase>().metaDao);
+  }
+  if (!getIt.isRegistered<HomeDao>()) {
+    getIt.registerLazySingleton<HomeDao>(() => HomeDao(getIt<AppDatabase>()));
   }
   if (!getIt.isRegistered<SeedSource>()) {
     getIt.registerLazySingleton<SeedSource>(() => const AssetSeedSource());
