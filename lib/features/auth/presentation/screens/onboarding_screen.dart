@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../constants/app_images.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../cubit/registration_cubit.dart';
 import '../cubit/otp_cubit.dart';
@@ -20,7 +21,7 @@ class OnboardingScreen extends StatelessWidget {
         fit: StackFit.expand,
         children: [
           Image.asset(
-            'assets/images/onboarding/onboarding_bg.png',
+            AppImages.onboardingBackground,
             fit: BoxFit.cover,
             alignment: Alignment.center,
           ),
@@ -92,7 +93,7 @@ class OnboardingScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               _SocialButton(
-                                asset: 'assets/images/onboarding/google.svg',
+                                asset: AppImages.onboardingGoogle,
                                 label: l10n.socialGoogle,
                                 onTap: () => _showPlaceholder(
                                   context,
@@ -101,14 +102,14 @@ class OnboardingScreen extends StatelessWidget {
                               ),
                               const SizedBox(width: 28),
                               _SocialButton(
-                                asset: 'assets/images/onboarding/apple.svg',
+                                asset: AppImages.onboardingApple,
                                 label: l10n.socialApple,
                                 onTap: () =>
                                     _showPlaceholder(context, l10n.socialApple),
                               ),
                               const SizedBox(width: 28),
                               _SocialButton(
-                                asset: 'assets/images/onboarding/facebook.svg',
+                                asset: AppImages.onboardingFacebook,
                                 label: l10n.socialFacebook,
                                 onTap: () => _showPlaceholder(
                                   context,
