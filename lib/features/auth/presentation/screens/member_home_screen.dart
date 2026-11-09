@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../constants/app_icons.dart';
 import '../../../../core/theme/app_design_system.dart';
+import '../../../../core/widgets/app_bottom_navigation.dart';
 import '../../../../database/app_database.dart';
 import '../../../../database/daos/home_dao.dart';
 import '../../../../l10n/app_localizations.dart';
@@ -73,6 +74,10 @@ class _MemberHomeScreenState extends State<MemberHomeScreen> {
   }
 
   void _selectTab(int index) {
+    if (index == 1) {
+      context.go('/rewards');
+      return;
+    }
     if (index == 4) {
       showModalBottomSheet<void>(
         context: context,
@@ -88,6 +93,10 @@ class _MemberHomeScreenState extends State<MemberHomeScreen> {
           ),
         ),
       );
+      return;
+    }
+    if (index == 0) {
+      context.go('/home');
       return;
     }
     setState(() => _selectedTab = index);
@@ -119,7 +128,7 @@ class _MemberHomeScreenState extends State<MemberHomeScreen> {
           },
         ),
       ),
-      bottomNavigationBar: _HomeBottomNavigation(
+      bottomNavigationBar: AppBottomNavigation(
         selectedIndex: _selectedTab,
         onSelected: _selectTab,
       ),
@@ -1030,109 +1039,6 @@ class _HomeLoadError extends StatelessWidget {
       ),
     ),
   );
-}
-
-class _HomeBottomNavigation extends StatelessWidget {
-  const _HomeBottomNavigation({
-    required this.selectedIndex,
-    required this.onSelected,
-  });
-
-  final int selectedIndex;
-  final ValueChanged<int> onSelected;
-
-  static const _icons = [
-    AppIcons.home,
-    AppIcons.crown,
-    AppIcons.order,
-    AppIcons.wallet,
-    AppIcons.settings,
-  ];
-  static const _labels = ['Home', 'Reward', 'Order', 'Wallet', 'Profile'];
-
-  @override
-  Widget build(BuildContext context) {
-    final compact = MediaQuery.sizeOf(context).width < 350;
-    const navigationHeight = 68.0;
-    return SafeArea(
-      top: false,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            height: navigationHeight,
-            decoration: const BoxDecoration(color: AppColors.primary),
-            child: Row(
-              children: [
-                for (var index = 0; index < _icons.length; index++)
-                  Expanded(
-                    flex: index == selectedIndex ? (compact ? 8 : 7) : 5,
-                    child: Semantics(
-                      button: true,
-                      label: _labels[index],
-                      selected: index == selectedIndex,
-                      child: InkWell(
-                        onTap: () => onSelected(index),
-                        child: Center(
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 180),
-                            padding: index == selectedIndex
-                                ? EdgeInsets.symmetric(
-                                    horizontal: compact ? 4 : 8,
-                                    vertical: 8,
-                                  )
-                                : EdgeInsets.zero,
-                            decoration: index == selectedIndex
-                                ? BoxDecoration(
-                                    color: AppColors.secondary,
-                                    borderRadius: BorderRadius.circular(24),
-                                    border: Border.all(
-                                      color: AppColors.textInverse,
-                                      width: 1,
-                                    ),
-                                  )
-                                : null,
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                SvgPicture.asset(
-                                  _icons[index],
-                                  width: compact ? 18 : 20,
-                                  height: compact ? 18 : 20,
-                                  colorFilter: const ColorFilter.mode(
-                                    AppColors.textInverse,
-                                    BlendMode.srcIn,
-                                  ),
-                                ),
-                                if (index == selectedIndex) ...[
-                                  SizedBox(width: compact ? 4 : 6),
-                                  Text(
-                                    _labels[index],
-                                    style:
-                                        (compact
-                                                ? AppTextStyles.labelSmall
-                                                      .copyWith(fontSize: 9)
-                                                : AppTextStyles.labelSmall)
-                                            .copyWith(
-                                              color: AppColors.textInverse,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                  ),
-                                ],
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }
 
 Color _bannerColor(String styleKey) => switch (styleKey) {
