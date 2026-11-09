@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart' as material_ui;
 
 import 'di/service_locator.dart';
+import 'database/seed/seed_loader.dart';
 import 'features/auth/domain/repositories/auth_repository.dart';
 import 'l10n/app_localizations.dart';
 import 'features/auth/presentation/cubit/otp_cubit.dart';
@@ -11,9 +12,38 @@ import 'features/auth/presentation/cubit/registration_cubit.dart';
 import 'features/auth/presentation/router/auth_router.dart';
 import 'features/auth/presentation/cubit/session_cubit.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
+  try {
+    await getIt<SeedLoader>().seedIfNeeded();
+  } catch (error, stackTrace) {
+    FlutterError.reportError(
+      FlutterErrorDetails(
+        exception: error,
+        stack: stackTrace,
+        library: 'offline seed startup',
+      ),
+    );
+    runApp(_StartupErrorApp(error: error));
+    return;
+  }
   runApp(const MyApp());
+}
+
+class _StartupErrorApp extends StatelessWidget {
+  const _StartupErrorApp({required this.error});
+
+  final Object error;
+
+  @override
+  Widget build(BuildContext context) => MaterialApp(
+    home: Scaffold(
+      body: Center(
+        child: SelectableText('Unable to load offline data.\n$error'),
+      ),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
