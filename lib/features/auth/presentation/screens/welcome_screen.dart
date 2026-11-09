@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../constants/app_images.dart';
 import '../../../../core/theme/app_design_system.dart';
+import '../../../../core/widgets/app_entrance.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../cubit/session_cubit.dart';
 
@@ -62,34 +63,40 @@ class WelcomeScreen extends StatelessWidget {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(
-                        l10n.welcomeTitle,
-                        textAlign: TextAlign.center,
-                        style: AppTextStyles.displayMedium.copyWith(
-                          color: AppColors.textPrimary,
-                          fontSize: 28,
-                          height: 1.1,
-                          letterSpacing: -0.5,
+                      AppEntrance(
+                        delay: const Duration(milliseconds: 220),
+                        child: Text(
+                          l10n.welcomeTitle,
+                          textAlign: TextAlign.center,
+                          style: AppTextStyles.displayMedium.copyWith(
+                            color: AppColors.textPrimary,
+                            fontSize: 28,
+                            height: 1.1,
+                            letterSpacing: -0.5,
+                          ),
                         ),
                       ),
                       const SizedBox(height: AppSpacing.xxxl),
-                      SizedBox(
-                        height: AppDimensions.buttonHeight,
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: context
-                              .read<SessionCubit>()
-                              .completeWelcome,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.primary,
-                            foregroundColor: AppColors.textInverse,
-                            elevation: 0,
-                            shape: const StadiumBorder(),
-                          ),
-                          child: Text(
-                            l10n.letsExplore,
-                            style: AppTextStyles.titleLarge.copyWith(
-                              letterSpacing: 0.8,
+                      AppEntrance(
+                        delay: const Duration(milliseconds: 380),
+                        child: SizedBox(
+                          height: AppDimensions.buttonHeight,
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            onPressed: context
+                                .read<SessionCubit>()
+                                .completeWelcome,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.primary,
+                              foregroundColor: AppColors.textInverse,
+                              elevation: 0,
+                              shape: const StadiumBorder(),
+                            ),
+                            child: Text(
+                              l10n.letsExplore,
+                              style: AppTextStyles.titleLarge.copyWith(
+                                letterSpacing: 0.8,
+                              ),
                             ),
                           ),
                         ),
