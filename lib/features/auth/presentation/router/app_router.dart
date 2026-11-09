@@ -8,7 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jdonuts_flutter_app/di/service_locator.dart';
 
-import '../../../../database/daos/home_dao.dart';
+import '../../../../core/network/connectivity_monitor.dart';
+import '../../../home/data/home_dao.dart';
 import '../../../../database/daos/cart_dao.dart';
 import '../../../../database/app_database.dart';
 import '../../../../database/daos/rewards_dao.dart';
@@ -20,7 +21,7 @@ import '../auth_failure_message.dart';
 import '../cubit/session_cubit.dart';
 import '../cubit/session_state.dart';
 import '../cubit/registration_cubit.dart';
-import '../screens/member_home_screen.dart';
+import '../../../home/presentation/screens/member_home_screen.dart';
 import '../../../products/presentation/screens/product_detail_screen.dart';
 import '../../../rewards/presentation/screens/rewards_screen.dart';
 import '../screens/dob_screen.dart';
@@ -61,7 +62,7 @@ GoRouter createAppRouter(SessionCubit cubit, AppRouterRefresh refresh) {
         if (location == '/splash' ||
             location == '/welcome' ||
             location == '/home' ||
-            location == '/product' ||
+            location.startsWith('/product/') ||
             location == '/rewards') {
           return '/onboarding';
         }
@@ -82,7 +83,7 @@ GoRouter createAppRouter(SessionCubit cubit, AppRouterRefresh refresh) {
         return location == '/welcome' ? null : '/welcome';
       }
       return location == '/home' ||
-              location == '/product' ||
+              location.startsWith('/product/') ||
               location == '/rewards'
           ? null
           : '/home';
@@ -128,20 +129,23 @@ GoRouter createAppRouter(SessionCubit cubit, AppRouterRefresh refresh) {
           sessionStore: getIt<SessionStore>(),
           userStore: getIt<UserStore>(),
           homeDao: getIt.isRegistered<HomeDao>() ? getIt<HomeDao>() : null,
+          connectivityMonitor: getIt.isRegistered<ConnectivityMonitor>()
+              ? getIt<ConnectivityMonitor>()
+              : null,
         ),
       ),
       GoRoute(
-        path: '/product',
+        path: '/product/:id',
         builder: (context, state) {
-          final product = state.extra;
-          if (product is! Product) {
-            return const Scaffold(
-              body: Center(child: Text('Product details are unavailable.')),
-            );
-          }
-          return ProductDetailScreen(
-            product: product,
-            cartDao: getIt<CartDao>(),
+          final extra = state.extra;
+          return _ProductRoute(
+            productId: state.pathParameters['id']!,
+            heroTag: extra is String ? extra : null,
+            homeDao: getIt.isRegistered<HomeDao>() ? getIt<HomeDao>() : null,
+            cartDao: getIt.isRegistered<CartDao>() ? getIt<CartDao>() : null,
+            connectivityMonitor: getIt.isRegistered<ConnectivityMonitor>()
+                ? getIt<ConnectivityMonitor>()
+                : null,
           );
         },
       ),
@@ -151,10 +155,70 @@ GoRouter createAppRouter(SessionCubit cubit, AppRouterRefresh refresh) {
           memberStore: getIt<MemberStore>(),
           sessionStore: getIt<SessionStore>(),
           rewardsDao: getIt<RewardsDao>(),
+          connectivityMonitor: getIt.isRegistered<ConnectivityMonitor>()
+              ? getIt<ConnectivityMonitor>()
+              : null,
         ),
       ),
     ],
   );
+}
+
+class _ProductRoute extends StatelessWidget {
+  const _ProductRoute({
+    required this.productId,
+    required this.heroTag,
+    required this.homeDao,
+    required this.cartDao,
+    required this.connectivityMonitor,
+  });
+
+  final String productId;
+  final String? heroTag;
+  final HomeDao? homeDao;
+  final CartDao? cartDao;
+  final ConnectivityMonitor? connectivityMonitor;
+
+  @override
+  Widget build(BuildContext context) {
+    final dao = homeDao;
+    final cart = cartDao;
+    if (dao == null || cart == null) {
+      return Scaffold(
+        body: Center(
+          child: Text(AppLocalizations.of(context).productUnavailable),
+        ),
+      );
+    }
+    return FutureBuilder<Product?>(
+      future: dao.findProductById(productId),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return Scaffold(
+            body: Center(
+              child: Text(AppLocalizations.of(context).productLoadError),
+            ),
+          );
+        }
+        final product = snapshot.data;
+        if (product == null) {
+          return Scaffold(
+            body: Center(
+              child: snapshot.connectionState == ConnectionState.done
+                  ? Text(AppLocalizations.of(context).productUnavailable)
+                  : const CircularProgressIndicator(),
+            ),
+          );
+        }
+        return ProductDetailScreen(
+          product: product,
+          cartDao: cart,
+          connectivityMonitor: connectivityMonitor,
+          heroTag: heroTag,
+        );
+      },
+    );
+  }
 }
 
 class _SplashScreen extends StatelessWidget {
