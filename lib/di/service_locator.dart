@@ -1,6 +1,9 @@
 import 'package:get_it/get_it.dart';
 
 import '../database/app_database.dart';
+import '../database/daos/meta_dao.dart';
+import '../database/seed/seed_loader.dart';
+import '../database/seed/seed_source.dart';
 import '../features/auth/data/stores/secure_session_store.dart';
 import '../features/auth/data/repositories/fake_auth_repository.dart';
 import '../features/auth/domain/repositories/auth_repository.dart';
@@ -13,6 +16,21 @@ final getIt = GetIt.instance;
 void configureDependencies() {
   if (!getIt.isRegistered<AppDatabase>()) {
     getIt.registerLazySingleton<AppDatabase>(AppDatabase.new);
+  }
+  if (!getIt.isRegistered<MetaDao>()) {
+    getIt.registerLazySingleton<MetaDao>(() => getIt<AppDatabase>().metaDao);
+  }
+  if (!getIt.isRegistered<SeedSource>()) {
+    getIt.registerLazySingleton<SeedSource>(() => const AssetSeedSource());
+  }
+  if (!getIt.isRegistered<SeedLoader>()) {
+    getIt.registerLazySingleton<SeedLoader>(
+      () => SeedLoader(
+        getIt<AppDatabase>(),
+        getIt<SeedSource>(),
+        getIt<MetaDao>(),
+      ),
+    );
   }
   if (!getIt.isRegistered<UserStore>()) {
     getIt.registerLazySingleton<UserStore>(() => getIt<AppDatabase>().userDao);
