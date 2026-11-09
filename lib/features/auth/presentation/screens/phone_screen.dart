@@ -84,7 +84,8 @@ class _PhoneScreenState extends State<PhoneScreen> {
                   border: Border.all(
                     color: phoneError == null
                         ? AppColors.surface
-                        : AppColors.secondary.withValues(alpha: 0.4),
+                        : AppColors.error,
+                    width: phoneError == null ? 1 : 1.5,
                   ),
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -126,18 +127,26 @@ class _PhoneScreenState extends State<PhoneScreen> {
                                   contentPadding: const EdgeInsets.symmetric(
                                     vertical: 18,
                                   ),
-                                  errorText: phoneError == null
-                                      ? null
-                                      : _phoneErrorText(l10n, phoneError),
-                                  errorStyle: AppTextStyles.labelSmall.copyWith(
-                                    color: AppColors.error,
-                                  ),
                                 ),
                       ),
                     ),
                   ],
                 ),
               ),
+              if (phoneError != null) ...[
+                const SizedBox(height: AppSpacing.xs),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.xs,
+                  ),
+                  child: Text(
+                    _phoneErrorText(l10n, phoneError),
+                    style: AppTextStyles.labelSmall.copyWith(
+                      color: AppColors.error,
+                    ),
+                  ),
+                ),
+              ],
               const SizedBox(height: 14),
               Text(l10n.phoneHelp(otpLength), style: AppTextStyles.bodySmall),
               if (state.failure != null) ...[
