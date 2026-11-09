@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../domain/auth_constants.dart';
+import '../../domain/result.dart';
 import '../../domain/validators/auth_validators.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../auth_failure_message.dart';
@@ -211,6 +212,14 @@ class _DobScreenState extends State<DobScreen> {
                       ),
                     ),
                   ),
+                ),
+              if (state.failure is AlreadyRegistered)
+                TextButton(
+                  onPressed: () {
+                    _registration.beginLogin();
+                    context.go('/phone');
+                  },
+                  child: Text(l10n.logIn),
                 ),
             ],
           ),
