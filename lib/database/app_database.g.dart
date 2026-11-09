@@ -4113,6 +4113,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $CartItemsTable cartItems = $CartItemsTable(this);
   late final MemberDao memberDao = MemberDao(this as AppDatabase);
   late final UserDao userDao = UserDao(this as AppDatabase);
+  late final MetaDao metaDao = MetaDao(this as AppDatabase);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();

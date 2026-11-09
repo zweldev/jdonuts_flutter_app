@@ -4,6 +4,7 @@ import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
 import 'package:path_provider/path_provider.dart';
 
+import 'daos/meta_dao.dart';
 import 'daos/member_dao.dart';
 import 'daos/user_dao.dart';
 import 'tables/banners.dart';
@@ -37,7 +38,7 @@ const databaseFilename = 'jdonuts.sqlite';
     Members,
     CartItems,
   ],
-  daos: [MemberDao, UserDao],
+  daos: [MemberDao, UserDao, MetaDao],
 )
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
@@ -50,8 +51,7 @@ class AppDatabase extends _$AppDatabase {
   @override
   MigrationStrategy get migration => MigrationStrategy(
     onCreate: (migrator) => migrator.createAll(),
-    onUpgrade: (migrator, from, to) async {
-    },
+    onUpgrade: (migrator, from, to) async {},
     beforeOpen: (details) async {
       await customStatement('PRAGMA foreign_keys = ON');
     },
