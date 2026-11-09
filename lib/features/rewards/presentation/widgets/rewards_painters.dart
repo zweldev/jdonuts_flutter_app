@@ -165,7 +165,7 @@ class TierLadderPainter extends CustomPainter {
     final top = stepHeight / 2;
     final bottom = size.height - stepHeight / 2;
     final track = Paint()
-      ..color = AppColors.homeBackground
+      ..color = AppColors.border
       ..strokeWidth = 2;
     canvas.drawLine(Offset(centerX, top), Offset(centerX, bottom), track);
 
@@ -176,8 +176,8 @@ class TierLadderPainter extends CustomPainter {
       Offset(centerX, startY),
       Offset(centerX, endY),
       Paint()
-        ..color = AppColors.textTertiary
-        ..strokeWidth = 2.5,
+        ..color = AppColors.secondary
+        ..strokeWidth = 3,
     );
   }
 

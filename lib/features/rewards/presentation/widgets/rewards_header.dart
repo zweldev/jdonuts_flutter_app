@@ -9,6 +9,8 @@ import '../../../../features/members/domain/tier_progress.dart';
 import '../../../../l10n/app_localizations.dart';
 import 'rewards_painters.dart';
 
+const _rewardsProgressFraction = 0.7;
+
 class RewardsHeader extends StatelessWidget {
   const RewardsHeader({
     super.key,
@@ -61,7 +63,11 @@ class _RewardsTitleRow extends StatelessWidget {
       ),
     );
     return Padding(
-      padding: const EdgeInsets.only(left: AppSpacing.lg, top: AppSpacing.xl),
+      padding: const EdgeInsets.only(
+        left: AppSpacing.lg,
+        top: AppSpacing.xl,
+        right: AppSpacing.lg,
+      ),
       child: Row(
         children: [
           Expanded(
@@ -72,45 +78,43 @@ class _RewardsTitleRow extends StatelessWidget {
               style: AppTextStyles.headlineLarge.copyWith(fontSize: 24),
             ),
           ),
-          Transform.translate(
-            offset: const Offset(AppSpacing.lg, 0),
-            child: ScaleTransition(
-              scale: badgeAnimation,
-              child: Container(
-                padding: const EdgeInsets.fromLTRB(
-                  AppSpacing.lg,
-                  AppSpacing.sm,
-                  AppSpacing.sm,
-                  AppSpacing.sm,
+          ScaleTransition(
+            scale: badgeAnimation,
+            child: Container(
+              padding: const EdgeInsets.fromLTRB(
+                AppSpacing.lg,
+                AppSpacing.sm,
+                AppSpacing.sm,
+                AppSpacing.sm,
+              ),
+              decoration: const BoxDecoration(
+                color: AppColors.tertiary,
+                borderRadius: BorderRadius.horizontal(
+                  left: Radius.circular(AppRadius.xxl),
+                  right: Radius.circular(AppRadius.xxl),
                 ),
-                decoration: const BoxDecoration(
-                  color: AppColors.tertiary,
-                  borderRadius: BorderRadius.horizontal(
-                    left: Radius.circular(AppRadius.xxl),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    l10n.rewardsBadge,
+                    style: AppTextStyles.titleLarge.copyWith(
+                      color: AppColors.textInverse,
+                    ),
                   ),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      l10n.rewardsBadge,
-                      style: AppTextStyles.titleLarge.copyWith(
-                        color: AppColors.textInverse,
+                  const SizedBox(width: AppSpacing.xs),
+                  CircleAvatar(
+                    radius: 12,
+                    backgroundColor: AppColors.surface,
+                    child: Text(
+                      '$badgeCount',
+                      style: AppTextStyles.labelLarge.copyWith(
+                        color: AppColors.textPrimary,
                       ),
                     ),
-                    const SizedBox(width: AppSpacing.xs),
-                    CircleAvatar(
-                      radius: 12,
-                      backgroundColor: AppColors.surface,
-                      child: Text(
-                        '$badgeCount',
-                        style: AppTextStyles.labelLarge.copyWith(
-                          color: AppColors.textPrimary,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -200,7 +204,7 @@ class _TierLadder extends StatelessWidget {
       (tier) => tier.id == member?.tierId,
     );
     final nextTierId = progress?.nextTier?.id;
-    final ladderProgress = progress?.progressFraction ?? 0;
+    final ladderProgress = _rewardsProgressFraction;
     final lineAnimation = CurvedAnimation(
       parent: entryAnimation,
       curve: const Interval(
@@ -378,10 +382,6 @@ class _PointsRing extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final points = member?.totalPoints ?? 0;
-    final tierProgress = member?.tierProgress;
-    final progressFraction = tierProgress is TierProgressSuccess
-        ? tierProgress.progress.progressFraction
-        : 0.0;
     final ringAnimation = CurvedAnimation(
       parent: entryAnimation,
       curve: const Interval(
@@ -406,7 +406,7 @@ class _PointsRing extends StatelessWidget {
               CustomPaint(
                 size: Size.square(size),
                 painter: RewardsRingPainter(
-                  progress: progressFraction * ringAnimation.value,
+                  progress: _rewardsProgressFraction * ringAnimation.value,
                 ),
               ),
               Column(
