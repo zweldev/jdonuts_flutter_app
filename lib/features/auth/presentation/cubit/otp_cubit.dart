@@ -90,10 +90,7 @@ class OtpCubit extends Cubit<OtpState> {
   Future<bool> resend() async {
     if (state.secondsUntilResend > 0 || state.isLoading) return false;
     emit(state.copyWith(isLoading: true, failure: null));
-    final result = await _repository.requestOtp(
-      _phoneNumber,
-      isRegistration: _registrationCubit.state.isRegistration,
-    );
+    final result = await _repository.requestOtp();
     if (isClosed) return false;
     switch (result) {
       case Success<void>():
@@ -126,7 +123,7 @@ class OtpCubit extends Cubit<OtpState> {
   }
 
   String get _phoneNumber =>
-      '$phoneCountryPrefix${normalizePhoneNumber(_registrationCubit.state.draft.phone)}';
+      canonicalPhoneNumber(_registrationCubit.state.draft.phone);
 
   @override
   Future<void> close() {
