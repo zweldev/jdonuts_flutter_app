@@ -60,114 +60,117 @@ class _AppBottomNavigationState extends State<AppBottomNavigation> {
       l10n.walletTabLabel,
       l10n.profileTabLabel,
     ];
-    return SafeArea(
-      top: false,
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          final slotWidth = constraints.maxWidth / _icons.length;
-          final pillWidth = slotWidth * (_animatedIndex == 1 ? 1.42 : 1.12);
-          final pillLeft =
-              (slotWidth * (_animatedIndex + 0.5) - pillWidth / 2).clamp(
-                0.0,
-                constraints.maxWidth - pillWidth,
-              );
-          return SizedBox(
-            height: 68,
-            child: Stack(
-              children: [
-                Positioned.fill(
-                  child: DecoratedBox(
-                    decoration: const BoxDecoration(
-                      color: AppColors.primary,
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(AppRadius.xl),
-                      ),
-                    ),
-                    child: Row(
-                      children: [
-                        for (var index = 0; index < _icons.length; index++)
-                          Expanded(
-                            child: Semantics(
-                              button: true,
-                              label: labels[index],
-                              selected: index == _animatedIndex,
-                              child: InkWell(
-                                onTap: () => widget.onSelected(index),
-                                child: Center(
-                                  child: index == _animatedIndex
-                                      ? const SizedBox(
-                                          width: AppDimensions.iconLarge,
-                                          height: AppDimensions.iconLarge,
-                                        )
-                                      : SvgPicture.asset(
-                                          _icons[index],
-                                          width: AppDimensions.iconMedium,
-                                          height: AppDimensions.iconMedium,
-                                          colorFilter: const ColorFilter.mode(
-                                            AppColors.textInverse,
-                                            BlendMode.srcIn,
-                                          ),
-                                        ),
-                                ),
-                              ),
-                            ),
-                          ),
-                      ],
-                    ),
-                  ),
-                ),
-                AnimatedPositioned(
-                  duration: reduceMotion
-                      ? Duration.zero
-                      : AppMotion.bottomNavPill,
-                  curve: AppMotion.tabCurve,
-                  left: pillLeft,
-                  top: AppSpacing.xs,
-                  bottom: AppSpacing.xs,
-                  width: pillWidth,
-                  child: IgnorePointer(
+    return ColoredBox(
+      color: AppColors.primary,
+      child: SafeArea(
+        top: false,
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final slotWidth = constraints.maxWidth / _icons.length;
+            final pillWidth = slotWidth * (_animatedIndex == 1 ? 1.42 : 1.12);
+            final pillLeft =
+                (slotWidth * (_animatedIndex + 0.5) - pillWidth / 2).clamp(
+                  0.0,
+                  constraints.maxWidth - pillWidth,
+                );
+            return SizedBox(
+              height: 68,
+              child: Stack(
+                children: [
+                  Positioned.fill(
                     child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        color: AppColors.secondary,
-                        borderRadius: BorderRadius.circular(AppRadius.pill),
-                        border: Border.all(
-                          color: AppColors.textInverse,
-                          width: 1.5,
+                      decoration: const BoxDecoration(
+                        color: AppColors.primary,
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(AppRadius.xl),
                         ),
                       ),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          SvgPicture.asset(
-                            _icons[_animatedIndex],
-                            width: AppDimensions.iconMedium,
-                            height: AppDimensions.iconMedium,
-                            colorFilter: const ColorFilter.mode(
-                              AppColors.textInverse,
-                              BlendMode.srcIn,
-                            ),
-                          ),
-                          const SizedBox(width: AppSpacing.xs),
-                          Flexible(
-                            child: Text(
-                              labels[_animatedIndex],
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: AppTextStyles.labelMedium.copyWith(
-                                color: AppColors.textInverse,
+                          for (var index = 0; index < _icons.length; index++)
+                            Expanded(
+                              child: Semantics(
+                                button: true,
+                                label: labels[index],
+                                selected: index == _animatedIndex,
+                                child: InkWell(
+                                  onTap: () => widget.onSelected(index),
+                                  child: Center(
+                                    child: index == _animatedIndex
+                                        ? const SizedBox(
+                                            width: AppDimensions.iconLarge,
+                                            height: AppDimensions.iconLarge,
+                                          )
+                                        : SvgPicture.asset(
+                                            _icons[index],
+                                            width: AppDimensions.iconMedium,
+                                            height: AppDimensions.iconMedium,
+                                            colorFilter: const ColorFilter.mode(
+                                              AppColors.textInverse,
+                                              BlendMode.srcIn,
+                                            ),
+                                          ),
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
                         ],
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-          );
-        },
+                  AnimatedPositioned(
+                    duration: reduceMotion
+                        ? Duration.zero
+                        : AppMotion.bottomNavPill,
+                    curve: AppMotion.tabCurve,
+                    left: pillLeft,
+                    top: AppSpacing.xs,
+                    bottom: AppSpacing.xs,
+                    width: pillWidth,
+                    child: IgnorePointer(
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: AppColors.secondary,
+                          borderRadius: BorderRadius.circular(AppRadius.pill),
+                          border: Border.all(
+                            color: AppColors.textInverse,
+                            width: 1.5,
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SvgPicture.asset(
+                              _icons[_animatedIndex],
+                              width: AppDimensions.iconMedium,
+                              height: AppDimensions.iconMedium,
+                              colorFilter: const ColorFilter.mode(
+                                AppColors.textInverse,
+                                BlendMode.srcIn,
+                              ),
+                            ),
+                            const SizedBox(width: AppSpacing.xs),
+                            Flexible(
+                              child: Text(
+                                labels[_animatedIndex],
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: AppTextStyles.labelMedium.copyWith(
+                                  color: AppColors.textInverse,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }
