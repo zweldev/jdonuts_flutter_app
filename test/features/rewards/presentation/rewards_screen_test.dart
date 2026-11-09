@@ -216,35 +216,22 @@ void main() {
     expect((ring.painter! as RewardsRingPainter).progress, 0.7);
   });
 
-  testWidgets('switches to the Gift tab and displays its challenges', (
+  testWidgets('Gift tab is disabled and Earn challenges remain selected', (
     tester,
   ) async {
     await _pumpRewardsScreen(tester, database, disableAnimations: true);
 
-    await tester.tap(find.text('Gift'));
+    expect(
+      find.ancestor(of: find.text('Gift'), matching: find.byType(InkWell)),
+      findsNothing,
+    );
+    await tester.tap(find.text('Gift'), warnIfMissed: false);
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 350));
     await tester.pump();
 
-    expect(find.text('Send a donut gift'), findsOneWidget);
-    expect(find.text('Eat 4 Coco donuts'), findsNothing);
-  });
-
-  testWidgets('shows an empty state when the selected tab has no challenges', (
-    tester,
-  ) async {
-    await (database.delete(
-      database.challenges,
-    )..where((challenge) => challenge.tab.equals('gift'))).go();
-    await _pumpRewardsScreen(tester, database, disableAnimations: true);
-
-    await tester.tap(find.text('Gift'));
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 350));
-    await tester.pump();
-
-    expect(find.text('No rewards here yet'), findsOneWidget);
-    expect(find.text('Check back soon for new challenges.'), findsOneWidget);
+    expect(find.text('Eat 4 Coco donuts'), findsOneWidget);
+    expect(find.text('Send a donut gift'), findsNothing);
   });
 }
 
