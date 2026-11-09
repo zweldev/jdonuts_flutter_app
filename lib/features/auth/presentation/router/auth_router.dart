@@ -3,13 +3,16 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jdonuts_flutter_app/di/service_locator.dart';
 
 import '../../../../l10n/app_localizations.dart';
+import '../../domain/repositories/session_store.dart';
+import '../../../members/domain/repositories/member_store.dart';
 import '../auth_failure_message.dart';
 import '../cubit/session_cubit.dart';
 import '../cubit/session_state.dart';
 import '../cubit/registration_cubit.dart';
-import '../screens/home_screen.dart';
+import '../screens/member_home_screen.dart';
 import '../screens/dob_screen.dart';
 import '../screens/name_screen.dart';
 import '../screens/onboarding_screen.dart';
@@ -102,7 +105,13 @@ GoRouter createAuthRouter(SessionCubit cubit, AuthRouterRefresh refresh) {
         path: '/welcome',
         builder: (context, state) => const WelcomeScreen(),
       ),
-      GoRoute(path: '/home', builder: (context, state) => const HomeScreen()),
+      GoRoute(
+        path: '/home',
+        builder: (context, state) => MemberHomeScreen(
+          memberStore: getIt<MemberStore>(),
+          sessionStore: getIt<SessionStore>(),
+        ),
+      ),
     ],
   );
 }
