@@ -15,4 +15,8 @@ abstract final class AppDimensions {
   static const cardPadding = 16.0;
   static const screenHorizontalPadding = 24.0;
   static const sectionSpacing = 24.0;
+  static const rewardsTierStepHeight = 76.0;
+  static const rewardsOverviewHeight = 292.0;
+  static const rewardsArtworkSize = 136.0;
+  static const rewardsChallengeMinHeight = 164.0;
 }
