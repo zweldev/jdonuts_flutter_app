@@ -9,6 +9,8 @@ import 'package:go_router/go_router.dart';
 import 'package:jdonuts_flutter_app/di/service_locator.dart';
 
 import '../../../../database/daos/home_dao.dart';
+import '../../../../database/daos/cart_dao.dart';
+import '../../../../database/app_database.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../domain/repositories/session_store.dart';
 import '../../domain/repositories/user_store.dart';
@@ -18,6 +20,7 @@ import '../cubit/session_cubit.dart';
 import '../cubit/session_state.dart';
 import '../cubit/registration_cubit.dart';
 import '../screens/member_home_screen.dart';
+import '../../../products/presentation/screens/product_detail_screen.dart';
 import '../screens/dob_screen.dart';
 import '../screens/name_screen.dart';
 import '../screens/onboarding_screen.dart';
@@ -74,7 +77,7 @@ GoRouter createAuthRouter(SessionCubit cubit, AuthRouterRefresh refresh) {
       if (authState.justRegistered) {
         return location == '/welcome' ? null : '/welcome';
       }
-      return location == '/home' ? null : '/home';
+      return location == '/home' || location == '/product' ? null : '/home';
     },
     routes: [
       GoRoute(
@@ -118,6 +121,21 @@ GoRouter createAuthRouter(SessionCubit cubit, AuthRouterRefresh refresh) {
           userStore: getIt<UserStore>(),
           homeDao: getIt.isRegistered<HomeDao>() ? getIt<HomeDao>() : null,
         ),
+      ),
+      GoRoute(
+        path: '/product',
+        builder: (context, state) {
+          final product = state.extra;
+          if (product is! Product) {
+            return const Scaffold(
+              body: Center(child: Text('Product details are unavailable.')),
+            );
+          }
+          return ProductDetailScreen(
+            product: product,
+            cartDao: getIt<CartDao>(),
+          );
+        },
       ),
     ],
   );
