@@ -1,7 +1,7 @@
 import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jdonuts_flutter_app/database/app_database.dart';
-import 'package:jdonuts_flutter_app/database/daos/home_dao.dart';
+import 'package:jdonuts_flutter_app/features/home/data/home_dao.dart';
 
 void main() {
   late AppDatabase database;
@@ -58,10 +58,14 @@ void main() {
       final catalog = await HomeDao(database).loadCatalog();
 
       expect(catalog.sections, hasLength(1));
-      expect(catalog.sections.single.products.map((product) => product.id), [
-        'first',
-        'second',
-      ]);
+      final products = await HomeDao(database)
+          .loadSectionProducts(catalog.sections.single.section.id);
+      expect(products.map((product) => product.id), ['first', 'second']);
+      expect(
+        (await HomeDao(database).findProductById('first'))?.code,
+        'JD000001',
+      );
+      expect(await HomeDao(database).findProductById('missing'), isNull);
     },
   );
 }
