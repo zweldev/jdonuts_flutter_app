@@ -141,7 +141,7 @@ void main() {
     );
   });
 
-  test('fresh database creates all tables at schema version two', () async {
+  test('fresh database creates all tables at schema version three', () async {
     await database.customSelect('SELECT 1').getSingle();
 
     final tables = await database

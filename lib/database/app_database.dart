@@ -21,9 +21,9 @@ import 'tables/users.dart';
 
 part 'app_database.g.dart';
 
-const currentSchemaVersion = 2;
+const currentSchemaVersion = 3;
 const databaseFilename = 'jdonuts.sqlite';
-const initialDemoMemberPoints = 350000;
+const initialDemoMemberPoints = 500000;
 
 @DriftDatabase(
   tables: [
@@ -53,10 +53,10 @@ class AppDatabase extends _$AppDatabase {
   MigrationStrategy get migration => MigrationStrategy(
     onCreate: (migrator) => migrator.createAll(),
     onUpgrade: (migrator, from, to) async {
-      if (from < 2 && to >= 2) {
+      if (from < 3 && to >= 3) {
         await customStatement(
-          'UPDATE members SET total_points = ? '
-          "WHERE total_points = 0 AND tier_id = 'bronze'",
+          "UPDATE members SET total_points = ?, tier_id = 'silver' "
+          "WHERE tier_id = 'bronze'",
           [initialDemoMemberPoints],
         );
       }
