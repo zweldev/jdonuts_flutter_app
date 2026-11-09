@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 
-import '../../domain/auth_constants.dart';
 import '../../domain/entities/auth_user.dart';
 import '../../domain/entities/registration_draft.dart';
 import '../../domain/repositories/auth_repository.dart';
@@ -54,10 +53,7 @@ class RegistrationCubit extends Cubit<RegistrationState> {
     final phone = state.draft.phone;
     if (state.isLoading || validatePhoneNumber(phone) != null) return false;
     emit(state.copyWith(isLoading: true, failure: null));
-    final result = await _repository.requestOtp(
-      '$phoneCountryPrefix${normalizePhoneNumber(phone)}',
-      isRegistration: state.isRegistration,
-    );
+    final result = await _repository.requestOtp();
     if (isClosed) return false;
     switch (result) {
       case Success<void>():
@@ -74,7 +70,10 @@ class RegistrationCubit extends Cubit<RegistrationState> {
   }
 
   Future<bool> submitName() async {
-    if (state.isLoading || !state.otpVerified || !state.isRegistration) {
+    if (state.isLoading ||
+        state.nameCompleted ||
+        !state.otpVerified ||
+        !state.isRegistration) {
       return false;
     }
     final error = state.nameValidationError;
@@ -82,30 +81,8 @@ class RegistrationCubit extends Cubit<RegistrationState> {
       emit(state.copyWith(nameError: error));
       return false;
     }
-    emit(state.copyWith(isLoading: true, failure: null));
-    return _saveRegistrationName();
-  }
-
-  Future<bool> _saveRegistrationName() async {
-    final result = await _repository.saveRegistrationName(
-      _phoneNumber(state.draft),
-      firstName: state.draft.firstName.trim(),
-      lastName: state.draft.lastName.trim(),
-    );
-    if (isClosed) return false;
-    switch (result) {
-      case Success<void>():
-        emit(
-          state.startDateOfBirth().copyWith(
-            isLoading: false,
-            nameCompleted: true,
-          ),
-        );
-        return true;
-      case Failure<void>(:final error):
-        emit(state.copyWith(isLoading: false, failure: error));
-        return false;
-    }
+    emit(state.startDateOfBirth().copyWith(nameCompleted: true, failure: null));
+    return true;
   }
 
   void dateOfBirthChanged(DateTime dateOfBirth) {
@@ -125,7 +102,8 @@ class RegistrationCubit extends Cubit<RegistrationState> {
   }
 
   Future<bool> _registerDraft() async {
-    final result = await _repository.register(_createUser(state.draft));
+    final user = _createUser(state.draft);
+    final result = await _repository.register(user);
     if (isClosed) return false;
     return _handleRegistrationResult(result);
   }
@@ -138,7 +116,7 @@ class RegistrationCubit extends Cubit<RegistrationState> {
   );
 
   String _phoneNumber(RegistrationDraft draft) =>
-      '$phoneCountryPrefix${normalizePhoneNumber(draft.phone)}';
+      canonicalPhoneNumber(draft.phone);
 
   bool _handleRegistrationResult(Result<void> result) {
     switch (result) {
