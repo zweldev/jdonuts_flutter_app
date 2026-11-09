@@ -1,12 +1,17 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+
+import '../../../../core/theme/app_design_system.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jdonuts_flutter_app/di/service_locator.dart';
 
+import '../../../../database/daos/home_dao.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../domain/repositories/session_store.dart';
+import '../../domain/repositories/user_store.dart';
 import '../../../members/domain/repositories/member_store.dart';
 import '../auth_failure_message.dart';
 import '../cubit/session_cubit.dart';
@@ -110,6 +115,8 @@ GoRouter createAuthRouter(SessionCubit cubit, AuthRouterRefresh refresh) {
         builder: (context, state) => MemberHomeScreen(
           memberStore: getIt<MemberStore>(),
           sessionStore: getIt<SessionStore>(),
+          userStore: getIt<UserStore>(),
+          homeDao: getIt.isRegistered<HomeDao>() ? getIt<HomeDao>() : null,
         ),
       ),
     ],
@@ -122,7 +129,7 @@ class _SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(child: CircularProgressIndicator(color: Color(0xFF55C9E0))),
+      body: Center(child: CircularProgressIndicator(color: AppColors.primary)),
     );
   }
 }
