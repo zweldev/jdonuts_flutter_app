@@ -13,10 +13,12 @@ class AuthStepScaffold extends StatelessWidget {
     required this.isContinueEnabled,
     required this.isLoading,
     required this.onContinue,
+    this.titleTextAlign = TextAlign.start,
     super.key,
   });
 
   final String title;
+  final TextAlign titleTextAlign;
   final double progress;
   final Widget child;
   final VoidCallback onBack;
@@ -78,6 +80,7 @@ class AuthStepScaffold extends StatelessWidget {
                 AppEntrance(
                   child: Text(
                     title,
+                    textAlign: titleTextAlign,
                     style: AppTextStyles.headlineLarge.copyWith(
                       color: AppColors.textPrimary,
                       fontSize: 27,
