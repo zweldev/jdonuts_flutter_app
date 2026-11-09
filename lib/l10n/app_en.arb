@@ -103,6 +103,61 @@
   "languageLabel": "Use Burmese",
   "englishLanguage": "English",
   "burmeseLanguage": "မြန်မာ",
+  "offlineBanner": "You’re offline. Showing saved data.",
+  "productUnavailable": "Product details are unavailable.",
+  "productLoadError": "Could not load this product. Please try again.",
+  "cartAdded": "{productName} added to cart.",
+  "@cartAdded": {
+    "placeholders": {
+      "productName": {}
+    }
+  },
+  "cartAddFailed": "Could not add this product to your cart.",
+  "notifications": "Notifications",
+  "noNotifications": "No new notifications.",
+  "noProductSections": "No product sections yet.",
+  "noProducts": "Nothing here yet.",
+  "noNearbyShops": "No nearby shops found.",
+  "sectionLoadError": "This section could not be loaded.",
+  "newBadge": "New",
+  "discountPercentOff": "{discount}% off",
+  "@discountPercentOff": {
+    "placeholders": {
+      "discount": {
+        "type": "int"
+      }
+    }
+  },
+  "decreaseQuantity": "Decrease quantity",
+  "increaseQuantity": "Increase quantity",
+  "memberFallback": "J’Donuts member",
+  "homeMemberTier": "{tier} member",
+  "@homeMemberTier": {
+    "placeholders": {
+      "tier": {}
+    }
+  },
+  "popularSectionTitle": "Popular 🔥",
+  "nearbyShopsCount": "There are {count} J’Donut shops near you. 😊",
+  "@nearbyShopsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "exploreNow": "EXPLORE NOW",
+  "orderOnline": "Order Online",
+  "whatsThis": "What’s\nthis?",
+  "addToCart": "ADD TO CART",
+  "discountPercent": "{discount}%",
+  "@discountPercent": {
+    "placeholders": {
+      "discount": {
+        "type": "int"
+      }
+    }
+  },
   "homeTitle": "Home",
   "progressReady": "Ready",
   "progressGettingStarted": "Getting started",
