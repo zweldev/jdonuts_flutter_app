@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../constants/app_images.dart';
 import '../../../../core/theme/app_design_system.dart';
+import '../../../../core/widgets/app_entrance.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../cubit/registration_cubit.dart';
 import '../cubit/otp_cubit.dart';
@@ -59,69 +60,85 @@ class OnboardingScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           SizedBox(height: constraints.maxHeight * 0.43),
-                          Text(
-                            l10n.onboardingTitle,
-                            textAlign: TextAlign.center,
-                            style: AppTextStyles.displaySmall.copyWith(
-                              color: AppColors.textPrimary,
-                              height: 1.14,
-                              fontSize: 29,
-                              letterSpacing: -0.5,
+                          AppEntrance(
+                            delay: const Duration(milliseconds: 100),
+                            child: Text(
+                              l10n.onboardingTitle,
+                              textAlign: TextAlign.center,
+                              style: AppTextStyles.displaySmall.copyWith(
+                                color: AppColors.textPrimary,
+                                height: 1.14,
+                                fontSize: 29,
+                                letterSpacing: -0.5,
+                              ),
                             ),
                           ),
                           const SizedBox(height: AppSpacing.xl),
-                          AuthPrimaryButton(
-                            label: l10n.getStarted,
-                            onPressed: () => _startFlow(
-                              context,
-                              context
-                                  .read<RegistrationCubit>()
-                                  .beginRegistration,
+                          AppEntrance(
+                            delay: const Duration(milliseconds: 210),
+                            child: AuthPrimaryButton(
+                              label: l10n.getStarted,
+                              onPressed: () => _startFlow(
+                                context,
+                                context
+                                    .read<RegistrationCubit>()
+                                    .beginRegistration,
+                              ),
                             ),
                           ),
                           const SizedBox(height: 8),
-                          Wrap(
-                            alignment: WrapAlignment.center,
-                            crossAxisAlignment: WrapCrossAlignment.center,
-                            children: [
-                              Text(l10n.alreadyHaveAccount),
-                              TextButton(
-                                onPressed: () => _startFlow(
-                                  context,
-                                  context.read<RegistrationCubit>().beginLogin,
+                          AppEntrance(
+                            delay: const Duration(milliseconds: 290),
+                            child: Wrap(
+                              alignment: WrapAlignment.center,
+                              crossAxisAlignment: WrapCrossAlignment.center,
+                              children: [
+                                Text(l10n.alreadyHaveAccount),
+                                TextButton(
+                                  onPressed: () => _startFlow(
+                                    context,
+                                    context
+                                        .read<RegistrationCubit>()
+                                        .beginLogin,
+                                  ),
+                                  child: Text(l10n.logIn),
                                 ),
-                                child: Text(l10n.logIn),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              _SocialButton(
-                                asset: AppImages.onboardingGoogle,
-                                label: l10n.socialGoogle,
-                                onTap: () => _showPlaceholder(
-                                  context,
-                                  l10n.socialGoogle,
+                          AppEntrance(
+                            delay: const Duration(milliseconds: 370),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                _SocialButton(
+                                  asset: AppImages.onboardingGoogle,
+                                  label: l10n.socialGoogle,
+                                  onTap: () => _showPlaceholder(
+                                    context,
+                                    l10n.socialGoogle,
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(width: 28),
-                              _SocialButton(
-                                asset: AppImages.onboardingApple,
-                                label: l10n.socialApple,
-                                onTap: () =>
-                                    _showPlaceholder(context, l10n.socialApple),
-                              ),
-                              const SizedBox(width: 28),
-                              _SocialButton(
-                                asset: AppImages.onboardingFacebook,
-                                label: l10n.socialFacebook,
-                                onTap: () => _showPlaceholder(
-                                  context,
-                                  l10n.socialFacebook,
+                                const SizedBox(width: 28),
+                                _SocialButton(
+                                  asset: AppImages.onboardingApple,
+                                  label: l10n.socialApple,
+                                  onTap: () => _showPlaceholder(
+                                    context,
+                                    l10n.socialApple,
+                                  ),
                                 ),
-                              ),
-                            ],
+                                const SizedBox(width: 28),
+                                _SocialButton(
+                                  asset: AppImages.onboardingFacebook,
+                                  label: l10n.socialFacebook,
+                                  onTap: () => _showPlaceholder(
+                                    context,
+                                    l10n.socialFacebook,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                           const SizedBox(height: 14),
                           Wrap(
