@@ -17,6 +17,9 @@ String normalizePhoneNumber(String input) {
   return number;
 }
 
+String canonicalPhoneNumber(String input) =>
+    '$phoneCountryPrefix${normalizePhoneNumber(input)}';
+
 PhoneError? validatePhoneNumber(String input) {
   if (input.trim().isEmpty) return PhoneError.empty;
   return RegExp(r'^9\d{7,9}$').hasMatch(normalizePhoneNumber(input))
