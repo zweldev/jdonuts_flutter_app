@@ -37,7 +37,7 @@ void main() {
     },
   );
 
-  test('register creates a Bronze member for the new user', () async {
+  test('register creates a Silver demo member for the new user', () async {
     await _insertTier(database, silverMinPoints: 500000);
 
     final userId = await database.userDao.register(
@@ -51,53 +51,51 @@ void main() {
 
     final member = await database.memberDao.findByUserId(userId);
     expect(member?.name, 'New Member');
-    expect(member?.tierId, 'bronze');
-    expect(member?.totalPoints, 350000);
+    expect(member?.tierId, 'silver');
+    expect(member?.totalPoints, 500000);
     final tierProgress = member?.tierProgress as TierProgressSuccess;
-    expect(tierProgress.progress.progressFraction, 0.7);
+    expect(tierProgress.progress.progressFraction, 0);
   });
 
-  test(
-    'upgrades zero-point Bronze members to the 70 percent demo balance',
-    () async {
-      final directory = await Directory.systemTemp.createTemp(
-        'jdonuts-db-upgrade-',
-      );
-      final file = File('${directory.path}/v1.sqlite');
-      final versionOne = AppDatabase.forTesting(NativeDatabase(file));
-      var versionOneClosed = false;
-      try {
-        await _insertTier(versionOne, silverMinPoints: 500000);
-        await _insertUser(versionOne);
-        await versionOne
-            .into(versionOne.members)
-            .insert(
-              MembersCompanion.insert(
-                id: 'member-1',
-                userId: 'user-1',
-                name: 'Ye Min',
-                tierId: 'bronze',
-                totalPoints: 0,
-              ),
-            );
-        await versionOne.customStatement('PRAGMA user_version = 1');
-        await versionOne.close();
-        versionOneClosed = true;
+  test('upgrades existing demo members to the Silver threshold', () async {
+    final directory = await Directory.systemTemp.createTemp(
+      'jdonuts-db-upgrade-',
+    );
+    final file = File('${directory.path}/v1.sqlite');
+    final versionOne = AppDatabase.forTesting(NativeDatabase(file));
+    var versionOneClosed = false;
+    try {
+      await _insertTier(versionOne, silverMinPoints: 500000);
+      await _insertUser(versionOne);
+      await versionOne
+          .into(versionOne.members)
+          .insert(
+            MembersCompanion.insert(
+              id: 'member-1',
+              userId: 'user-1',
+              name: 'Ye Min',
+              tierId: 'bronze',
+              totalPoints: 0,
+            ),
+          );
+      await versionOne.customStatement('PRAGMA user_version = 1');
+      await versionOne.close();
+      versionOneClosed = true;
 
-        final upgraded = AppDatabase.forTesting(NativeDatabase(file));
-        try {
-          final member = (await upgraded.select(upgraded.members).get()).single;
-          expect(upgraded.schemaVersion, 2);
-          expect(member.totalPoints, 350000);
-        } finally {
-          await upgraded.close();
-        }
+      final upgraded = AppDatabase.forTesting(NativeDatabase(file));
+      try {
+        final member = (await upgraded.select(upgraded.members).get()).single;
+        expect(upgraded.schemaVersion, 3);
+        expect(member.tierId, 'silver');
+        expect(member.totalPoints, 500000);
       } finally {
-        if (!versionOneClosed) await versionOne.close();
-        await directory.delete(recursive: true);
+        await upgraded.close();
       }
-    },
-  );
+    } finally {
+      if (!versionOneClosed) await versionOne.close();
+      await directory.delete(recursive: true);
+    }
+  });
 
   test('member insertion rejects unknown tier and user IDs', () async {
     await _insertTier(database);
@@ -156,7 +154,7 @@ void main() {
         .get();
 
     expect(tables, hasLength(11));
-    expect(database.schemaVersion, 2);
+    expect(database.schemaVersion, 3);
   });
 
   test('products persist their catalog fields', () async {
@@ -196,6 +194,16 @@ Future<void> _insertTier(
           name: 'Silver',
           minPoints: silverMinPoints,
           sortOrder: 1,
+        ),
+      );
+  await database
+      .into(database.tiers)
+      .insert(
+        TiersCompanion.insert(
+          id: 'gold',
+          name: 'Gold',
+          minPoints: 680500,
+          sortOrder: 2,
         ),
       );
 }
