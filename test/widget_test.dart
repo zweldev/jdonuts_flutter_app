@@ -428,6 +428,21 @@ void main() {
     await tester.tap(find.text('CONTINUE'));
     await tester.pumpAndSettle();
 
+    expect(
+      tester.widget<Text>(find.text('Verify your number')).textAlign,
+      TextAlign.center,
+    );
+    expect(
+      tester
+          .widget<Text>(find.text("We've sent a 6 digit OTP to +959254135592"))
+          .textAlign,
+      TextAlign.center,
+    );
+    expect(
+      tester.widget<Wrap>(find.byType(Wrap).last).alignment,
+      WrapAlignment.center,
+    );
+
     await tester.enterText(
       find.descendant(
         of: find.byType(Pinput),
