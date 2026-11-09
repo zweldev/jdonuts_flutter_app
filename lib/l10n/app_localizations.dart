@@ -440,6 +440,150 @@ abstract class AppLocalizations {
   /// **'မြန်မာ'**
   String get burmeseLanguage;
 
+  /// No description provided for @offlineBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'You’re offline. Showing saved data.'**
+  String get offlineBanner;
+
+  /// No description provided for @productUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Product details are unavailable.'**
+  String get productUnavailable;
+
+  /// No description provided for @productLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load this product. Please try again.'**
+  String get productLoadError;
+
+  /// No description provided for @cartAdded.
+  ///
+  /// In en, this message translates to:
+  /// **'{productName} added to cart.'**
+  String cartAdded(Object productName);
+
+  /// No description provided for @cartAddFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not add this product to your cart.'**
+  String get cartAddFailed;
+
+  /// No description provided for @notifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notifications;
+
+  /// No description provided for @noNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'No new notifications.'**
+  String get noNotifications;
+
+  /// No description provided for @noProductSections.
+  ///
+  /// In en, this message translates to:
+  /// **'No product sections yet.'**
+  String get noProductSections;
+
+  /// No description provided for @noProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing here yet.'**
+  String get noProducts;
+
+  /// No description provided for @noNearbyShops.
+  ///
+  /// In en, this message translates to:
+  /// **'No nearby shops found.'**
+  String get noNearbyShops;
+
+  /// No description provided for @sectionLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'This section could not be loaded.'**
+  String get sectionLoadError;
+
+  /// No description provided for @newBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'New'**
+  String get newBadge;
+
+  /// No description provided for @discountPercentOff.
+  ///
+  /// In en, this message translates to:
+  /// **'{discount}% off'**
+  String discountPercentOff(int discount);
+
+  /// No description provided for @decreaseQuantity.
+  ///
+  /// In en, this message translates to:
+  /// **'Decrease quantity'**
+  String get decreaseQuantity;
+
+  /// No description provided for @increaseQuantity.
+  ///
+  /// In en, this message translates to:
+  /// **'Increase quantity'**
+  String get increaseQuantity;
+
+  /// No description provided for @memberFallback.
+  ///
+  /// In en, this message translates to:
+  /// **'J’Donuts member'**
+  String get memberFallback;
+
+  /// No description provided for @homeMemberTier.
+  ///
+  /// In en, this message translates to:
+  /// **'{tier} member'**
+  String homeMemberTier(Object tier);
+
+  /// No description provided for @popularSectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Popular 🔥'**
+  String get popularSectionTitle;
+
+  /// No description provided for @nearbyShopsCount.
+  ///
+  /// In en, this message translates to:
+  /// **'There are {count} J’Donut shops near you. 😊'**
+  String nearbyShopsCount(int count);
+
+  /// No description provided for @exploreNow.
+  ///
+  /// In en, this message translates to:
+  /// **'EXPLORE NOW'**
+  String get exploreNow;
+
+  /// No description provided for @orderOnline.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Online'**
+  String get orderOnline;
+
+  /// No description provided for @whatsThis.
+  ///
+  /// In en, this message translates to:
+  /// **'What’s\nthis?'**
+  String get whatsThis;
+
+  /// No description provided for @addToCart.
+  ///
+  /// In en, this message translates to:
+  /// **'ADD TO CART'**
+  String get addToCart;
+
+  /// No description provided for @discountPercent.
+  ///
+  /// In en, this message translates to:
+  /// **'{discount}%'**
+  String discountPercent(int discount);
+
   /// No description provided for @homeTitle.
   ///
   /// In en, this message translates to:
