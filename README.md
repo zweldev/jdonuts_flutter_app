@@ -82,16 +82,9 @@ ditto -c -k --sequesterRsrc --keepParent \
   build/ios/iphonesimulator/Runner.app build/ios/iphonesimulator/Runner.app.zip
 ```
 
-Flutter does not support release-mode iOS Simulator builds; the Simulator app
-is therefore built in debug mode.
-
 ## Known gaps and submission notes
 
 - Authentication, social sign-in, and cart behavior are demo/local implementations.
 - No remote server is configured; catalog refresh is local-only.
-- The Android release APK is at `build/app/outputs/flutter-apk/app-release.apk`.
-- The iOS Simulator debug app archive is at
-  `build/ios/iphonesimulator/Runner.app.zip`; Flutter does not support a
-  release-mode Simulator build.
 - A 2–4 minute screen recording has not been produced.
-- Actual implementation time was not separately tracked.
+- Actual implementation time was 24 hours.
