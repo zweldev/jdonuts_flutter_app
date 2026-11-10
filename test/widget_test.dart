@@ -461,6 +461,7 @@ void main() {
     await tester.tap(find.text('VERIFY'));
     await tester.pumpAndSettle();
     expect(find.text("What's your\nname?"), findsOneWidget);
+    expect(find.text('Please enter your first name.'), findsNothing);
     await tester.tap(find.byIcon(Icons.arrow_back));
     await tester.pumpAndSettle();
     expect(
@@ -471,8 +472,8 @@ void main() {
     await tester.pumpAndSettle();
 
     await tester.tap(find.text('CONTINUE'));
-    await tester.pump();
-    expect(find.text('Please enter your first name.'), findsOneWidget);
+    await tester.pumpAndSettle();
+    expect(find.text('Please enter your first name.'), findsNothing);
     expect(
       tester.widget<ElevatedButton>(find.byType(ElevatedButton)).onPressed,
       isNull,
@@ -484,10 +485,14 @@ void main() {
     await tester.tap(find.text('CONTINUE'));
     await tester.pumpAndSettle();
     expect(find.text("What's your\ndate of birth?"), findsOneWidget);
+    expect(find.text('Enter your complete date of birth.'), findsNothing);
     expect(
       tester.widget<ElevatedButton>(find.byType(ElevatedButton)).onPressed,
       isNull,
     );
+    await tester.tap(find.text('CONTINUE'));
+    await tester.pumpAndSettle();
+    expect(find.text('Enter your complete date of birth.'), findsNothing);
 
     await tester.tap(find.byType(TextField).first);
     await tester.pumpAndSettle();
