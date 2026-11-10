@@ -50,11 +50,11 @@ class _NameScreenState extends State<NameScreen> {
     return BlocBuilder<RegistrationCubit, RegistrationState>(
       builder: (context, state) {
         final l10n = AppLocalizations.of(context);
+        final nameError = state.nameError;
         final firstNameError = validateName(
           state.draft.firstName,
           isRequired: true,
         );
-        final nameError = state.nameError ?? firstNameError;
         final isValid =
             firstNameError == null &&
             validateName(state.draft.lastName, isRequired: false) == null;
