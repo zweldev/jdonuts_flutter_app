@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cupertino_ui/cupertino_ui.dart' as cupertino_ui;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -41,6 +42,22 @@ void main() {
     if (getIt.currentScopeName == 'widget-test') {
       await getIt.popScope();
     }
+  });
+
+  testWidgets('provides Cupertino localizations for text selection UI', (
+    tester,
+  ) async {
+    await _pumpAppWithRepository(tester, _createRepository());
+    await tester.pumpAndSettle();
+
+    final context = tester.element(find.byType(Scaffold).first);
+    expect(
+      Localizations.of<cupertino_ui.CupertinoLocalizations>(
+        context,
+        cupertino_ui.CupertinoLocalizations,
+      ),
+      isNotNull,
+    );
   });
 
   group('phone validation', () {
