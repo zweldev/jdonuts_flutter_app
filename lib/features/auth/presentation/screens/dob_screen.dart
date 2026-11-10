@@ -154,7 +154,8 @@ class _DobScreenState extends State<DobScreen> {
     return BlocBuilder<RegistrationCubit, RegistrationState>(
       builder: (context, state) {
         final l10n = AppLocalizations.of(context);
-        final isValid = state.dobError == null;
+        final isValid =
+            state.draft.dateOfBirth != null && state.dobError == null;
         return AuthStepScaffold(
           title: l10n.dobTitle,
           progress: 1,
