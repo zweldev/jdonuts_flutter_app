@@ -30,7 +30,7 @@ extension RegistrationStateTransitions on RegistrationState {
       validateName(draft.lastName, isRequired: false);
 
   RegistrationState startDateOfBirth() =>
-      copyWith(nameError: null, dobError: DobError.incomplete);
+      copyWith(nameError: null, dobError: null);
 
   RegistrationState withDateOfBirth(
     DateTime dateOfBirth, {
