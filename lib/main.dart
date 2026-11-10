@@ -1,3 +1,4 @@
+import 'package:cupertino_ui/cupertino_ui.dart' as cupertino_ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -111,6 +112,7 @@ class _MyAppState extends State<MyApp> {
             localizationsDelegates: [
               ...AppLocalizations.localizationsDelegates,
               material_ui.GlobalMaterialLocalizations.delegate,
+              cupertino_ui.GlobalCupertinoLocalizations.delegate,
             ],
             supportedLocales: AppLocalizations.supportedLocales,
             theme: AppTheme.light,
