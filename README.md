@@ -86,5 +86,4 @@ ditto -c -k --sequesterRsrc --keepParent \
 
 - Authentication, social sign-in, and cart behavior are demo/local implementations.
 - No remote server is configured; catalog refresh is local-only.
-- A 2–4 minute screen recording has not been produced.
 - Actual implementation time was 24 hours.
